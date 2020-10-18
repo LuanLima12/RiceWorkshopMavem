@@ -5,6 +5,13 @@
  */
 package Frames;
 
+import Entidades.Funcionario;
+import Entidades.Senha;
+import Models.ModelFuncionario;
+import Models.ModelSenha;
+import javax.persistence.EntityManager;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Luan
@@ -34,13 +41,13 @@ public class FrameAdcFuncionario extends javax.swing.JInternalFrame {
         Email = new javax.swing.JTextField();
         CPF = new javax.swing.JFormattedTextField();
         jLabel5 = new javax.swing.JLabel();
-        celular = new javax.swing.JFormattedTextField();
+        Fone = new javax.swing.JFormattedTextField();
         Cadastrar = new javax.swing.JButton();
         Cancelar = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         RG = new javax.swing.JFormattedTextField();
         jLabel6 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        cargo = new javax.swing.JComboBox<>();
 
         setClosable(true);
         setIconifiable(true);
@@ -74,7 +81,7 @@ public class FrameAdcFuncionario extends javax.swing.JInternalFrame {
 
         jLabel6.setText("Cargo:");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "[ Selecione o cargo ]", "Gerente", "Funcionário" }));
+        cargo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "[ Selecione o cargo ]", "Gerente", "Funcionário" }));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -98,12 +105,12 @@ public class FrameAdcFuncionario extends javax.swing.JInternalFrame {
                                 .addGap(37, 37, 37)
                                 .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(celular, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(Fone, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(31, 31, 31)
                                 .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addComponent(cargo, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -127,13 +134,13 @@ public class FrameAdcFuncionario extends javax.swing.JInternalFrame {
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(Nome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(celular, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(Fone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(Email, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cargo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -162,6 +169,67 @@ public class FrameAdcFuncionario extends javax.swing.JInternalFrame {
     private void CadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CadastrarActionPerformed
         // TODO add your handling code here:
         
+        Funcionario f = new Funcionario();
+        Senha s = new Senha();
+        
+        if(cargo.getSelectedIndex()==0){
+            JOptionPane.showMessageDialog(this, "Por favor, selecione um cargo.");
+        }else{
+            try{
+            EntityManager em = ModelFuncionario.openDB(); //CHAMAR O MODELO
+        
+            f.setNome(Nome.getText());
+            f.setEmail(Email.getText());
+            f.setFone(Fone.getText());
+            f.setCpf_funcionario(CPF.getText());
+            f.setRg(RG.getText());
+
+            if(cargo.getSelectedIndex()==1){
+                f.setCargo("gerente");
+            }else{
+                f.setCargo("funcionario");
+            }
+
+            em.getTransaction().begin(); //INICIAR TRANSAÇÃO DE INFORMAÇÕES
+            em.persist(f); //MONTA O INSERT
+            em.getTransaction().commit(); //EXECUTA O QUE FOI MONTADO ACIMA
+
+            em.close(); //FECHA A TRANSAÇÃO
+            
+                try{ //INICIALIZAR A SENHA
+                EntityManager em2 = ModelSenha.openDB(); //CHAMAR O MODELO
+        
+                s.setSenha("senha123");
+                
+
+                em2.getTransaction().begin(); //INICIAR TRANSAÇÃO DE INFORMAÇÕES
+                em2.persist(s); //MONTA O INSERT
+                em2.getTransaction().commit(); //EXECUTA O QUE FOI MONTADO ACIMA
+
+                em2.close(); //FECHA A TRANSAÇÃO
+
+                
+                JOptionPane.showMessageDialog(this, "Funcionario cadastrado com sucesso!");
+
+                Nome.setText(null);
+                Email.setText(null);
+                Fone.setText(null);
+                CPF.setText(null);
+                RG.setText(null);
+                cargo.setSelectedIndex(0);
+
+                }catch(Exception e){
+                    JOptionPane.showMessageDialog(this, e);
+                    //System.out.println(e);
+                }
+
+            }catch(Exception e){
+                JOptionPane.showMessageDialog(this, e);
+                //System.out.println(e);
+            }
+        }
+        
+        
     }//GEN-LAST:event_CadastrarActionPerformed
 
 
@@ -170,10 +238,10 @@ public class FrameAdcFuncionario extends javax.swing.JInternalFrame {
     private javax.swing.JButton Cadastrar;
     private javax.swing.JButton Cancelar;
     private javax.swing.JTextField Email;
+    private javax.swing.JFormattedTextField Fone;
     private javax.swing.JTextField Nome;
     private javax.swing.JFormattedTextField RG;
-    private javax.swing.JFormattedTextField celular;
-    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JComboBox<String> cargo;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

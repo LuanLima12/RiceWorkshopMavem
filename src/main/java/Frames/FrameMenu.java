@@ -5,6 +5,8 @@
  */
 package Frames;
 
+import javax.swing.JInternalFrame;
+
 /**
  *
  * @author Luan
@@ -159,33 +161,35 @@ public class FrameMenu extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_MenuGFuncionarioActionPerformed
 
+    private void openForm(JInternalFrame f){
+        Desktop.add(f);
+        f.show();
+    }
+    
     private void MenuGAdcFuncionarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuGAdcFuncionarioActionPerformed
         // TODO add your handling code here:
-        FrameAdcFuncionario adcFunc = new FrameAdcFuncionario();
+        /*FrameAdcFuncionario adcFunc = new FrameAdcFuncionario();
         Desktop.add(adcFunc);
-        adcFunc.show();
+        adcFunc.show();*/
+        openForm(new FrameAdcFuncionario());
         
     }//GEN-LAST:event_MenuGAdcFuncionarioActionPerformed
 
     private void MenuGAdcFornecedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuGAdcFornecedorActionPerformed
         // TODO add your handling code here:
-        FrameAdcFornecedor adcForn = new FrameAdcFornecedor();
-        Desktop.add(adcForn);
-        adcForn.show();
+        //FrameAdcFornecedor adcForn = new FrameAdcFornecedor();
+        openForm(new FrameAdcFornecedor());
     }//GEN-LAST:event_MenuGAdcFornecedorActionPerformed
 
     private void MenuGAdcClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuGAdcClienteActionPerformed
         // TODO add your handling code here:
-        FrameAdcCliente adcCliente = new FrameAdcCliente();
-        Desktop.add(adcCliente);
-        adcCliente.show();
+        openForm(new FrameAdcCliente());
     }//GEN-LAST:event_MenuGAdcClienteActionPerformed
 
     private void MenuGAdcProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuGAdcProdutoActionPerformed
         // TODO add your handling code here:
-        FrameAdcProduto adcProduto = new FrameAdcProduto();
-        Desktop.add(adcProduto);
-        adcProduto.show();
+        
+        openForm(new FrameAdcProduto());
     }//GEN-LAST:event_MenuGAdcProdutoActionPerformed
 
     /**

@@ -5,6 +5,11 @@
  */
 package Frames;
 
+import Entidades.Cliente;
+import Models.ModelCliente;
+import javax.persistence.EntityManager;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Luan
@@ -34,7 +39,7 @@ public class FrameAdcCliente extends javax.swing.JInternalFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        celular = new javax.swing.JFormattedTextField();
+        Fone = new javax.swing.JFormattedTextField();
 
         setClosable(true);
         setIconifiable(true);
@@ -86,7 +91,7 @@ public class FrameAdcCliente extends javax.swing.JInternalFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(celular, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(Fone, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap(31, Short.MAX_VALUE))
         );
@@ -104,7 +109,7 @@ public class FrameAdcCliente extends javax.swing.JInternalFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(celular, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(Fone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Cadastrar)
@@ -117,7 +122,33 @@ public class FrameAdcCliente extends javax.swing.JInternalFrame {
 
     private void CadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CadastrarActionPerformed
         // TODO add your handling code here:
-
+        Cliente c = new Cliente();
+        
+        try{
+            EntityManager em = ModelCliente.openDB(); //CHAMAR O MODELO
+        
+        c.setNome(Nome.getText());
+        c.setEmail(Email.getText());
+        c.setFone(Fone.getText());
+        
+        em.getTransaction().begin(); //INICIAR TRANSAÇÃO DE INFORMAÇÕES
+        em.persist(c); //MONTA O INSERT
+        em.getTransaction().commit(); //EXECUTA O QUE FOI MONTADO ACIMA
+        
+        em.close(); //FECHA A TRANSAÇÃO
+        
+        JOptionPane.showMessageDialog(this, "Cliente cadastrado com sucesso!");
+        
+        Nome.setText(null);
+        Email.setText(null);
+        Fone.setText(null);
+        
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(this, e);
+            //System.out.println(e);
+        }
+        
+        
     }//GEN-LAST:event_CadastrarActionPerformed
 
     private void CancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CancelarActionPerformed
@@ -130,8 +161,8 @@ public class FrameAdcCliente extends javax.swing.JInternalFrame {
     private javax.swing.JButton Cadastrar;
     private javax.swing.JButton Cancelar;
     private javax.swing.JTextField Email;
+    private javax.swing.JFormattedTextField Fone;
     private javax.swing.JTextField Nome;
-    private javax.swing.JFormattedTextField celular;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

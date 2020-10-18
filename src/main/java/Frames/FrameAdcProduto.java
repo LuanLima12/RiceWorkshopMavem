@@ -5,6 +5,11 @@
  */
 package Frames;
 
+import Entidades.Produto;
+import Models.ModelProduto;
+import javax.persistence.EntityManager;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Luan
@@ -29,7 +34,7 @@ public class FrameAdcProduto extends javax.swing.JInternalFrame {
 
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        Selecao = new javax.swing.JComboBox<>();
         jLabel3 = new javax.swing.JLabel();
         Quantidade = new javax.swing.JFormattedTextField();
         jLabel4 = new javax.swing.JLabel();
@@ -43,7 +48,7 @@ public class FrameAdcProduto extends javax.swing.JInternalFrame {
         jButton1 = new javax.swing.JButton();
         Cancelar = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
-        Nome1 = new javax.swing.JTextField();
+        Tamanho = new javax.swing.JTextField();
 
         setClosable(true);
         setIconifiable(true);
@@ -55,7 +60,7 @@ public class FrameAdcProduto extends javax.swing.JInternalFrame {
 
         jLabel2.setText("Descrição: ");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "[ Selecione uma das opções ]", "Caixa", "Litro", "Metro", "M²", "Unidade", "Outro" }));
+        Selecao.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "[ Selecione uma das opções ]", "Caixa", "Litro", "Metro", "M²", "Unidade", "Outro" }));
 
         jLabel3.setText("Qntd.:");
 
@@ -66,6 +71,11 @@ public class FrameAdcProduto extends javax.swing.JInternalFrame {
         jLabel6.setText("Valor Venda:");
 
         jButton1.setText("Cadastrar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         Cancelar.setText("Cancelar");
         Cancelar.addActionListener(new java.awt.event.ActionListener() {
@@ -86,7 +96,7 @@ public class FrameAdcProduto extends javax.swing.JInternalFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(Selecao, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -112,7 +122,7 @@ public class FrameAdcProduto extends javax.swing.JInternalFrame {
                         .addGap(18, 18, 18)
                         .addComponent(jLabel7)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(Nome1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(Tamanho, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -134,7 +144,7 @@ public class FrameAdcProduto extends javax.swing.JInternalFrame {
                     .addComponent(Compra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Selecao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(Quantidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -148,7 +158,7 @@ public class FrameAdcProduto extends javax.swing.JInternalFrame {
                     .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(min, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Nome1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(Tamanho, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
@@ -164,17 +174,58 @@ public class FrameAdcProduto extends javax.swing.JInternalFrame {
         this.dispose();
     }//GEN-LAST:event_CancelarActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        
+        Produto p = new Produto();
+        
+        //if()
+        try{
+            EntityManager em = ModelProduto.openDB(); //CHAMAR O MODELO
+        
+        p.setNome(Nome.getText());
+        p.setDescricao(Descricao.getText());
+        p.setEstoque(Integer.parseInt(Quantidade.getText()));
+        p.setValorCompra(Double.parseDouble(Compra.getText()));
+        p.setValorVenda(Double.parseDouble(Venda.getText()));
+        p.setEstoqueMin(Integer.parseInt(min.getText()));
+        p.setTamanho(Tamanho.getText());
+                
+        em.getTransaction().begin(); //INICIAR TRANSAÇÃO DE INFORMAÇÕES
+        em.persist(p); //MONTA O INSERT
+        em.getTransaction().commit(); //EXECUTA O QUE FOI MONTADO ACIMA
+        
+        em.close(); //FECHA A TRANSAÇÃO
+        
+        JOptionPane.showMessageDialog(this, "Produto cadastrado com sucesso!");
+        
+        Nome.setText(null);
+        Descricao.setText(null);
+        Quantidade.setText(null);
+        Compra.setText(null);
+        Venda.setText(null);
+        min.setText(null);
+        Tamanho.setText(null);
+        
+        
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(this, e);
+            //System.out.println(e);
+        }
+        
+    }//GEN-LAST:event_jButton1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Cancelar;
     private javax.swing.JFormattedTextField Compra;
     private javax.swing.JTextField Descricao;
     private javax.swing.JTextField Nome;
-    private javax.swing.JTextField Nome1;
     private javax.swing.JFormattedTextField Quantidade;
+    private javax.swing.JComboBox<String> Selecao;
+    private javax.swing.JTextField Tamanho;
     private javax.swing.JFormattedTextField Venda;
     private javax.swing.JButton jButton1;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -184,4 +235,8 @@ public class FrameAdcProduto extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JFormattedTextField min;
     // End of variables declaration//GEN-END:variables
+
+    private Object getTransaction() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }
