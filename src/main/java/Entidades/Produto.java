@@ -21,7 +21,7 @@ public class Produto implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    private String nome, descricao, cnpj_fornecedor, tamanho;
+    private String nome, descricao, cnpj_fornecedor, tamanho, tipo;
     private int estoque, estoqueMin;
     private double valorVenda, valorCompra;
     
@@ -67,6 +67,14 @@ public class Produto implements Serializable {
 
     public void setTamanho(String tamanho) {
         this.tamanho = tamanho;
+    }
+    
+    public String getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
     }
 
     public int getEstoque() {
