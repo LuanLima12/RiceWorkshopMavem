@@ -7,6 +7,7 @@ package Frames;
 
 import Entidades.Produto;
 import Models.ModelProduto;
+import Outros.SuporteSistema;
 import javax.persistence.EntityManager;
 import javax.swing.JOptionPane;
 
@@ -50,7 +51,7 @@ public class FrameAdcProduto extends javax.swing.JInternalFrame {
         jLabel7 = new javax.swing.JLabel();
         Tamanho = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
-        cnpj = new javax.swing.JTextField();
+        cnpj = new javax.swing.JFormattedTextField();
 
         setClosable(true);
         setIconifiable(true);
@@ -89,6 +90,17 @@ public class FrameAdcProduto extends javax.swing.JInternalFrame {
         jLabel7.setText("Tamanho: ");
 
         jLabel8.setText("CNPJ fonecedor");
+
+        try {
+            cnpj.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("###.###.###-##")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+        cnpj.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cnpjActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -139,7 +151,7 @@ public class FrameAdcProduto extends javax.swing.JInternalFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(cnpj, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(cnpj, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(37, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -162,7 +174,7 @@ public class FrameAdcProduto extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(Descricao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 7, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cnpj, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -190,63 +202,87 @@ public class FrameAdcProduto extends javax.swing.JInternalFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         
+        ModelProduto mp = new ModelProduto();
         Produto p = new Produto();
-        
-        if(tipo.getSelectedIndex()==0){
+        SuporteSistema ss =new SuporteSistema();
+            
+        if(tipo.getSelectedIndex()==0){ //CHECAR SE O CAMPO FOI SELECIONADO
             JOptionPane.showMessageDialog(this, "Por favor, não deixe campos em branco.");
         }else{
-            try{
-                EntityManager em = ModelProduto.openDB(); //CHAMAR O MODELO
-
-            p.setNome(Nome.getText());
-            p.setDescricao(Descricao.getText());
-            p.setEstoque(Integer.parseInt(Quantidade.getText()));
-            p.setValorCompra(Double.parseDouble(Compra.getText()));
-            p.setValorVenda(Double.parseDouble(Venda.getText()));
-            p.setEstoqueMin(Integer.parseInt(min.getText()));
-            p.setTamanho(Tamanho.getText());
-            p.setCnpj_fornecedor(cnpj.getText());
             
-                switch (tipo.getSelectedIndex()) {
-                    case 1: p.setTipo("caixa");
-                        break;
-                    case 2: p.setTipo("unidade");
-                        break;
-                    case 3: p.setTipo("litro");
-                        break;
-                    case 4: p.setTipo("metro");
-                        break;
-                    case 5: p.setTipo("unidade");
-                        break;
-                    case 6: p.setTipo("outro");
-                        break;
-                }
+            if(ss.checarLetras(Quantidade.getText()) ==false && //conferir se há letras em campos numéricos
+                ss.checarLetras(Compra.getText()) ==false && 
+                ss.checarLetras(Venda.getText()) ==false &&
+                ss.checarLetras(min.getText()) ==false &&
+                ss.checarLetras(cnpj.getText()) ==false){
+                
+                if(ss.checarNumeros(Nome.getText()) == false){ //Conferir se há numeros em campos de letras
+                        
+                    //INICIO DAS OPERAÇÕES DE CRUD
+                    p.setNome(Nome.getText());
+                    p.setDescricao(Descricao.getText());
+                    p.setEstoque(Integer.parseInt(Quantidade.getText()));
+                    p.setValorCompra(Double.parseDouble(Compra.getText()));
+                    p.setValorVenda(Double.parseDouble(Venda.getText()));
+                    p.setEstoqueMin(Integer.parseInt(min.getText()));
+                    p.setTamanho(Tamanho.getText());
+                    p.setCnpj_fornecedor(cnpj.getText());
 
-            em.getTransaction().begin(); //INICIAR TRANSAÇÃO DE INFORMAÇÕES
-            em.persist(p); //MONTA O INSERT
-            em.getTransaction().commit(); //EXECUTA O QUE FOI MONTADO ACIMA
+                    switch (tipo.getSelectedIndex()) {
+                        case 1:
+                            p.setTipo("caixa");
+                            break;
+                        case 2:
+                            p.setTipo("unidade");
+                            break;
+                        case 3:
+                            p.setTipo("litro");
+                            break;
+                        case 4:
+                            p.setTipo("metro");
+                            break;
+                        case 5:
+                            p.setTipo("unidade");
+                            break;
+                        case 6:
+                            p.setTipo("outro");
+                            break;
+                    }
 
-            em.close(); //FECHA A TRANSAÇÃO
+                    if (mp.inserir(p) == true) {
+                        JOptionPane.showMessageDialog(this, "Produto cadastrado com sucesso!");
 
-            JOptionPane.showMessageDialog(this, "Produto cadastrado com sucesso!");
+                        Nome.setText(null);
+                        Descricao.setText(null);
+                        Quantidade.setText(null);
+                        Compra.setText(null);
+                        Venda.setText(null);
+                        min.setText(null);
+                        Tamanho.setText(null);
+                        tipo.setSelectedIndex(0);
+                        cnpj.setText(null);
 
-            Nome.setText(null);
-            Descricao.setText(null);
-            Quantidade.setText(null);
-            Compra.setText(null);
-            Venda.setText(null);
-            min.setText(null);
-            Tamanho.setText(null);
-            tipo.setSelectedIndex(0);
-            cnpj.setText(null);
-
-
-            }catch(Exception e){
-                JOptionPane.showMessageDialog(this, e);
-                //System.out.println(e);
+                    } else {
+                        JOptionPane.showMessageDialog(this, mp.exibirErro());
+                    }  
+                    
+                    
+                    
+                }else{
+                    JOptionPane.showMessageDialog(this, "Por favor, não coloque letras em campos numéricos.");
+                }    
+                
+            }else{
+                JOptionPane.showMessageDialog(this, "Por favor, não coloque números em campos de texto.");
             }
+            
         }
+        
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void cnpjActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cnpjActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cnpjActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -257,7 +293,7 @@ public class FrameAdcProduto extends javax.swing.JInternalFrame {
     private javax.swing.JFormattedTextField Quantidade;
     private javax.swing.JTextField Tamanho;
     private javax.swing.JFormattedTextField Venda;
-    private javax.swing.JTextField cnpj;
+    private javax.swing.JFormattedTextField cnpj;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
