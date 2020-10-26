@@ -7,6 +7,7 @@ package Frames;
 
 import Entidades.Cliente;
 import Models.ModelCliente;
+import Outros.SuporteSistema;
 import javax.persistence.EntityManager;
 import javax.swing.JOptionPane;
 
@@ -67,6 +68,12 @@ public class FrameAdcCliente extends javax.swing.JInternalFrame {
 
         jLabel3.setText("fone:");
 
+        try {
+            Fone.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("(##)#####-####")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -123,29 +130,35 @@ public class FrameAdcCliente extends javax.swing.JInternalFrame {
     private void CadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CadastrarActionPerformed
         // TODO add your handling code here:
         Cliente c = new Cliente();
+        ModelCliente mc = new ModelCliente();
+        SuporteSistema ss = new SuporteSistema();
         
-        try{
-            EntityManager em = ModelCliente.openDB(); //CHAMAR O MODELO
-        
-        c.setNome(Nome.getText());
-        c.setEmail(Email.getText());
-        c.setFone(Fone.getText());
-        
-        em.getTransaction().begin(); //INICIAR TRANSAÇÃO DE INFORMAÇÕES
-        em.persist(c); //MONTA O INSERT
-        em.getTransaction().commit(); //EXECUTA O QUE FOI MONTADO ACIMA
-        
-        em.close(); //FECHA A TRANSAÇÃO
-        
-        JOptionPane.showMessageDialog(this, "Cliente cadastrado com sucesso!");
-        
-        Nome.setText(null);
-        Email.setText(null);
-        Fone.setText(null);
-        
-        }catch(Exception e){
-            JOptionPane.showMessageDialog(this, e);
-            //System.out.println(e);
+        if(ss.checarNumeros(Nome.getText()) ==false){ //checar se não há numeros
+            if (ss.checarLetras(Fone.getText()) ==false){ //checar se não há letras
+                
+                
+                c.setNome(Nome.getText());
+                c.setEmail(Email.getText());
+                c.setFone(Fone.getText());
+                
+                if(mc.inserir(c) == true){
+                    
+                    
+                    JOptionPane.showMessageDialog(this, "Cliente cadastrado com sucesso!");
+
+                    Nome.setText(null);
+                    Email.setText(null);
+                    Fone.setText(null);
+                }else{
+                    JOptionPane.showMessageDialog(this, mc.exibirErro());
+                }
+                
+                
+            }else{
+                JOptionPane.showMessageDialog(this, "Não devem haver letras em campos numéricos");
+            }
+        }else{
+            JOptionPane.showMessageDialog(this, "Não devem haver números em campos de texto.");
         }
         
         

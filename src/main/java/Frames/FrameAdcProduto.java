@@ -92,7 +92,7 @@ public class FrameAdcProduto extends javax.swing.JInternalFrame {
         jLabel8.setText("CNPJ fonecedor");
 
         try {
-            cnpj.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("###.###.###-##")));
+            cnpj.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##.###.###/####-##")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
@@ -215,9 +215,9 @@ public class FrameAdcProduto extends javax.swing.JInternalFrame {
                 ss.checarLetras(Venda.getText()) ==false &&
                 ss.checarLetras(min.getText()) ==false &&
                 ss.checarLetras(cnpj.getText()) ==false){
+
                 
-                if(ss.checarNumeros(Nome.getText()) == false){ //Conferir se há numeros em campos de letras
-                        
+                   
                     //INICIO DAS OPERAÇÕES DE CRUD
                     p.setNome(Nome.getText());
                     p.setDescricao(Descricao.getText());
@@ -261,23 +261,13 @@ public class FrameAdcProduto extends javax.swing.JInternalFrame {
                         Tamanho.setText(null);
                         tipo.setSelectedIndex(0);
                         cnpj.setText(null);
-
                     } else {
                         JOptionPane.showMessageDialog(this, mp.exibirErro());
-                    }  
-                    
-                    
-                    
-                }else{
-                    JOptionPane.showMessageDialog(this, "Por favor, não coloque letras em campos numéricos.");
-                }    
-                
+                    }
             }else{
                 JOptionPane.showMessageDialog(this, "Por favor, não coloque números em campos de texto.");
             }
-            
         }
-        
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void cnpjActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cnpjActionPerformed

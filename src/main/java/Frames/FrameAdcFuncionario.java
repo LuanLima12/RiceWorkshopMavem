@@ -6,10 +6,8 @@
 package Frames;
 
 import Entidades.Funcionario;
-import Entidades.Senha;
 import Models.ModelFuncionario;
-import Models.ModelSenha;
-import javax.persistence.EntityManager;
+import Outros.SuporteSistema;
 import javax.swing.JOptionPane;
 
 /**
@@ -39,15 +37,15 @@ public class FrameAdcFuncionario extends javax.swing.JInternalFrame {
         jLabel3 = new javax.swing.JLabel();
         Nome = new javax.swing.JTextField();
         Email = new javax.swing.JTextField();
-        CPF = new javax.swing.JFormattedTextField();
         jLabel5 = new javax.swing.JLabel();
         Fone = new javax.swing.JFormattedTextField();
         Cadastrar = new javax.swing.JButton();
-        Cancelar = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         RG = new javax.swing.JFormattedTextField();
         jLabel6 = new javax.swing.JLabel();
         cargo = new javax.swing.JComboBox<>();
+        CPF = new javax.swing.JFormattedTextField();
+        Cancelar = new javax.swing.JButton();
 
         setClosable(true);
         setIconifiable(true);
@@ -61,7 +59,13 @@ public class FrameAdcFuncionario extends javax.swing.JInternalFrame {
 
         jLabel3.setText("CPF:");
 
-        jLabel5.setText("Tel.:");
+        jLabel5.setText("Fone:");
+
+        try {
+            Fone.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("(##)#####-####")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
 
         Cadastrar.setText("Cadastrar");
         Cadastrar.addActionListener(new java.awt.event.ActionListener() {
@@ -70,18 +74,30 @@ public class FrameAdcFuncionario extends javax.swing.JInternalFrame {
             }
         });
 
+        jLabel4.setText("RG:");
+
+        try {
+            RG.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##########-#")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+
+        jLabel6.setText("Cargo:");
+
+        cargo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "[ Selecione o cargo ]", "Gerente", "Funcionário" }));
+
+        try {
+            CPF.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("###.###.###-##")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+
         Cancelar.setText("Cancelar");
         Cancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 CancelarActionPerformed(evt);
             }
         });
-
-        jLabel4.setText("RG:");
-
-        jLabel6.setText("Cargo:");
-
-        cargo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "[ Selecione o cargo ]", "Gerente", "Funcionário" }));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -114,16 +130,17 @@ public class FrameAdcFuncionario extends javax.swing.JInternalFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(Cadastrar)
-                            .addComponent(CPF, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(76, 76, 76)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(Cancelar)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(layout.createSequentialGroup()
+                                .addComponent(CPF, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
                                 .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(RG, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                .addComponent(RG, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(Cadastrar)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(Cancelar)))))
                 .addGap(29, 29, 29))
         );
         layout.setVerticalGroup(
@@ -153,84 +170,69 @@ public class FrameAdcFuncionario extends javax.swing.JInternalFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(RG, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(Cancelar)))
-                .addContainerGap(38, Short.MAX_VALUE))
+                .addContainerGap(42, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void CadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CadastrarActionPerformed
+        // TODO add your handling code here:
+
+        Funcionario f = new Funcionario();
+        ModelFuncionario mf = new ModelFuncionario();
+        SuporteSistema ss = new SuporteSistema();
+
+        if (cargo.getSelectedIndex()==0){
+            JOptionPane.showMessageDialog(this, "Por favor, selecione um cargo.");
+        }else{
+
+            if(ss.checarNumeros(Nome.getText())==false){
+
+                if(ss.checarLetras(Fone.getText())==false){
+
+                    f.setNome(Nome.getText());
+                    f.setEmail(Email.getText());
+                    f.setFone(Fone.getText());
+                    f.setCpf_funcionario(CPF.getText());
+                    f.setRg(RG.getText());
+
+                    if (cargo.getSelectedIndex() == 1) {
+                        f.setCargo("gerente");
+                    } else {
+                        f.setCargo("funcionario");
+                    }
+
+                    if(mf.inserir(f)==true){
+                        JOptionPane.showMessageDialog(this, "Funcionario cadastrado com sucesso!");
+
+                        Nome.setText(null);
+                        Email.setText(null);
+                        Fone.setText(null);
+                        CPF.setText(null);
+                        RG.setText(null);
+                        cargo.setSelectedIndex(0);
+                    }else{
+                        JOptionPane.showMessageDialog(this, mf.exibirErro());
+                    }
+
+                }else{
+                    JOptionPane.showMessageDialog(this, "Campos numéricos não devem conter letras.");
+                }
+
+            }else{
+                JOptionPane.showMessageDialog(this, "Campos de texto não devem conter números.");
+            }
+        }
+
+    }//GEN-LAST:event_CadastrarActionPerformed
+
     private void CancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CancelarActionPerformed
         // TODO add your handling code here:
         this.dispose();
     }//GEN-LAST:event_CancelarActionPerformed
-
-    private void CadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CadastrarActionPerformed
-        // TODO add your handling code here:
-        
-        Funcionario f = new Funcionario();
-        Senha s = new Senha();
-        
-        if(cargo.getSelectedIndex()==0){
-            JOptionPane.showMessageDialog(this, "Por favor, selecione um cargo.");
-        }else{
-            try{
-            EntityManager em = ModelFuncionario.openDB(); //CHAMAR O MODELO
-        
-            f.setNome(Nome.getText());
-            f.setEmail(Email.getText());
-            f.setFone(Fone.getText());
-            f.setCpf_funcionario(CPF.getText());
-            f.setRg(RG.getText());
-
-            if(cargo.getSelectedIndex()==1){
-                f.setCargo("gerente");
-            }else{
-                f.setCargo("funcionario");
-            }
-
-            em.getTransaction().begin(); //INICIAR TRANSAÇÃO DE INFORMAÇÕES
-            em.persist(f); //MONTA O INSERT
-            em.getTransaction().commit(); //EXECUTA O QUE FOI MONTADO ACIMA
-
-            em.close(); //FECHA A TRANSAÇÃO
-            
-                try{ //INICIALIZAR A SENHA
-                EntityManager em2 = ModelSenha.openDB(); //CHAMAR O MODELO
-        
-                s.setSenha("senha123");
-                
-
-                em2.getTransaction().begin(); //INICIAR TRANSAÇÃO DE INFORMAÇÕES
-                em2.persist(s); //MONTA O INSERT
-                em2.getTransaction().commit(); //EXECUTA O QUE FOI MONTADO ACIMA
-
-                em2.close(); //FECHA A TRANSAÇÃO
-
-                
-                JOptionPane.showMessageDialog(this, "Funcionario cadastrado com sucesso!");
-
-                Nome.setText(null);
-                Email.setText(null);
-                Fone.setText(null);
-                CPF.setText(null);
-                RG.setText(null);
-                cargo.setSelectedIndex(0);
-
-                }catch(Exception e){
-                    JOptionPane.showMessageDialog(this, e);
-                    //System.out.println(e);
-                }
-
-            }catch(Exception e){
-                JOptionPane.showMessageDialog(this, e);
-                //System.out.println(e);
-            }
-        }
-        
-        
-    }//GEN-LAST:event_CadastrarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

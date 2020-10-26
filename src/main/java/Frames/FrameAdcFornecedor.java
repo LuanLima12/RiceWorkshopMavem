@@ -7,6 +7,7 @@ package Frames;
 
 import Entidades.Fornecedor;
 import Models.ModelFornecedor;
+import Outros.SuporteSistema;
 import javax.persistence.EntityManager;
 import javax.swing.JOptionPane;
 
@@ -68,6 +69,12 @@ public class FrameAdcFornecedor extends javax.swing.JInternalFrame {
         });
 
         jLabel3.setText("CNPJ:");
+
+        try {
+            CNPJ.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##.###.###/####-##")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
 
         jLabel5.setText("Cidade:");
 
@@ -132,33 +139,24 @@ public class FrameAdcFornecedor extends javax.swing.JInternalFrame {
     private void CadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CadastrarActionPerformed
         // TODO add your handling code here:
         Fornecedor f = new Fornecedor();
-
-        try{
-            EntityManager em = ModelFornecedor.openDB(); //CHAMAR O MODELO
+        ModelFornecedor mf = new ModelFornecedor();
         
         f.setCnpj_fornecedor(CNPJ.getText());
         f.setRazao_social(Razao.getText());
         f.setCidade(Cidade.getText());
         f.setEndereco(Endereco.getText());
         
-        em.getTransaction().begin(); //INICIAR TRANSAÇÃO DE INFORMAÇÕES
-        em.persist(f); //MONTA O INSERT
-        em.getTransaction().commit(); //EXECUTA O QUE FOI MONTADO ACIMA
-        
-        em.close(); //FECHA A TRANSAÇÃO
-        
-        JOptionPane.showMessageDialog(this, "Fornecedor cadastrado com sucesso!");
+        if(mf.inserir(f)==true){
+            JOptionPane.showMessageDialog(this, "Fornecedor cadastrado com sucesso!");
         
         Razao.setText(null);
         Endereco.setText(null);
         Cidade.setText(null);
         CNPJ.setText(null);
-        
-        }catch(Exception e){
-            JOptionPane.showMessageDialog(this, e);
-            //System.out.println(e);
+        }else{
+            JOptionPane.showMessageDialog(this, mf.exibirErro());
         }
-        
+
     }//GEN-LAST:event_CadastrarActionPerformed
 
     private void CancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CancelarActionPerformed
