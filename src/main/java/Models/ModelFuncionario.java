@@ -6,6 +6,7 @@
 package Models;
 
 import Entidades.Funcionario;
+import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -21,6 +22,29 @@ public class ModelFuncionario {
      public static EntityManager openDB(){
         EntityManagerFactory enf = Persistence.createEntityManagerFactory("Rice-PU");
         return enf.createEntityManager();
+    }
+     
+  /*public Funcionario buscar(String funcionario){
+        EntityManager em = ModelFuncionario.openDB(); //CHAMAR O MODELO
+        try{
+            
+            Funcionario f = em.createQuery("SELECT f Funcionario f WHERE ")
+            
+        }catch (Exception e) {
+            em.getTransaction().rollback();
+            erro = e;
+        }finally{
+            em.close();
+        }
+    }*/
+     
+    public List<Funcionario> listaFuncionarios(){
+        EntityManager em = ModelCliente.openDB();
+        try{
+            return em.createQuery("Select f from Funcionario f").getResultList();
+        }finally{
+            em.close();
+        }
     }
      
     public boolean inserir(Funcionario f) {

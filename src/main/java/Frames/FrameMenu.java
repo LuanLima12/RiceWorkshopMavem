@@ -159,6 +159,9 @@ public class FrameMenu extends javax.swing.JFrame {
 
     private void MenuGFuncionarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuGFuncionarioActionPerformed
         // TODO add your handling code here:
+        
+        openForm(new FrameFuncionario());
+        
     }//GEN-LAST:event_MenuGFuncionarioActionPerformed
 
     private void openForm(JInternalFrame f){
