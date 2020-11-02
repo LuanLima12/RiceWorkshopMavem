@@ -6,6 +6,7 @@
 package Models;
 
 import Entidades.Produto;
+import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;;
@@ -42,6 +43,33 @@ public class ModelProduto {
             }finally{
             em.close(); //FECHA A TRANSAÇÃO
             }
+    }
+    
+    public List<Produto> listaProdutos(){
+        EntityManager em = ModelCliente.openDB();
+        try{
+            return em.createQuery("Select p from Produto p").getResultList();
+        }finally{
+            em.close();
+        }
+    }
+    
+    public List<Produto> listaProdutos1(String selecionado1, String conteudo1){
+        EntityManager em = ModelCliente.openDB();
+        try{
+            return em.createQuery("SELECT p FROM Produto p WHERE p."+selecionado1+" = '"+conteudo1+"'").getResultList();
+        }finally{
+            em.close();
+        }
+    }
+    
+    public List<Produto> listaProdutos2(String selecionado1,String selecionado2, String conteudo1, String conteudo2){
+        EntityManager em = ModelCliente.openDB();
+        try{
+            return em.createQuery("SELECT p FROM Produto p WHERE p."+selecionado1+" = '"+conteudo1+"' AND p."+selecionado2+" = '"+conteudo2+"'").getResultList();
+        }finally{
+            em.close();
+        }
     }
     
     public Exception exibirErro(){

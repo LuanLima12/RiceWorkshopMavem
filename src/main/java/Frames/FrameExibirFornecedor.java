@@ -5,105 +5,81 @@
  */
 package Frames;
 
-import Entidades.Funcionario;
-import Models.ModelFuncionario;
+import Entidades.Fornecedor;
+import Models.ModelFornecedor;
 import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author Luan
  */
-public class FrameExibirFuncionario extends javax.swing.JFrame {
-    
-    /**
-     * Creates new form FrameExibirFuncionario
-     */
-    public FrameExibirFuncionario() {
-        initComponents();
-        /*if(getQuantidade()==0){
-            montarTabela();
-        }else if(getQuantidade()==1){
-            montarTabela1();
-        }else if(getQuantidade()==2){
-            montarTabela2();
-        }
-        System.out.println(selecionado1+","+selecionado2+","+conteudo1+","+conteudo2+","+quantidade);
-        */
-    }
-    
-    DefaultTableModel tabela;
-    public int quantidade; //Saber a quantidade de itens para o SELECT
-    public String selecionado1, selecionado2; //Saber quais itens serão usados no SELECT
-    public String conteudo1, conteudo2; //Conteudo dos campos selecionados para o SELECT
+public class FrameExibirFornecedor extends javax.swing.JFrame {
 
+    /**
+     * Creates new form FrameExibirFornecedor
+     */
+    public FrameExibirFornecedor() {
+        initComponents();
+        
+    }
+
+    DefaultTableModel tabela;
+    private int quantidade; //Saber a quantidade de itens para o SELECT
+    private String selecionado1, selecionado2; //Saber quais itens serão usados no SELECT
+    private String conteudo1, conteudo2; //Conteudo dos campos selecionados para o SELECT
+    
     private void montarTabela(){
         tabela = (DefaultTableModel) Tabela.getModel();
-        ModelFuncionario mf = new ModelFuncionario();
-        for (Funcionario f : mf.listaFuncionarios()){
-            tabela.addRow(new Object[]{f.getId(), f.getNome(), f.getCargo(), f.getEmail(), f.getFone(), f.getCpf_funcionario(), f.getRg()});
+        ModelFornecedor mf = new ModelFornecedor();
+        for (Fornecedor f : mf.listaFornecedores()){
+            tabela.addRow(new Object[]{f.getId(), f.getRazao_social(), f.getCnpj_fornecedor(), f.getEndereco(), f.getCidade()});
         }
     }
     
     private void montarTabela1(){
         tabela = (DefaultTableModel) Tabela.getModel();
-        ModelFuncionario mf = new ModelFuncionario();
-        for (Funcionario f : mf.listaFuncionarios1(selecionado1, conteudo1)){
-            tabela.addRow(new Object[]{f.getId(), f.getNome(), f.getCargo(), f.getEmail(),f.getFone(), f.getCpf_funcionario(), f.getRg()});
+        ModelFornecedor mf = new ModelFornecedor();
+        for (Fornecedor f : mf.listaFornecedores1(selecionado1, conteudo1)){
+            tabela.addRow(new Object[]{f.getId(), f.getRazao_social(), f.getCnpj_fornecedor(), f.getEndereco(), f.getCidade()});
         }
     }
     
     private void montarTabela2(){
         tabela = (DefaultTableModel) Tabela.getModel();
-        ModelFuncionario mf = new ModelFuncionario();
-        for (Funcionario f : mf.listaFuncionarios2(selecionado1, conteudo1, selecionado2, conteudo2)){
-            tabela.addRow(new Object[]{f.getId(), f.getNome(), f.getCargo(), f.getEmail(),f.getFone(), f.getCpf_funcionario(), f.getRg()});
+        ModelFornecedor mf = new ModelFornecedor();
+        for (Fornecedor f : mf.listaFornecedores2(selecionado1, conteudo1, selecionado2, conteudo2)){
+            tabela.addRow(new Object[]{f.getId(), f.getRazao_social(), f.getCnpj_fornecedor(), f.getEndereco(), f.getCidade()});
         }
+    }
+    
+    public void setValores(String selecionado1, String selecionado2, String conteudo1, String conteudo2, int quantidade){
+        this.selecionado1 = selecionado1;
+        this.selecionado2 = selecionado2;
+        this.conteudo1 = conteudo1;
+        this.conteudo2 = conteudo2;
+        this.quantidade = quantidade;
     }
 
     public int getQuantidade() {
         return quantidade;
     }
 
-    public void setQuantidade(int quantidade) {
-        this.quantidade = quantidade;
-    }
-
     public String getSelecionado1() {
         return selecionado1;
-    }
-
-    public void setSelecionado1(String selecionado1) {
-        this.selecionado1 = selecionado1;
     }
 
     public String getSelecionado2() {
         return selecionado2;
     }
 
-    public void setSelecionado2(String selecionado2) {
-        this.selecionado2 = selecionado2;
-    }
-
     public String getConteudo1() {
         return conteudo1;
-    }
-
-    public void setConteudo1(String conteudo1) {
-        this.conteudo1 = conteudo1;
     }
 
     public String getConteudo2() {
         return conteudo2;
     }
 
-    public void setConteudo2(String conteudo2) {
-        this.conteudo2 = conteudo2;
-    }
-
-    
-    
-    
-    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -117,7 +93,7 @@ public class FrameExibirFuncionario extends javax.swing.JFrame {
         Tabela = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Funcionarios");
+        setTitle("Fornecedores");
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowOpened(java.awt.event.WindowEvent evt) {
                 formWindowOpened(evt);
@@ -129,11 +105,11 @@ public class FrameExibirFuncionario extends javax.swing.JFrame {
 
             },
             new String [] {
-                "ID", "Nome", "E-Mail", "Cargo", "Fone", "CPF", "RG", "Comandos"
+                "ID", "Razão Social", "CNPJ", "Endereço", "Cidade"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false
+                false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -146,7 +122,7 @@ public class FrameExibirFuncionario extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 387, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -187,20 +163,20 @@ public class FrameExibirFuncionario extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(FrameExibirFuncionario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrameExibirFornecedor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(FrameExibirFuncionario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrameExibirFornecedor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(FrameExibirFuncionario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrameExibirFornecedor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(FrameExibirFuncionario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrameExibirFornecedor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new FrameExibirFuncionario().setVisible(true);
+                new FrameExibirFornecedor().setVisible(true);
             }
         });
     }

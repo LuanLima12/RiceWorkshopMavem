@@ -46,6 +46,24 @@ public class ModelFuncionario {
             em.close();
         }
     }
+    
+    public List<Funcionario> listaFuncionarios1(String selecionado1, String conteudo1){
+        EntityManager em = ModelCliente.openDB();
+        try{
+            return em.createQuery("SELECT f FROM Funcionario f WHERE f."+selecionado1+" = '"+conteudo1+"'").getResultList();
+        }finally{
+            em.close();
+        }
+    }
+    
+    public List<Funcionario> listaFuncionarios2(String selecionado1,String selecionado2, String conteudo1, String conteudo2){
+        EntityManager em = ModelCliente.openDB();
+        try{
+            return em.createQuery("SELECT f FROM Funcionario f WHERE f."+selecionado1+" = '"+conteudo1+"' AND f."+selecionado2+" = '"+conteudo2+"'").getResultList();
+        }finally{
+            em.close();
+        }
+    }
      
     public boolean inserir(Funcionario f) {
         ModelSenha ms = new ModelSenha();

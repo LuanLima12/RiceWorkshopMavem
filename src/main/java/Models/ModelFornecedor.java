@@ -6,6 +6,7 @@
 package Models;
 
 import Entidades.Fornecedor;
+import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -40,6 +41,33 @@ public class ModelFornecedor {
             return false;
         }finally{
              em.close(); //FECHA A TRANSAÇÃO
+        }
+    }
+    
+    public List<Fornecedor> listaFornecedores(){
+        EntityManager em = ModelCliente.openDB();
+        try{
+            return em.createQuery("Select f from Fornecedor f").getResultList();
+        }finally{
+            em.close();
+        }
+    }
+    
+    public List<Fornecedor> listaFornecedores1(String selecionado1, String conteudo1){
+        EntityManager em = ModelCliente.openDB();
+        try{
+            return em.createQuery("SELECT f FROM Fornecedor f WHERE f."+selecionado1+" = '"+conteudo1+"'").getResultList();
+        }finally{
+            em.close();
+        }
+    }
+    
+    public List<Fornecedor> listaFornecedores2(String selecionado1,String selecionado2, String conteudo1, String conteudo2){
+        EntityManager em = ModelCliente.openDB();
+        try{
+            return em.createQuery("SELECT f FROM Fornecedor f WHERE f."+selecionado1+" = '"+conteudo1+"' AND f."+selecionado2+" = '"+conteudo2+"'").getResultList();
+        }finally{
+            em.close();
         }
     }
     

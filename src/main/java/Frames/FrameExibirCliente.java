@@ -5,21 +5,22 @@
  */
 package Frames;
 
-import Entidades.Funcionario;
-import Models.ModelFuncionario;
+import Entidades.Cliente;
+import Models.ModelCliente;
 import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author Luan
  */
-public class FrameExibirFuncionario extends javax.swing.JFrame {
-    
+public class FrameExibirCliente extends javax.swing.JFrame {
+
     /**
-     * Creates new form FrameExibirFuncionario
+     * Creates new form FrameExibirCliente
      */
-    public FrameExibirFuncionario() {
+    public FrameExibirCliente() {
         initComponents();
+        i = 0;
         /*if(getQuantidade()==0){
             montarTabela();
         }else if(getQuantidade()==1){
@@ -27,81 +28,67 @@ public class FrameExibirFuncionario extends javax.swing.JFrame {
         }else if(getQuantidade()==2){
             montarTabela2();
         }
-        System.out.println(selecionado1+","+selecionado2+","+conteudo1+","+conteudo2+","+quantidade);
-        */
+        //System.out.println("SELECT c FROM Clientes c WHERE c."+selecionado1+" = '"+conteudo1+"'");
+        System.out.println(getSelecionado1());*/
     }
-    
-    DefaultTableModel tabela;
-    public int quantidade; //Saber a quantidade de itens para o SELECT
-    public String selecionado1, selecionado2; //Saber quais itens serão usados no SELECT
-    public String conteudo1, conteudo2; //Conteudo dos campos selecionados para o SELECT
 
+    DefaultTableModel tabela;
+    private int i; //controle
+    private int quantidade; //Saber a quantidade de itens para o SELECT
+    private String selecionado1, selecionado2; //Saber quais itens serão usados no SELECT
+    private String conteudo1, conteudo2; //Conteudo dos campos selecionados para o SELECT
+    
     private void montarTabela(){
-        tabela = (DefaultTableModel) Tabela.getModel();
-        ModelFuncionario mf = new ModelFuncionario();
-        for (Funcionario f : mf.listaFuncionarios()){
-            tabela.addRow(new Object[]{f.getId(), f.getNome(), f.getCargo(), f.getEmail(), f.getFone(), f.getCpf_funcionario(), f.getRg()});
+        tabela = (DefaultTableModel) TabelaCliente.getModel();
+        ModelCliente mc = new ModelCliente();
+        for (Cliente c : mc.listaClientes()){
+            tabela.addRow(new Object[]{c.getId(), c.getNome(), c.getEmail(), c.getFone()});
         }
     }
     
     private void montarTabela1(){
-        tabela = (DefaultTableModel) Tabela.getModel();
-        ModelFuncionario mf = new ModelFuncionario();
-        for (Funcionario f : mf.listaFuncionarios1(selecionado1, conteudo1)){
-            tabela.addRow(new Object[]{f.getId(), f.getNome(), f.getCargo(), f.getEmail(),f.getFone(), f.getCpf_funcionario(), f.getRg()});
+        tabela = (DefaultTableModel) TabelaCliente.getModel();
+        ModelCliente mc = new ModelCliente();
+        for (Cliente c : mc.listaClientes1(selecionado1, conteudo1)){
+            tabela.addRow(new Object[]{c.getId(), c.getNome(), c.getEmail(), c.getFone()});
         }
     }
     
     private void montarTabela2(){
-        tabela = (DefaultTableModel) Tabela.getModel();
-        ModelFuncionario mf = new ModelFuncionario();
-        for (Funcionario f : mf.listaFuncionarios2(selecionado1, conteudo1, selecionado2, conteudo2)){
-            tabela.addRow(new Object[]{f.getId(), f.getNome(), f.getCargo(), f.getEmail(),f.getFone(), f.getCpf_funcionario(), f.getRg()});
+        tabela = (DefaultTableModel) TabelaCliente.getModel();
+        ModelCliente mc = new ModelCliente();
+        for (Cliente c : mc.listaClientes2(selecionado1, conteudo1, selecionado2, conteudo2)){
+            tabela.addRow(new Object[]{c.getId(), c.getNome(), c.getEmail(), c.getFone()});
         }
+    }
+    
+    public void setValores(String selecionado1, String selecionado2, String conteudo1, String conteudo2, int quantidade){
+        this.selecionado1 = selecionado1;
+        this.selecionado2 = selecionado2;
+        this.conteudo1 = conteudo1;
+        this.conteudo2 = conteudo2;
+        this.quantidade = quantidade;
     }
 
     public int getQuantidade() {
         return quantidade;
     }
 
-    public void setQuantidade(int quantidade) {
-        this.quantidade = quantidade;
-    }
-
     public String getSelecionado1() {
         return selecionado1;
-    }
-
-    public void setSelecionado1(String selecionado1) {
-        this.selecionado1 = selecionado1;
     }
 
     public String getSelecionado2() {
         return selecionado2;
     }
 
-    public void setSelecionado2(String selecionado2) {
-        this.selecionado2 = selecionado2;
-    }
-
     public String getConteudo1() {
         return conteudo1;
-    }
-
-    public void setConteudo1(String conteudo1) {
-        this.conteudo1 = conteudo1;
     }
 
     public String getConteudo2() {
         return conteudo2;
     }
-
-    public void setConteudo2(String conteudo2) {
-        this.conteudo2 = conteudo2;
-    }
-
-    
-    
     
     
     /**
@@ -114,39 +101,39 @@ public class FrameExibirFuncionario extends javax.swing.JFrame {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        Tabela = new javax.swing.JTable();
+        TabelaCliente = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Funcionarios");
+        setTitle("Clientes");
         addWindowListener(new java.awt.event.WindowAdapter() {
-            public void windowOpened(java.awt.event.WindowEvent evt) {
-                formWindowOpened(evt);
+            public void windowActivated(java.awt.event.WindowEvent evt) {
+                formWindowActivated(evt);
             }
         });
 
-        Tabela.setModel(new javax.swing.table.DefaultTableModel(
+        TabelaCliente.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "ID", "Nome", "E-Mail", "Cargo", "Fone", "CPF", "RG", "Comandos"
+                "ID", "Nome", "E-Mail", "Fone", "Comandos"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false
+                false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(Tabela);
+        jScrollPane1.setViewportView(TabelaCliente);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 387, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -157,18 +144,19 @@ public class FrameExibirFuncionario extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+    private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
         // TODO add your handling code here:
-        
-        if(getQuantidade()==0){
+        if (i == 0){
+            i = 1;
+            if(getQuantidade()==0){
             montarTabela();
         }else if(getQuantidade()==1){
             montarTabela1();
         }else if(getQuantidade()==2){
             montarTabela2();
         }
-        
-    }//GEN-LAST:event_formWindowOpened
+        }
+    }//GEN-LAST:event_formWindowActivated
 
     /**
      * @param args the command line arguments
@@ -187,26 +175,26 @@ public class FrameExibirFuncionario extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(FrameExibirFuncionario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrameExibirCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(FrameExibirFuncionario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrameExibirCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(FrameExibirFuncionario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrameExibirCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(FrameExibirFuncionario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrameExibirCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new FrameExibirFuncionario().setVisible(true);
+                new FrameExibirCliente().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTable Tabela;
+    private javax.swing.JTable TabelaCliente;
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 }

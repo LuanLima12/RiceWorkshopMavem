@@ -85,6 +85,11 @@ public class FrameMenu extends javax.swing.JFrame {
         jMenu3.setText("Clientes");
 
         ManuGCliente.setText("Clientes");
+        ManuGCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ManuGClienteActionPerformed(evt);
+            }
+        });
         jMenu3.add(ManuGCliente);
 
         MenuGAdcCliente.setText("Adicionar Cliente");
@@ -110,6 +115,11 @@ public class FrameMenu extends javax.swing.JFrame {
         jMenu5.setText("Produtos");
 
         MenuGProdutos.setText("Produtos");
+        MenuGProdutos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MenuGProdutosActionPerformed(evt);
+            }
+        });
         jMenu5.add(MenuGProdutos);
 
         MenuGAdcProduto.setText("Adicionar Produto");
@@ -121,6 +131,11 @@ public class FrameMenu extends javax.swing.JFrame {
         jMenu5.add(MenuGAdcProduto);
 
         MenuGFornecedor.setText("Fornecedores");
+        MenuGFornecedor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MenuGFornecedorActionPerformed(evt);
+            }
+        });
         jMenu5.add(MenuGFornecedor);
 
         MenuGAdcFornecedor.setText("Adicionar Fornecedor");
@@ -159,7 +174,6 @@ public class FrameMenu extends javax.swing.JFrame {
 
     private void MenuGFuncionarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuGFuncionarioActionPerformed
         // TODO add your handling code here:
-        
         openForm(new FrameFuncionario());
         
     }//GEN-LAST:event_MenuGFuncionarioActionPerformed
@@ -194,6 +208,24 @@ public class FrameMenu extends javax.swing.JFrame {
         
         openForm(new FrameAdcProduto());
     }//GEN-LAST:event_MenuGAdcProdutoActionPerformed
+
+    private void ManuGClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ManuGClienteActionPerformed
+        // TODO add your handling code here:
+        
+        openForm(new FrameClientes());
+    }//GEN-LAST:event_ManuGClienteActionPerformed
+
+    private void MenuGProdutosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuGProdutosActionPerformed
+        // TODO add your handling code here:
+        
+        openForm(new FrameProduto());
+    }//GEN-LAST:event_MenuGProdutosActionPerformed
+
+    private void MenuGFornecedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuGFornecedorActionPerformed
+        // TODO add your handling code here:
+        
+        openForm(new FrameFornecedor());
+    }//GEN-LAST:event_MenuGFornecedorActionPerformed
 
     /**
      * @param args the command line arguments
