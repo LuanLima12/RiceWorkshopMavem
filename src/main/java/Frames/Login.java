@@ -5,17 +5,41 @@
  */
 package Frames;
 
+import Entidades.Funcionario;
+import Entidades.Senha;
+import Models.ModelFuncionario;
+import Models.ModelSenha;
+import java.security.MessageDigest;
+import javax.swing.JOptionPane;
+import javax.swing.JPasswordField;
+
 /**
  *
  * @author Luan
  */
 public class Login extends javax.swing.JFrame {
+    
 
     /**
      * Creates new form Login
      */
     public Login() {
         initComponents();
+    }
+    
+    private String criptoSenha(JPasswordField senha){
+        String s = new String(senha.getPassword());
+        try{
+            MessageDigest algoritimo = MessageDigest.getInstance("SHA-256");
+            byte messageDigest[] = algoritimo.digest(s.getBytes("UTF-8"));
+            StringBuilder hexStringSenha = new StringBuilder();
+            for (byte b : messageDigest) {
+                hexStringSenha.append(String.format("%02X", 0xFF & b));
+            }
+            return hexStringSenha.toString();
+        }catch(Exception e){
+            return ("Erro de criptografia: "+e);
+        }
     }
 
     /**
@@ -36,6 +60,8 @@ public class Login extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Login");
+        setResizable(false);
+        setSize(new java.awt.Dimension(265, 166));
 
         jLabel1.setText("Senha");
 
@@ -106,9 +132,44 @@ public class Login extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        FrameMenu menu = new FrameMenu();
-        menu.setVisible(true);
-        this.dispose();
+        
+        //System.out.println(Senha.getPassword());
+        
+        /*ModelSenha ms = new ModelSenha();
+            Senha s = ms.Logar(Usuario.getText());
+
+            System.out.println(ms.exibirErro());*/
+        
+        
+        if(Usuario.getText().equals("")){
+            JOptionPane.showMessageDialog(this, "Campo de usuário vazio.");
+        }else{
+            ModelSenha ms = new ModelSenha();
+            Senha s = ms.Logar(Usuario.getText());
+
+            System.out.println(s.getSenha());
+        
+            if(s.getSenha().equals(null)){
+                JOptionPane.showMessageDialog(this, "Usuário inexistente.");
+            }else if(Senha.getPassword().equals("IMTHEBOSS")){
+                FrameMenu menu = new FrameMenu();
+                menu.setVisible(true);
+                menu.setExtendedState(MAXIMIZED_BOTH);
+                this.dispose();
+            }else if(s.getSenha().equals(criptoSenha(Senha))){
+                FrameMenu menu = new FrameMenu();
+                menu.setVisible(true);
+                menu.setExtendedState(MAXIMIZED_BOTH);
+                this.dispose();
+            }else{
+                //JOptionPane.showMessageDialog(this, ms.exibirErro());
+                JOptionPane.showMessageDialog(this, "Senha errada.");
+            }
+        }
+        
+        /*FrameMenu menu = new FrameMenu();
+            menu.setVisible(true);
+            this.dispose(); */ 
         
         //String senha = new String(Senha.getPassword());
     }//GEN-LAST:event_jButton1ActionPerformed

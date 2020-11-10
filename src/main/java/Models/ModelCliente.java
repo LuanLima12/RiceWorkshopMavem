@@ -58,8 +58,16 @@ public class ModelCliente {
     public List<Cliente> listaClientes1(String selecionado1, String conteudo1){
         EntityManager emCliente = ModelCliente.openDB();
         try{
+            /*if (selecionado1.equals("id")){
+                return emCliente.createQuery("SELECT c FROM Cliente c WHERE c."+selecionado1+" = '"+Long.parseLong(conteudo1)+"'").getResultList();
+            }*/
             return emCliente.createQuery("SELECT c FROM Cliente c WHERE c."+selecionado1+" = '"+conteudo1+"'").getResultList();
-        }finally{
+        }catch(Exception e){
+            emCliente.getTransaction().rollback();
+            erro = e;
+            return null;
+        }
+        finally{
             emCliente.close();
         }
     }
@@ -67,7 +75,12 @@ public class ModelCliente {
     public List<Cliente> listaClientes2(String selecionado1,String selecionado2, String conteudo1, String conteudo2){
         EntityManager emCliente = ModelCliente.openDB();
         try{
+            if (selecionado1.equals("id")){
+                return emCliente.createQuery("SELECT c FROM Cliente c WHERE c."+selecionado1+" = '"+Long.parseLong(conteudo1)+"' AND c."+selecionado2+" = '"+conteudo2+"';").getResultList();
+            }
             return emCliente.createQuery("SELECT c FROM Cliente c WHERE c."+selecionado1+" = '"+conteudo1+"' AND c."+selecionado2+" = '"+conteudo2+"';").getResultList();
+            
+            
         }finally{
             emCliente.close();
         }

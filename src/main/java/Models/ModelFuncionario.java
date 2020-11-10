@@ -24,19 +24,20 @@ public class ModelFuncionario {
         return enf.createEntityManager();
     }
      
-  /*public Funcionario buscar(String funcionario){
+    public Funcionario Logar(String id){
         EntityManager em = ModelFuncionario.openDB(); //CHAMAR O MODELO
         try{
-            
-            Funcionario f = em.createQuery("SELECT f Funcionario f WHERE ")
-            
+            return (Funcionario) em.createQuery("SELECT f FROM funcionario f WHERE f.id = '"+id+"';").getSingleResult();                        
         }catch (Exception e) {
             em.getTransaction().rollback();
             erro = e;
+            return null;
         }finally{
             em.close();
         }
-    }*/
+    }
+    
+    
      
     public List<Funcionario> listaFuncionarios(){
         EntityManager em = ModelCliente.openDB();
