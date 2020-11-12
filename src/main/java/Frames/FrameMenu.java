@@ -180,6 +180,7 @@ public class FrameMenu extends javax.swing.JFrame {
 
     private void openForm(JInternalFrame f){
         Desktop.add(f);
+        //f.centralizar();
         f.show();
     }
     
@@ -196,11 +197,13 @@ public class FrameMenu extends javax.swing.JFrame {
         // TODO add your handling code here:
         //FrameAdcFornecedor adcForn = new FrameAdcFornecedor();
         openForm(new FrameAdcFornecedor());
+        
     }//GEN-LAST:event_MenuGAdcFornecedorActionPerformed
 
     private void MenuGAdcClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuGAdcClienteActionPerformed
         // TODO add your handling code here:
         openForm(new FrameAdcCliente());
+        
     }//GEN-LAST:event_MenuGAdcClienteActionPerformed
 
     private void MenuGAdcProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuGAdcProdutoActionPerformed

@@ -8,6 +8,7 @@ package Frames;
 import Entidades.Produto;
 import Models.ModelProduto;
 import Outros.SuporteSistema;
+import java.awt.Dimension;
 import javax.persistence.EntityManager;
 import javax.swing.JOptionPane;
 
@@ -58,6 +59,23 @@ public class FrameAdcProduto extends javax.swing.JInternalFrame {
         setClosable(true);
         setIconifiable(true);
         setTitle("Adicionar Produto");
+        addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
+            public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameClosed(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameClosing(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameDeactivated(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameDeiconified(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameIconified(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameOpened(javax.swing.event.InternalFrameEvent evt) {
+                formInternalFrameOpened(evt);
+            }
+        });
 
         Nome.setToolTipText("Nome do produto.");
 
@@ -231,6 +249,11 @@ public class FrameAdcProduto extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    public void centralizar(){
+        Dimension d = this.getDesktopPane().getSize();
+        this.setLocation((d.width - this.getSize().width) / 2, (d.height - this.getSize().height) / 2);
+    }
+    
     private void CancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CancelarActionPerformed
         // TODO add your handling code here:
         this.dispose();
@@ -310,6 +333,13 @@ public class FrameAdcProduto extends javax.swing.JInternalFrame {
     private void cnpjActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cnpjActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_cnpjActionPerformed
+
+    private void formInternalFrameOpened(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameOpened
+        // TODO add your handling code here:
+        
+        centralizar();
+        
+    }//GEN-LAST:event_formInternalFrameOpened
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

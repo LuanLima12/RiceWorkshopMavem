@@ -49,7 +49,7 @@ public class ModelCliente {
     public List<Cliente> listaClientes(){
         EntityManager emCliente = ModelCliente.openDB();
         try{
-            return emCliente.createQuery("Select c from Cliente c").getResultList();
+            return emCliente.createQuery("SELECT c FROM Cliente c").getResultList();
         }finally{
             emCliente.close();
         }
@@ -75,9 +75,9 @@ public class ModelCliente {
     public List<Cliente> listaClientes2(String selecionado1,String selecionado2, String conteudo1, String conteudo2){
         EntityManager emCliente = ModelCliente.openDB();
         try{
-            if (selecionado1.equals("id")){
+            /*if (selecionado1.equals("id")){
                 return emCliente.createQuery("SELECT c FROM Cliente c WHERE c."+selecionado1+" = '"+Long.parseLong(conteudo1)+"' AND c."+selecionado2+" = '"+conteudo2+"';").getResultList();
-            }
+            }*/
             return emCliente.createQuery("SELECT c FROM Cliente c WHERE c."+selecionado1+" = '"+conteudo1+"' AND c."+selecionado2+" = '"+conteudo2+"';").getResultList();
             
             

@@ -8,6 +8,7 @@ package Frames;
 import Entidades.Funcionario;
 import Models.ModelFuncionario;
 import Outros.SuporteSistema;
+import java.awt.Dimension;
 import javax.swing.JOptionPane;
 
 /**
@@ -51,6 +52,23 @@ public class FrameAdcFuncionario extends javax.swing.JInternalFrame {
         setClosable(true);
         setIconifiable(true);
         setTitle("Adicionar Funcionário");
+        addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
+            public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameClosed(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameClosing(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameDeactivated(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameDeiconified(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameIconified(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameOpened(javax.swing.event.InternalFrameEvent evt) {
+                formInternalFrameOpened(evt);
+            }
+        });
 
         jLabel1.setText("Nome:");
 
@@ -198,6 +216,11 @@ public class FrameAdcFuncionario extends javax.swing.JInternalFrame {
         setBounds(0, 0, 485, 217);
     }// </editor-fold>//GEN-END:initComponents
 
+    public void centralizar(){
+        Dimension d = this.getDesktopPane().getSize();
+        this.setLocation((d.width - this.getSize().width) / 2, (d.height - this.getSize().height) / 2);
+    }
+    
     private void CadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CadastrarActionPerformed
         // TODO add your handling code here:
 
@@ -253,6 +276,11 @@ public class FrameAdcFuncionario extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         this.dispose();
     }//GEN-LAST:event_CancelarActionPerformed
+
+    private void formInternalFrameOpened(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameOpened
+        // TODO add your handling code here:
+        centralizar();
+    }//GEN-LAST:event_formInternalFrameOpened
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

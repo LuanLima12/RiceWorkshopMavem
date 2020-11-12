@@ -8,6 +8,7 @@ package Frames;
 import Entidades.Cliente;
 import Models.ModelCliente;
 import Outros.SuporteSistema;
+import java.awt.Dimension;
 import javax.persistence.EntityManager;
 import javax.swing.JOptionPane;
 
@@ -48,6 +49,23 @@ public class FrameAdcCliente extends javax.swing.JInternalFrame {
         setIconifiable(true);
         setTitle("Adicionar Cliente");
         setToolTipText("Adicionar um cliente com seu nome, email e telefone.");
+        addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
+            public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameClosed(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameClosing(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameDeactivated(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameDeiconified(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameIconified(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameOpened(javax.swing.event.InternalFrameEvent evt) {
+                formInternalFrameOpened(evt);
+            }
+        });
 
         jLabel1.setText("Nome:");
 
@@ -140,9 +158,15 @@ public class FrameAdcCliente extends javax.swing.JInternalFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        setBounds(550, 250, 300, 200);
+        setBounds(550, 250, 300, 220);
     }// </editor-fold>//GEN-END:initComponents
 
+    
+    public void centralizar(){
+        Dimension d = this.getDesktopPane().getSize();
+        this.setLocation((d.width - this.getSize().width) / 2, (d.height - this.getSize().height) / 2);
+    }
+    
     private void CadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CadastrarActionPerformed
         // TODO add your handling code here:
         Cliente c = new Cliente();
@@ -184,6 +208,13 @@ public class FrameAdcCliente extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         this.dispose();
     }//GEN-LAST:event_CancelarActionPerformed
+
+    private void formInternalFrameOpened(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameOpened
+        // TODO add your handling code here:
+        
+        centralizar();
+        
+    }//GEN-LAST:event_formInternalFrameOpened
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

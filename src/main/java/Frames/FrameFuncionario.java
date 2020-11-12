@@ -5,7 +5,11 @@
  */
 package Frames;
 
+import Entidades.Funcionario;
+import Models.ModelFuncionario;
+import java.awt.Dimension;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -13,7 +17,8 @@ import javax.swing.JOptionPane;
  */
 public class FrameFuncionario extends javax.swing.JInternalFrame {
 
-    public int q; //Saber a q de itens para o SELECT
+    DefaultTableModel tabela;
+    public int q, i=0; //Saber a q de itens para o SELECT
     public String s1, s2; //Saber quais itens serão usados no SELECT
     public String c1, c2; //Conteudo dos campos selecionados para o SELECT
     
@@ -72,11 +77,50 @@ public class FrameFuncionario extends javax.swing.JInternalFrame {
      */
     @SuppressWarnings(value = "unchecked")
 
+    public void centralizar(){
+        Dimension d = this.getDesktopPane().getSize();
+        this.setLocation((d.width - this.getSize().width) / 2, (d.height - this.getSize().height) / 2);
+    }
+    
+    // METODOS PARA A TABELA
+    //-----------------------------------------------------------------------------
+    
+    private void montarTabela(){
+        tabela = (DefaultTableModel) Tabela.getModel();
+        ModelFuncionario mf = new ModelFuncionario();
+        for (Funcionario f : mf.listaFuncionarios()){
+            tabela.addRow(new Object[]{f.getId(), f.getNome(), f.getEmail(), f.getCargo(), f.getFone(), f.getCpf_funcionario(), f.getRg()});
+        }
+    }
+    
+    private void montarTabela1(){
+        tabela = (DefaultTableModel) Tabela.getModel();
+        ModelFuncionario mf = new ModelFuncionario();
+        for (Funcionario f : mf.listaFuncionarios1(s1, c1)){
+            tabela.addRow(new Object[]{f.getId(), f.getNome(), f.getEmail(), f.getCargo(), f.getFone(), f.getCpf_funcionario(), f.getRg()});
+        }
+    }
+    
+    private void montarTabela2(){
+        tabela = (DefaultTableModel) Tabela.getModel();
+        ModelFuncionario mf = new ModelFuncionario();
+        for (Funcionario f : mf.listaFuncionarios2(s1, c1, s2, c2)){
+            tabela.addRow(new Object[]{f.getId(), f.getNome(), f.getEmail(), f.getCargo(),f.getFone(), f.getCpf_funcionario(), f.getRg()});
+        }
+    }
+    
+    private void limparTabela(){
+        tabela.setNumRows(0);
+    }
+    
+    // ============================================================================
+    
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         buttonGroup1 = new javax.swing.ButtonGroup();
         buttonGroup2 = new javax.swing.ButtonGroup();
+        jPanel3 = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         Nome1 = new javax.swing.JRadioButton();
         Cargo1 = new javax.swing.JRadioButton();
@@ -103,12 +147,31 @@ public class FrameFuncionario extends javax.swing.JInternalFrame {
         pesquisar = new javax.swing.JButton();
         RG = new javax.swing.JFormattedTextField();
         jButton2 = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        Tabela = new javax.swing.JTable();
 
         setClosable(true);
         setIconifiable(true);
         setMaximizable(true);
         setResizable(true);
         setTitle("Funcionarios");
+        addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
+            public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameClosed(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameClosing(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameDeactivated(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameDeiconified(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameIconified(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameOpened(javax.swing.event.InternalFrameEvent evt) {
+                formInternalFrameOpened(evt);
+            }
+        });
 
         jPanel1.setBackground(new java.awt.Color(153, 153, 255));
         jPanel1.setToolTipText("Escolha temas para pesquisar.\n\"Data\" pode ser combinado com qualquer outro.");
@@ -363,31 +426,72 @@ public class FrameFuncionario extends javax.swing.JInternalFrame {
                         .addComponent(Cargo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(pesquisar))
                     .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(35, 35, 35))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
+        );
+
+        Tabela.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "ID", "Nome", "E-Mail", "Cargo", "Fone", "CPF", "RG", "Comandos"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(Tabela);
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1)
+                .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap(207, Short.MAX_VALUE)
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(207, Short.MAX_VALUE))
+        );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(92, Short.MAX_VALUE))
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 252, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
-        pack();
+        setBounds(0, 0, 899, 495);
     }// </editor-fold>//GEN-END:initComponents
 
     private void Cargo1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Cargo1ActionPerformed
@@ -616,22 +720,30 @@ public class FrameFuncionario extends javax.swing.JInternalFrame {
            c1 = Nome.getText();
             
         }else if(Cargo1.isSelected() && Data1.isSelected()){
-            if(Cargo.getSelectedIndex()==1){
-                c1 = "gerente";
-            }else if(Cargo.getSelectedIndex()==2){
-                c1= "funcionario";
-            }else{
-                JOptionPane.showMessageDialog(this, "Selecione um cargo, por favor.");
+            switch (Cargo.getSelectedIndex()) {
+                case 1:
+                    c1 = "gerente";
+                    break;
+                case 2:
+                    c1= "funcionario";
+                    break;
+                default:
+                    JOptionPane.showMessageDialog(this, "Selecione um cargo, por favor.");
+                    break;
             }
             c2 = Data.getText();
             
         }else if(Cargo1.isSelected()){
-            if(Cargo.getSelectedIndex()==1){
-                c1 = "gerente";
-            }else if(Cargo.getSelectedIndex()==2){
-                c1= "funcionario";
-            }else{
-                JOptionPane.showMessageDialog(this, "Selecione um cargo, por favor. Caso contrario, serão exibidos resultados sem filtro de pesquisa.");
+            switch (Cargo.getSelectedIndex()) {
+                case 1:
+                    c1 = "gerente";
+                    break;
+                case 2:
+                    c1= "funcionario";
+                    break;
+                default:
+                    JOptionPane.showMessageDialog(this, "Selecione um cargo, por favor. Caso contrario, serão exibidos resultados sem filtro de pesquisa.");
+                    break;
             }
             
         }else if(CPF1.isSelected() && Data1.isSelected()){
@@ -663,29 +775,43 @@ public class FrameFuncionario extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(this, "Exibindo resultado sem filtros de pesquisa.");
         }
         
-        FrameExibirFuncionario fef = new FrameExibirFuncionario();
-        fef.setSelecionado1(getS1());
-        fef.setSelecionado2(getS2());
-        fef.setQuantidade(getQ());
-        fef.setConteudo1(getC1());
-        fef.setConteudo2(getC2());
-        fef.setVisible(true);
+        if (i==1){
+          limparTabela();  
+        }
+        switch (getQ()) {
+            case 0:
+                montarTabela();
+                i=1;
+                break;
+            case 1:
+                montarTabela1();
+                i=1;
+                break;
+            case 2:
+                montarTabela2();
+                i=1;
+                break;
+            default:
+                break;
+        }
    
     }//GEN-LAST:event_pesquisarActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
 
-        setQ(0); 
-        FrameExibirFuncionario fef = new FrameExibirFuncionario();
-        fef.setSelecionado1(getS1());
-        fef.setSelecionado2(getS2());
-        fef.setQuantidade(getQ());
-        fef.setConteudo1(getC1());
-        fef.setConteudo2(getC2());
-        fef.setVisible(true);
+        if(i==1){
+            limparTabela();
+        }
+        montarTabela();
+        i=1;
 
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void formInternalFrameOpened(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameOpened
+        // TODO add your handling code here:
+        centralizar();
+    }//GEN-LAST:event_formInternalFrameOpened
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -703,6 +829,7 @@ public class FrameFuncionario extends javax.swing.JInternalFrame {
     private javax.swing.JRadioButton Nome1;
     private javax.swing.JFormattedTextField RG;
     private javax.swing.JRadioButton RG1;
+    private javax.swing.JTable Tabela;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.ButtonGroup buttonGroup2;
     private javax.swing.JButton jButton1;
@@ -716,6 +843,8 @@ public class FrameFuncionario extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton pesquisar;
     // End of variables declaration//GEN-END:variables
 }
