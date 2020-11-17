@@ -39,7 +39,38 @@ public class ModelSenha {
         //return id;
     }
      
-    public boolean inserir(){
+    public boolean inserir(Senha s){
+        EntityManager em2 = ModelSenha.openDB(); //CHAMAR O MODELO
+        try{ //PASSAR A SENHA
+                texto = s.getSenha();
+                
+                if(criptoSenha(texto)==true){ //CRIPTOGRAFAR
+                s.setSenha(texto);
+                
+                texto = null;
+                
+                em2.getTransaction().begin(); //INICIAR TRANSAÇÃO DE INFORMAÇÕES
+                
+                em2.persist(s); //MONTA O INSERT
+                
+                em2.getTransaction().commit(); //EXECUTA O QUE FOI MONTADO ACIMA
+
+                return true;  
+                
+                }else{
+                return false;
+                }
+        }catch(Exception e){
+            em2.getTransaction().rollback();
+            erro = e;
+            return false;
+        }finally{
+            em2.close(); //FECHA A TRANSAÇÃO
+        }
+        
+    }
+    
+    /*public boolean inserir(){
         EntityManager em2 = ModelSenha.openDB(); //CHAMAR O MODELO
         try{ //INICIALIZAR A SENHA
                 Senha s = new Senha();
@@ -67,7 +98,7 @@ public class ModelSenha {
             em2.close(); //FECHA A TRANSAÇÃO
         }
         
-    }
+    }*/
     
     private  boolean criptoSenha(String s){
         try{

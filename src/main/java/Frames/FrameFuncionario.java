@@ -21,6 +21,8 @@ public class FrameFuncionario extends javax.swing.JInternalFrame {
     public int q, i=0; //Saber a q de itens para o SELECT
     public String s1, s2; //Saber quais itens serão usados no SELECT
     public String c1, c2; //Conteudo dos campos selecionados para o SELECT
+    Funcionario f = new Funcionario();
+    ModelFuncionario mf = new ModelFuncionario();
     
     public FrameFuncionario() {
         initComponents();
@@ -144,11 +146,14 @@ public class FrameFuncionario extends javax.swing.JInternalFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         CPF = new javax.swing.JFormattedTextField();
-        pesquisar = new javax.swing.JButton();
+        Confirmar = new javax.swing.JButton();
         RG = new javax.swing.JFormattedTextField();
-        jButton2 = new javax.swing.JButton();
+        semFiltro = new javax.swing.JButton();
+        jLabel8 = new javax.swing.JLabel();
+        Fone = new javax.swing.JFormattedTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         Tabela = new javax.swing.JTable();
+        Editar = new javax.swing.JButton();
 
         setClosable(true);
         setIconifiable(true);
@@ -321,12 +326,12 @@ public class FrameFuncionario extends javax.swing.JInternalFrame {
         }
         CPF.setEnabled(false);
 
-        pesquisar.setText("Pesquisar");
-        pesquisar.setAutoscrolls(true);
-        pesquisar.setEnabled(false);
-        pesquisar.addActionListener(new java.awt.event.ActionListener() {
+        Confirmar.setText("Pesquisar");
+        Confirmar.setAutoscrolls(true);
+        Confirmar.setEnabled(false);
+        Confirmar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                pesquisarActionPerformed(evt);
+                ConfirmarActionPerformed(evt);
             }
         });
 
@@ -337,13 +342,22 @@ public class FrameFuncionario extends javax.swing.JInternalFrame {
         }
         RG.setEnabled(false);
 
-        jButton2.setText("Sem Filtro");
-        jButton2.setToolTipText("Não usar filtros de pesquisa.");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        semFiltro.setText("Sem Filtro");
+        semFiltro.setToolTipText("Não usar filtros de pesquisa.");
+        semFiltro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                semFiltroActionPerformed(evt);
             }
         });
+
+        jLabel8.setText("Fone");
+
+        try {
+            Fone.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("(##)#####-####")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+        Fone.setEnabled(false);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -355,24 +369,13 @@ public class FrameFuncionario extends javax.swing.JInternalFrame {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
-                                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(Cargo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
-                                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(CPF, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel2Layout.createSequentialGroup()
-                                        .addGap(4, 4, 4)
-                                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(RG, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(pesquisar))))
+                                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(CPF, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(4, 4, 4)
+                                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(RG, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -382,19 +385,26 @@ public class FrameFuncionario extends javax.swing.JInternalFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(Data, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jButton2)))
+                                .addComponent(semFiltro))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(Cargo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(Confirmar)))
                         .addContainerGap())
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(Nome, javax.swing.GroupLayout.PREFERRED_SIZE, 259, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(Email, javax.swing.GroupLayout.PREFERRED_SIZE, 259, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 0, Short.MAX_VALUE))))
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(Nome, javax.swing.GroupLayout.PREFERRED_SIZE, 259, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(Email, javax.swing.GroupLayout.PREFERRED_SIZE, 259, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(Fone, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE))))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -405,7 +415,7 @@ public class FrameFuncionario extends javax.swing.JInternalFrame {
                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(ID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(Data, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2))
+                    .addComponent(semFiltro))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -420,12 +430,15 @@ public class FrameFuncionario extends javax.swing.JInternalFrame {
                     .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(CPF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(RG, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(Cargo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(pesquisar))
-                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Fone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Cargo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Confirmar))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -445,9 +458,9 @@ public class FrameFuncionario extends javax.swing.JInternalFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
+                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         Tabela.setModel(new javax.swing.table.DefaultTableModel(
@@ -468,18 +481,27 @@ public class FrameFuncionario extends javax.swing.JInternalFrame {
         });
         jScrollPane1.setViewportView(Tabela);
 
+        Editar.setText("Editar");
+        Editar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                EditarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1)
-                .addContainerGap())
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(207, Short.MAX_VALUE)
+                .addContainerGap(225, Short.MAX_VALUE)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(207, Short.MAX_VALUE))
+                .addContainerGap(189, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 770, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(Editar)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -487,7 +509,11 @@ public class FrameFuncionario extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 252, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(Editar)
+                        .addGap(0, 206, Short.MAX_VALUE)))
                 .addContainerGap())
         );
 
@@ -529,7 +555,7 @@ public class FrameFuncionario extends javax.swing.JInternalFrame {
             CPF.setEnabled(false);
             RG.setEnabled(false);
             Cargo.setEnabled(false);
-            pesquisar.setEnabled(true);
+            Confirmar.setEnabled(true);
             
             q = 2;
             s1 = "id";
@@ -543,7 +569,7 @@ public class FrameFuncionario extends javax.swing.JInternalFrame {
             CPF.setEnabled(false);
             RG.setEnabled(false);
             Cargo.setEnabled(false);
-            pesquisar.setEnabled(true);
+            Confirmar.setEnabled(true);
             
             q = 1;
             s1 = "id";
@@ -556,7 +582,7 @@ public class FrameFuncionario extends javax.swing.JInternalFrame {
             CPF.setEnabled(false);
             RG.setEnabled(false);
             Cargo.setEnabled(false);
-            pesquisar.setEnabled(true);
+            Confirmar.setEnabled(true);
             
             q = 2;
             s1 = "nome";
@@ -570,7 +596,7 @@ public class FrameFuncionario extends javax.swing.JInternalFrame {
             CPF.setEnabled(false);
             RG.setEnabled(false);
             Cargo.setEnabled(false);
-            pesquisar.setEnabled(true);
+            Confirmar.setEnabled(true);
             
             q = 1;
             s1 = "nome";
@@ -583,7 +609,7 @@ public class FrameFuncionario extends javax.swing.JInternalFrame {
             CPF.setEnabled(false);
             RG.setEnabled(false);
             Cargo.setEnabled(true);
-            pesquisar.setEnabled(true);
+            Confirmar.setEnabled(true);
             
             q = 2;
             s1 = "cargo";
@@ -597,7 +623,7 @@ public class FrameFuncionario extends javax.swing.JInternalFrame {
             CPF.setEnabled(false);
             RG.setEnabled(false);
             Cargo.setEnabled(true);
-            pesquisar.setEnabled(true);
+            Confirmar.setEnabled(true);
             
             q = 1;
             s1 = "cargo";
@@ -610,7 +636,7 @@ public class FrameFuncionario extends javax.swing.JInternalFrame {
             CPF.setEnabled(true);
             RG.setEnabled(false);
             Cargo.setEnabled(false);
-            pesquisar.setEnabled(true);
+            Confirmar.setEnabled(true);
             
             q = 2;
             s1 = "cpf_funcionario";
@@ -624,7 +650,7 @@ public class FrameFuncionario extends javax.swing.JInternalFrame {
             CPF.setEnabled(true);
             RG.setEnabled(false);
             Cargo.setEnabled(false);
-            pesquisar.setEnabled(true);
+            Confirmar.setEnabled(true);
             
             q = 1;
             s1 = "cpf_funcionario";
@@ -637,7 +663,7 @@ public class FrameFuncionario extends javax.swing.JInternalFrame {
             CPF.setEnabled(false);
             RG.setEnabled(true);
             Cargo.setEnabled(false);
-            pesquisar.setEnabled(true);
+            Confirmar.setEnabled(true);
             
             q = 2;
             s1 = "rg";
@@ -651,7 +677,7 @@ public class FrameFuncionario extends javax.swing.JInternalFrame {
             CPF.setEnabled(false);
             RG.setEnabled(true);
             Cargo.setEnabled(false);
-            pesquisar.setEnabled(true);
+            Confirmar.setEnabled(true);
             
             q = 1;
             s1 = "rg";
@@ -664,7 +690,7 @@ public class FrameFuncionario extends javax.swing.JInternalFrame {
             CPF.setEnabled(false);
             RG.setEnabled(false);
             Cargo.setEnabled(false);
-            pesquisar.setEnabled(true);
+            Confirmar.setEnabled(true);
             
             q = 2;
             s1 = "email";
@@ -678,7 +704,7 @@ public class FrameFuncionario extends javax.swing.JInternalFrame {
             CPF.setEnabled(false);
             RG.setEnabled(false);
             Cargo.setEnabled(false);
-            pesquisar.setEnabled(true);
+            Confirmar.setEnabled(true);
             
             q = 1;
             s1 = "email";
@@ -691,7 +717,7 @@ public class FrameFuncionario extends javax.swing.JInternalFrame {
             CPF.setEnabled(false);
             RG.setEnabled(false);
             Cargo.setEnabled(false);
-            pesquisar.setEnabled(true);
+            Confirmar.setEnabled(true);
             
             q = 1;
             s1 = "email";
@@ -702,102 +728,136 @@ public class FrameFuncionario extends javax.swing.JInternalFrame {
         
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void pesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pesquisarActionPerformed
+    private void ConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ConfirmarActionPerformed
         // TODO add your handling code here:
         
-        if (ID1.isSelected() && Data1.isSelected()){
-            c1 = ID.getText();
-            c2 = Data.getText();
-            
-        }else if(ID1.isSelected()){
-           c1 = ID.getText();
-            
-        }else if(Nome1.isSelected() && Data1.isSelected()){
-            c1 = Nome.getText();
-            c2 = Data.getText();
-            
-        }else if(Nome1.isSelected()){
-           c1 = Nome.getText();
-            
-        }else if(Cargo1.isSelected() && Data1.isSelected()){
-            switch (Cargo.getSelectedIndex()) {
+        if (Confirmar.getText().equals("Pesquisar")){ // DECIDIR SESERÁ SELEC OU UPDATE
+
+            if (ID1.isSelected() && Data1.isSelected()){
+                c1 = ID.getText();
+                c2 = Data.getText();
+
+            }else if(ID1.isSelected()){
+               c1 = ID.getText();
+
+            }else if(Nome1.isSelected() && Data1.isSelected()){
+                c1 = Nome.getText();
+                c2 = Data.getText();
+
+            }else if(Nome1.isSelected()){
+               c1 = Nome.getText();
+
+            }else if(Cargo1.isSelected() && Data1.isSelected()){
+                switch (Cargo.getSelectedIndex()) {
+                    case 1:
+                        c1 = "gerente";
+                        break;
+                    case 2:
+                        c1= "funcionario";
+                        break;
+                    default:
+                        JOptionPane.showMessageDialog(this, "Selecione um cargo, por favor.");
+                        break;
+                }
+                c2 = Data.getText();
+
+            }else if(Cargo1.isSelected()){
+                switch (Cargo.getSelectedIndex()) {
+                    case 1:
+                        c1 = "gerente";
+                        break;
+                    case 2:
+                        c1= "funcionario";
+                        break;
+                    default:
+                        JOptionPane.showMessageDialog(this, "Selecione um cargo, por favor. Caso contrario, serão exibidos resultados sem filtro de pesquisa.");
+                        break;
+                }
+
+            }else if(CPF1.isSelected() && Data1.isSelected()){
+                c1 = CPF.getText();
+                c2 = Data.getText();
+
+            }else if(CPF1.isSelected()){
+                c1 = CPF.getText();
+
+            }else if(RG1.isSelected() && Data1.isSelected()){
+                c1 = RG.getText();
+                c2 = Data.getText();
+
+            }else if(RG1.isSelected()){
+                c1 = RG.getText();
+
+            }else if(Email1.isSelected() && Data1.isSelected()){
+                c1 = Email.getText();
+                c2 = Data.getText();
+
+            }else if(Email1.isSelected()){
+                c1 = Email.getText();
+
+            }else if(Data1.isSelected()){
+                c1 = Data.getText();
+
+            }else{
+                q = 0;
+                JOptionPane.showMessageDialog(this, "Exibindo resultado sem filtros de pesquisa.");
+            }
+
+            if (i==1){
+              limparTabela();  
+            }
+            switch (getQ()) {
+                case 0:
+                    montarTabela();
+                    i=1;
+                    break;
                 case 1:
-                    c1 = "gerente";
+                    montarTabela1();
+                    i=1;
                     break;
                 case 2:
-                    c1= "funcionario";
+                    montarTabela2();
+                    i=1;
                     break;
                 default:
-                    JOptionPane.showMessageDialog(this, "Selecione um cargo, por favor.");
                     break;
-            }
-            c2 = Data.getText();
-            
-        }else if(Cargo1.isSelected()){
-            switch (Cargo.getSelectedIndex()) {
-                case 1:
-                    c1 = "gerente";
-                    break;
-                case 2:
-                    c1= "funcionario";
-                    break;
-                default:
-                    JOptionPane.showMessageDialog(this, "Selecione um cargo, por favor. Caso contrario, serão exibidos resultados sem filtro de pesquisa.");
-                    break;
-            }
-            
-        }else if(CPF1.isSelected() && Data1.isSelected()){
-            c1 = CPF.getText();
-            c2 = Data.getText();
-            
-        }else if(CPF1.isSelected()){
-            c1 = CPF.getText();
-            
-        }else if(RG1.isSelected() && Data1.isSelected()){
-            c1 = RG.getText();
-            c2 = Data.getText();
-            
-        }else if(RG1.isSelected()){
-            c1 = RG.getText();
-            
-        }else if(Email1.isSelected() && Data1.isSelected()){
-            c1 = Email.getText();
-            c2 = Data.getText();
-            
-        }else if(Email1.isSelected()){
-            c1 = Email.getText();
-            
-        }else if(Data1.isSelected()){
-            c1 = Data.getText();
+            }    
             
         }else{
-            q = 0;
-            JOptionPane.showMessageDialog(this, "Exibindo resultado sem filtros de pesquisa.");
+
+            if (Cargo.getSelectedIndex()==1){
+                f.setCargo("gerente");
+            }else if (Cargo.getSelectedIndex()==2){
+                f.setCargo("funcionario");
+            }
+            
+            f.setNome(Nome.getText());
+            f.setEmail(Email.getText());
+            f.setCpf_funcionario(CPF.getText());
+            f.setRg(RG.getText());
+            f.setFone(Fone.getText());
+            
+            
+            if (mf.editar(f)==true){
+                JOptionPane.showMessageDialog(this, "Funcionario editado com sucesso!");
+                ID.setText(null); ID.setEnabled(false);
+                Nome.setText(null); Nome.setEnabled(false);
+                Email.setText(null); Email.setEnabled(false);
+                CPF.setText(null); CPF.setEnabled(false);
+                RG.setText(null); RG.setEnabled(false);
+                Fone.setText(null); Fone.setEnabled(false);
+                Cargo.setSelectedIndex(0); Cargo.setEnabled(false);
+                Confirmar.setText("Pesquisar"); Confirmar.setEnabled(false);
+                semFiltro.setEnabled(true);
+            }
+            
         }
         
-        if (i==1){
-          limparTabela();  
-        }
-        switch (getQ()) {
-            case 0:
-                montarTabela();
-                i=1;
-                break;
-            case 1:
-                montarTabela1();
-                i=1;
-                break;
-            case 2:
-                montarTabela2();
-                i=1;
-                break;
-            default:
-                break;
-        }
+        
    
-    }//GEN-LAST:event_pesquisarActionPerformed
+    }//GEN-LAST:event_ConfirmarActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void semFiltroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_semFiltroActionPerformed
         // TODO add your handling code here:
 
         if(i==1){
@@ -806,12 +866,42 @@ public class FrameFuncionario extends javax.swing.JInternalFrame {
         montarTabela();
         i=1;
 
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_semFiltroActionPerformed
 
     private void formInternalFrameOpened(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameOpened
         // TODO add your handling code here:
         centralizar();
     }//GEN-LAST:event_formInternalFrameOpened
+
+    private void EditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EditarActionPerformed
+        // TODO add your handling code here:
+        
+        if (Tabela.getSelectedRowCount()<1){
+            JOptionPane.showMessageDialog(this, "Nenhum funcionario selecionado.");
+        }else if (Tabela.getSelectedRowCount()>1){
+            JOptionPane.showMessageDialog(this, "Por favor, selecione apenas um funcionario por vez para edita-lo.");
+        }else{
+            Long idLocal = (Long)Tabela.getValueAt(Tabela.getSelectedRow(), 0);
+            f = mf.buscar(idLocal);
+            ID.setText(Long.toString(f.getId())); ID.setEnabled(false);
+            Nome.setText(f.getNome()); Nome.setEnabled(true);
+            Email.setText(f.getEmail()); Email.setEnabled(true);
+            CPF.setText(f.getCpf_funcionario()); CPF.setEnabled(true);
+            RG.setText(f.getRg()); RG.setEnabled(true);
+            Fone.setText(f.getFone()); Fone.setEnabled(true);
+            
+            if(f.getCargo().equals("gerente")){
+                Cargo.setSelectedIndex(1);
+            }else{
+                Cargo.setSelectedIndex(2);
+            }
+            
+            Confirmar.setText("Salvar"); Confirmar.setEnabled(true);
+            semFiltro.setEnabled(false);
+            
+        }
+        
+    }//GEN-LAST:event_EditarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -819,10 +909,13 @@ public class FrameFuncionario extends javax.swing.JInternalFrame {
     private javax.swing.JRadioButton CPF1;
     private javax.swing.JComboBox<String> Cargo;
     private javax.swing.JRadioButton Cargo1;
+    private javax.swing.JButton Confirmar;
     private javax.swing.JFormattedTextField Data;
     private javax.swing.JRadioButton Data1;
+    private javax.swing.JButton Editar;
     private javax.swing.JTextField Email;
     private javax.swing.JRadioButton Email1;
+    private javax.swing.JFormattedTextField Fone;
     private javax.swing.JTextField ID;
     private javax.swing.JRadioButton ID1;
     private javax.swing.JTextField Nome;
@@ -833,7 +926,6 @@ public class FrameFuncionario extends javax.swing.JInternalFrame {
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.ButtonGroup buttonGroup2;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -841,10 +933,11 @@ public class FrameFuncionario extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JButton pesquisar;
+    private javax.swing.JButton semFiltro;
     // End of variables declaration//GEN-END:variables
 }

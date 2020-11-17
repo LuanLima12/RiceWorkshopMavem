@@ -45,6 +45,41 @@ public class ModelProduto {
             }
     }
     
+    public boolean editar(Produto p){
+        
+        EntityManager emProduto = ModelProduto.openDB(); //CHAMAR O MODELO
+        
+        try{
+        emProduto.getTransaction().begin(); //INICIAR TRANSAÇÃO DE INFORMAÇÕES
+        
+        emProduto.merge(p); //MONTA O UPDATE
+        
+        emProduto.getTransaction().commit(); //EXECUTA O QUE FOI MONTADO ACIMA
+        
+        return true;
+        
+        }catch(Exception e){
+            emProduto.getTransaction().rollback();
+            erro = e;
+            return false;
+        }finally{
+            emProduto.close(); //FECHA A TRANSAÇÃO
+        }
+    }
+    
+    public Produto buscar(Long id){
+        EntityManager emProduto = ModelProduto.openDB();
+        try{
+            return (Produto) emProduto.createQuery("SELECT p FROM Produto p WHERE p.id = "+id).getSingleResult();
+        }catch(Exception e){
+            emProduto.getTransaction().rollback();
+            erro = e;
+            return null;
+        }finally{
+            emProduto.close();
+        }
+    }
+    
     public List<Produto> listaProdutos(){
         EntityManager em = ModelCliente.openDB();
         try{

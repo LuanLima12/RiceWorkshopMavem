@@ -21,6 +21,8 @@ public class FrameFornecedor extends javax.swing.JInternalFrame {
     private int quantidade, i=0; //Saber a quantidade de itens para o SELECT
     private String selecionado1, selecionado2; //Saber quais itens serão usados no SELECT
     private String conteudo1, conteudo2; //Conteudo dos campos selecionados para o SELECT
+    Fornecedor f = new Fornecedor();
+    ModelFornecedor mf = new ModelFornecedor();
     
     /**
      * Creates new form FrameFornecedor
@@ -100,13 +102,15 @@ public class FrameFornecedor extends javax.swing.JInternalFrame {
         Data = new javax.swing.JFormattedTextField();
         jLabel1 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        pesquisar = new javax.swing.JButton();
+        Confirmar = new javax.swing.JButton();
         CNPJ = new javax.swing.JFormattedTextField();
         jLabel6 = new javax.swing.JLabel();
         Cidade = new javax.swing.JFormattedTextField();
-        jButton2 = new javax.swing.JButton();
+        semFiltro = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         Tabela = new javax.swing.JTable();
+        Editar = new javax.swing.JButton();
+        Editar1 = new javax.swing.JButton();
 
         setClosable(true);
         setIconifiable(true);
@@ -251,12 +255,12 @@ public class FrameFornecedor extends javax.swing.JInternalFrame {
 
         jLabel4.setText("Endereço");
 
-        pesquisar.setText("Pesquisar");
-        pesquisar.setAutoscrolls(true);
-        pesquisar.setEnabled(false);
-        pesquisar.addActionListener(new java.awt.event.ActionListener() {
+        Confirmar.setText("Pesquisar");
+        Confirmar.setAutoscrolls(true);
+        Confirmar.setEnabled(false);
+        Confirmar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                pesquisarActionPerformed(evt);
+                ConfirmarActionPerformed(evt);
             }
         });
 
@@ -271,11 +275,11 @@ public class FrameFornecedor extends javax.swing.JInternalFrame {
 
         Cidade.setEnabled(false);
 
-        jButton2.setText("Sem Filtro");
-        jButton2.setToolTipText("Não usar filtros de pesquisa.");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        semFiltro.setText("Sem Filtro");
+        semFiltro.setToolTipText("Não usar filtros de pesquisa.");
+        semFiltro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                semFiltroActionPerformed(evt);
             }
         });
 
@@ -312,8 +316,8 @@ public class FrameFornecedor extends javax.swing.JInternalFrame {
                                         .addComponent(CNPJ, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                 .addGap(36, 36, 36)
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(pesquisar)
-                                    .addComponent(jButton2))))
+                                    .addComponent(Confirmar)
+                                    .addComponent(semFiltro))))
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel4)
@@ -342,12 +346,12 @@ public class FrameFornecedor extends javax.swing.JInternalFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(Cidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2))
+                    .addComponent(semFiltro))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(CNPJ, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(pesquisar))
+                    .addComponent(Confirmar))
                 .addContainerGap())
         );
 
@@ -390,18 +394,34 @@ public class FrameFornecedor extends javax.swing.JInternalFrame {
         });
         jScrollPane1.setViewportView(Tabela);
 
+        Editar.setText("Editar");
+
+        Editar1.setText("Editar");
+        Editar1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Editar1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1)
-                .addContainerGap())
-            .addGroup(layout.createSequentialGroup()
                 .addContainerGap(132, Short.MAX_VALUE)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(132, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 664, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(Editar1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(Editar)
+                    .addGap(0, 0, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -409,8 +429,17 @@ public class FrameFornecedor extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(11, 11, 11)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 225, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 225, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(Editar1)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(Editar)
+                    .addGap(0, 0, Short.MAX_VALUE)))
         );
 
         setBounds(0, 0, 788, 469);
@@ -434,7 +463,7 @@ public class FrameFornecedor extends javax.swing.JInternalFrame {
             endereco.setEnabled(false);
             Cidade.setEnabled(false);
             CNPJ.setEnabled(false);
-            pesquisar.setEnabled(true);
+            Confirmar.setEnabled(true);
 
             quantidade = 2;
             selecionado1 = "id";
@@ -447,7 +476,7 @@ public class FrameFornecedor extends javax.swing.JInternalFrame {
             endereco.setEnabled(false);
             Cidade.setEnabled(false);
             CNPJ.setEnabled(false);
-            pesquisar.setEnabled(true);
+            Confirmar.setEnabled(true);
 
             quantidade = 1;
             selecionado1 = "id";
@@ -459,7 +488,7 @@ public class FrameFornecedor extends javax.swing.JInternalFrame {
             endereco.setEnabled(false);
             Cidade.setEnabled(false);
             CNPJ.setEnabled(false);
-            pesquisar.setEnabled(true);
+            Confirmar.setEnabled(true);
 
             quantidade = 2;
             selecionado1 = "razao_social";
@@ -472,7 +501,7 @@ public class FrameFornecedor extends javax.swing.JInternalFrame {
             endereco.setEnabled(false);
             Cidade.setEnabled(false);
             CNPJ.setEnabled(false);
-            pesquisar.setEnabled(true);
+            Confirmar.setEnabled(true);
 
             quantidade = 1;
             selecionado1 = "razao_social";
@@ -484,7 +513,7 @@ public class FrameFornecedor extends javax.swing.JInternalFrame {
             endereco.setEnabled(false);
             Cidade.setEnabled(false);
             CNPJ.setEnabled(true);
-            pesquisar.setEnabled(true);
+            Confirmar.setEnabled(true);
 
             quantidade = 2;
             selecionado1 = "cnpj_fornecedor";
@@ -497,7 +526,7 @@ public class FrameFornecedor extends javax.swing.JInternalFrame {
             endereco.setEnabled(false);
             Cidade.setEnabled(false);
             CNPJ.setEnabled(true);
-            pesquisar.setEnabled(true);
+            Confirmar.setEnabled(true);
 
             quantidade = 1;
             selecionado1 = "cnpj_fornecedor";
@@ -508,7 +537,7 @@ public class FrameFornecedor extends javax.swing.JInternalFrame {
             razao_social.setEnabled(false);
             endereco.setEnabled(true);
             Cidade.setEnabled(false);
-            pesquisar.setEnabled(true);
+            Confirmar.setEnabled(true);
 
             quantidade = 2;
             selecionado1 = "cidade";
@@ -521,7 +550,7 @@ public class FrameFornecedor extends javax.swing.JInternalFrame {
             endereco.setEnabled(true);
             Cidade.setEnabled(false);
             CNPJ.setEnabled(false);
-            pesquisar.setEnabled(true);
+            Confirmar.setEnabled(true);
 
             quantidade = 1;
             selecionado1 = "cidade";
@@ -532,7 +561,7 @@ public class FrameFornecedor extends javax.swing.JInternalFrame {
             razao_social.setEnabled(false);
             endereco.setEnabled(false);
             Cidade.setEnabled(true);
-            pesquisar.setEnabled(true);
+            Confirmar.setEnabled(true);
 
             quantidade = 2;
             selecionado1 = "cidade";
@@ -545,7 +574,7 @@ public class FrameFornecedor extends javax.swing.JInternalFrame {
             endereco.setEnabled(false);
             Cidade.setEnabled(true);
             CNPJ.setEnabled(false);
-            pesquisar.setEnabled(true);
+            Confirmar.setEnabled(true);
 
             quantidade = 1;
             selecionado1 = "cidade";
@@ -557,7 +586,7 @@ public class FrameFornecedor extends javax.swing.JInternalFrame {
             endereco.setEnabled(false);
             Cidade.setEnabled(false);
             CNPJ.setEnabled(false);
-            pesquisar.setEnabled(true);
+            Confirmar.setEnabled(true);
 
             quantidade = 1;
             selecionado1 = "data";
@@ -572,73 +601,97 @@ public class FrameFornecedor extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_Data1ActionPerformed
 
-    private void pesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pesquisarActionPerformed
+    private void ConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ConfirmarActionPerformed
         // TODO add your handling code here:
 
-        if (ID1.isSelected() && Data1.isSelected()){
+        if (Confirmar.getText().equals("Pesquisar")){ // DECIDIR SESERÁ SELEC OU UPDATE
+
+           if (ID1.isSelected() && Data1.isSelected()){
             conteudo1 = ID.getText();
             conteudo2 = Data.getText();
 
-        }else if(ID1.isSelected()){
-            conteudo1 = ID.getText();
+            }else if(ID1.isSelected()){
+                conteudo1 = ID.getText();
 
-        }else if(razao_social1.isSelected() && Data1.isSelected()){
-            conteudo1 = razao_social.getText();
-            conteudo2 = Data.getText();
+            }else if(razao_social1.isSelected() && Data1.isSelected()){
+                conteudo1 = razao_social.getText();
+                conteudo2 = Data.getText();
 
-        }else if(razao_social1.isSelected()){
-            conteudo1 = razao_social.getText();
+            }else if(razao_social1.isSelected()){
+                conteudo1 = razao_social.getText();
 
-        }else if(CNPJ1.isSelected() && Data1.isSelected()){
-            conteudo1 = CNPJ.getText();
-            conteudo2 = Data.getText();
+            }else if(CNPJ1.isSelected() && Data1.isSelected()){
+                conteudo1 = CNPJ.getText();
+                conteudo2 = Data.getText();
 
-        }else if(CNPJ1.isSelected()){
-            conteudo1 = CNPJ.getText();
+            }else if(CNPJ1.isSelected()){
+                conteudo1 = CNPJ.getText();
 
-        }else if(endereco1.isSelected() && Data1.isSelected()){
-            conteudo1 = endereco.getText();
-            conteudo2 = Data.getText();
+            }else if(endereco1.isSelected() && Data1.isSelected()){
+                conteudo1 = endereco.getText();
+                conteudo2 = Data.getText();
 
-        }else if(endereco1.isSelected()){
-            conteudo1 = endereco.getText();
+            }else if(endereco1.isSelected()){
+                conteudo1 = endereco.getText();
 
-        }else if(cidade1.isSelected() && Data1.isSelected()){
-            conteudo1 = Cidade.getText();
-            conteudo2 = Data.getText();
+            }else if(cidade1.isSelected() && Data1.isSelected()){
+                conteudo1 = Cidade.getText();
+                conteudo2 = Data.getText();
 
-        }else if(cidade1.isSelected()){
-            conteudo1 = Cidade.getText();
+            }else if(cidade1.isSelected()){
+                conteudo1 = Cidade.getText();
 
-        }else if(Data1.isSelected()){
-            conteudo1 = Data.getText();
+            }else if(Data1.isSelected()){
+                conteudo1 = Data.getText();
 
+            }else{
+                quantidade = 0;
+                JOptionPane.showMessageDialog(this, "Exibindo resultado sem filtros de pesquisa.");
+            }
+
+            if (i==1){
+              limparTabela();  
+            }
+            switch (getQuantidade()) {
+                case 0:
+                    montarTabela();
+                    i=1;
+                    break;
+                case 1:
+                    montarTabela1();
+                    i=1;
+                    break;
+                case 2:
+                    montarTabela2();
+                    i=1;
+                    break;
+                default:
+                    break;
+            } 
+            
         }else{
-            quantidade = 0;
-            JOptionPane.showMessageDialog(this, "Exibindo resultado sem filtros de pesquisa.");
-        }
+            
+            f.setRazao_social(razao_social.getText());
+            f.setEndereco(endereco.getText());
+            f.setCidade(Cidade.getText());
+            f.setCnpj_fornecedor(CNPJ.getText());
+            
+            if (mf.editar(f)==true){
+                JOptionPane.showMessageDialog(this, "Fornecedor editado com sucesso!");
+                ID.setText(null); ID.setEnabled(false);
+                razao_social.setText(null); razao_social.setEnabled(false);
+                endereco.setText(null); endereco.setEnabled(false);
+                Cidade.setText(null); Cidade.setEnabled(false);
+                CNPJ.setText(null); CNPJ.setEnabled(false);
+                Confirmar.setText("Pesquisar"); Confirmar.setEnabled(false);
+                semFiltro.setEnabled(true);
+            }
 
-        if (i==1){
-          limparTabela();  
-        }
-        switch (getQuantidade()) {
-            case 0:
-                montarTabela();
-                i=1;
-                break;
-            case 1:
-                montarTabela1();
-                i=1;
-                break;
-            case 2:
-                montarTabela2();
-                i=1;
-                break;
-            default:
-                break;
         }
         
-    }//GEN-LAST:event_pesquisarActionPerformed
+        
+        
+    }//GEN-LAST:event_ConfirmarActionPerformed
 
     private void DataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DataActionPerformed
         // TODO add your handling code here:
@@ -648,7 +701,7 @@ public class FrameFornecedor extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_endereco1ActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void semFiltroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_semFiltroActionPerformed
         // TODO add your handling code here:
         
         if(i==1){
@@ -657,20 +710,45 @@ public class FrameFornecedor extends javax.swing.JInternalFrame {
         montarTabela();
         i=1;
         
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_semFiltroActionPerformed
 
     private void formInternalFrameOpened(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameOpened
         // TODO add your handling code here:
         centralizar();
     }//GEN-LAST:event_formInternalFrameOpened
 
+    private void Editar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Editar1ActionPerformed
+        // TODO add your handling code here:
+        
+        if (Tabela.getSelectedRowCount()<1){
+            JOptionPane.showMessageDialog(this, "Nenhum fornecedor selecionado.");
+        }else if (Tabela.getSelectedRowCount()>1){
+            JOptionPane.showMessageDialog(this, "Por favor, selecione apenas um fornecedor por vez para edita-lo.");
+        }else{
+            Long idLocal = (Long)Tabela.getValueAt(Tabela.getSelectedRow(), 0);
+            f = mf.buscar(idLocal);
+            ID.setText(Long.toString(f.getId())); ID.setEnabled(false);
+            razao_social.setText(f.getRazao_social()); razao_social.setEnabled(true);
+            endereco.setText(f.getEndereco()); endereco.setEnabled(true);
+            Cidade.setText(f.getCidade()); Cidade.setEnabled(true);
+            CNPJ.setText(f.getCnpj_fornecedor()); CNPJ.setEnabled(true);
+            Confirmar.setText("Salvar"); Confirmar.setEnabled(true);
+            semFiltro.setEnabled(false);
+            
+        }
+        
+    }//GEN-LAST:event_Editar1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JFormattedTextField CNPJ;
     private javax.swing.JRadioButton CNPJ1;
     private javax.swing.JFormattedTextField Cidade;
+    private javax.swing.JButton Confirmar;
     private javax.swing.JFormattedTextField Data;
     private javax.swing.JRadioButton Data1;
+    private javax.swing.JButton Editar;
+    private javax.swing.JButton Editar1;
     private javax.swing.JTextField ID;
     private javax.swing.JRadioButton ID1;
     private javax.swing.JTable Tabela;
@@ -678,7 +756,6 @@ public class FrameFornecedor extends javax.swing.JInternalFrame {
     private javax.swing.JTextField endereco;
     private javax.swing.JRadioButton endereco1;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -689,8 +766,8 @@ public class FrameFornecedor extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JButton pesquisar;
     private javax.swing.JTextField razao_social;
     private javax.swing.JRadioButton razao_social1;
+    private javax.swing.JButton semFiltro;
     // End of variables declaration//GEN-END:variables
 }

@@ -44,6 +44,41 @@ public class ModelFornecedor {
         }
     }
     
+    public boolean editar(Fornecedor f){
+        
+        EntityManager emFornecedor = ModelFornecedor.openDB(); //CHAMAR O MODELO
+        
+        try{
+        emFornecedor.getTransaction().begin(); //INICIAR TRANSAÇÃO DE INFORMAÇÕES
+        
+        emFornecedor.merge(f); //MONTA O UPDATE
+        
+        emFornecedor.getTransaction().commit(); //EXECUTA O QUE FOI MONTADO ACIMA
+        
+        return true;
+        
+        }catch(Exception e){
+            emFornecedor.getTransaction().rollback();
+            erro = e;
+            return false;
+        }finally{
+            emFornecedor.close(); //FECHA A TRANSAÇÃO
+        }
+    }
+    
+    public Fornecedor buscar(Long id){
+        EntityManager emFornecedor = ModelFornecedor.openDB();
+        try{
+            return (Fornecedor) emFornecedor.createQuery("SELECT f FROM Fornecedor f WHERE f.id = "+id).getSingleResult();
+        }catch(Exception e){
+            emFornecedor.getTransaction().rollback();
+            erro = e;
+            return null;
+        }finally{
+            emFornecedor.close();
+        }
+    }
+    
     public List<Fornecedor> listaFornecedores(){
         EntityManager em = ModelCliente.openDB();
         try{

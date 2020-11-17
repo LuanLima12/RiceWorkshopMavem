@@ -46,6 +46,41 @@ public class ModelCliente {
         }
     }
     
+    public boolean editar(Cliente c){
+        
+        EntityManager emCliente = ModelCliente.openDB(); //CHAMAR O MODELO
+        
+        try{
+        emCliente.getTransaction().begin(); //INICIAR TRANSAÇÃO DE INFORMAÇÕES
+        
+        emCliente.merge(c); //MONTA O UPDATE
+        
+        emCliente.getTransaction().commit(); //EXECUTA O QUE FOI MONTADO ACIMA
+        
+        return true;
+        
+        }catch(Exception e){
+            emCliente.getTransaction().rollback();
+            erro = e;
+            return false;
+        }finally{
+            emCliente.close(); //FECHA A TRANSAÇÃO
+        }
+    }
+    
+    public Cliente buscar(Long id){
+        EntityManager emCliente = ModelCliente.openDB();
+        try{
+            return (Cliente) emCliente.createQuery("SELECT c FROM Cliente c WHERE c.id = "+id).getSingleResult();
+        }catch(Exception e){
+            emCliente.getTransaction().rollback();
+            erro = e;
+            return null;
+        }finally{
+            emCliente.close();
+        }
+    }
+    
     public List<Cliente> listaClientes(){
         EntityManager emCliente = ModelCliente.openDB();
         try{

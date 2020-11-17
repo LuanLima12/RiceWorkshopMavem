@@ -24,7 +24,7 @@ public class Cliente implements Serializable {
     private Long id;
     private String nome, email, fone;
 
-    public void Cliente(){
+    public void Cliente(Cliente cliente){
         
     }
     
