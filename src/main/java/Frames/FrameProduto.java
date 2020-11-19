@@ -6,6 +6,7 @@
 package Frames;
 
 import Entidades.Produto;
+import Modal.AdcProduto;
 import Models.ModelProduto;
 import java.awt.Dimension;
 import javax.swing.JOptionPane;
@@ -83,6 +84,11 @@ public class FrameProduto extends javax.swing.JInternalFrame {
     
     //==========================================================================
     
+    public void areaTexto(){
+        Descricao.setLineWrap(true);
+        Descricao.setWrapStyleWord(true);
+    }
+    
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
@@ -126,6 +132,8 @@ public class FrameProduto extends javax.swing.JInternalFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         Tabela = new javax.swing.JTable();
         Editar = new javax.swing.JButton();
+        Editar1 = new javax.swing.JButton();
+        Editar2 = new javax.swing.JButton();
 
         setClosable(true);
         setIconifiable(true);
@@ -483,6 +491,20 @@ public class FrameProduto extends javax.swing.JInternalFrame {
             }
         });
 
+        Editar1.setText("Apagar");
+        Editar1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Editar1ActionPerformed(evt);
+            }
+        });
+
+        Editar2.setText("Cadastrar");
+        Editar2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Editar2ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -493,11 +515,17 @@ public class FrameProduto extends javax.swing.JInternalFrame {
                     .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 604, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(Editar)
-                        .addGap(0, 4, Short.MAX_VALUE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(Editar)
+                            .addComponent(Editar1)
+                            .addComponent(Editar2))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
+
+        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {Editar, Editar1, Editar2});
+
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
@@ -505,12 +533,17 @@ public class FrameProduto extends javax.swing.JInternalFrame {
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(Editar)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(Editar2, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 48, Short.MAX_VALUE)
+                        .addComponent(Editar, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 49, Short.MAX_VALUE)
+                        .addComponent(Editar1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
-        setBounds(0, 0, 723, 455);
+        setBounds(0, 0, 723, 463);
     }// </editor-fold>//GEN-END:initComponents
 
     private void CNPJ1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CNPJ1ActionPerformed
@@ -862,6 +895,7 @@ public class FrameProduto extends javax.swing.JInternalFrame {
 
     private void formInternalFrameOpened(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameOpened
         // TODO add your handling code here:
+        areaTexto();
         centralizar();
     }//GEN-LAST:event_formInternalFrameOpened
 
@@ -903,6 +937,17 @@ public class FrameProduto extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_EditarActionPerformed
 
+    private void Editar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Editar1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_Editar1ActionPerformed
+
+    private void Editar2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Editar2ActionPerformed
+        // TODO add your handling code here:
+        AdcProduto ap = new AdcProduto();
+        ap.setModal(true);
+        ap.setVisible(true);
+    }//GEN-LAST:event_Editar2ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JFormattedTextField CNPJ;
@@ -912,6 +957,8 @@ public class FrameProduto extends javax.swing.JInternalFrame {
     private javax.swing.JRadioButton Data1;
     private javax.swing.JTextArea Descricao;
     private javax.swing.JButton Editar;
+    private javax.swing.JButton Editar1;
+    private javax.swing.JButton Editar2;
     private javax.swing.JTextField Estoque;
     private javax.swing.JRadioButton Estoque1;
     private javax.swing.JTextField ID;

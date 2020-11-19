@@ -6,6 +6,7 @@
 package Frames;
 
 import Entidades.Funcionario;
+import Modal.AdcFuncionario;
 import Models.ModelFuncionario;
 import java.awt.Dimension;
 import javax.swing.JOptionPane;
@@ -122,6 +123,7 @@ public class FrameFuncionario extends javax.swing.JInternalFrame {
 
         buttonGroup1 = new javax.swing.ButtonGroup();
         buttonGroup2 = new javax.swing.ButtonGroup();
+        jToggleButton1 = new javax.swing.JToggleButton();
         jPanel3 = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         Nome1 = new javax.swing.JRadioButton();
@@ -154,6 +156,10 @@ public class FrameFuncionario extends javax.swing.JInternalFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         Tabela = new javax.swing.JTable();
         Editar = new javax.swing.JButton();
+        Editar1 = new javax.swing.JButton();
+        Editar2 = new javax.swing.JButton();
+
+        jToggleButton1.setText("jToggleButton1");
 
         setClosable(true);
         setIconifiable(true);
@@ -488,6 +494,20 @@ public class FrameFuncionario extends javax.swing.JInternalFrame {
             }
         });
 
+        Editar1.setText("Apagar");
+        Editar1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Editar1ActionPerformed(evt);
+            }
+        });
+
+        Editar2.setText("Cadastrar");
+        Editar2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Editar2ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -499,10 +519,16 @@ public class FrameFuncionario extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 770, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(Editar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(Editar)
+                    .addComponent(Editar1)
+                    .addComponent(Editar2))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
+
+        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {Editar, Editar1, Editar2});
+
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
@@ -512,8 +538,11 @@ public class FrameFuncionario extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(Editar)
-                        .addGap(0, 206, Short.MAX_VALUE)))
+                        .addComponent(Editar2, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(62, 62, 62)
+                        .addComponent(Editar, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(62, 62, 62)
+                        .addComponent(Editar1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
 
@@ -903,6 +932,17 @@ public class FrameFuncionario extends javax.swing.JInternalFrame {
         
     }//GEN-LAST:event_EditarActionPerformed
 
+    private void Editar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Editar1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_Editar1ActionPerformed
+
+    private void Editar2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Editar2ActionPerformed
+        // TODO add your handling code here:
+        AdcFuncionario af = new AdcFuncionario();
+        af.setModal(true);
+        af.setVisible(true);
+    }//GEN-LAST:event_Editar2ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JFormattedTextField CPF;
@@ -913,6 +953,8 @@ public class FrameFuncionario extends javax.swing.JInternalFrame {
     private javax.swing.JFormattedTextField Data;
     private javax.swing.JRadioButton Data1;
     private javax.swing.JButton Editar;
+    private javax.swing.JButton Editar1;
+    private javax.swing.JButton Editar2;
     private javax.swing.JTextField Email;
     private javax.swing.JRadioButton Email1;
     private javax.swing.JFormattedTextField Fone;
@@ -938,6 +980,7 @@ public class FrameFuncionario extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JToggleButton jToggleButton1;
     private javax.swing.JButton semFiltro;
     // End of variables declaration//GEN-END:variables
 }

@@ -68,6 +68,19 @@ public class ModelCliente {
         }
     }
     
+    public Cliente buscarNome(String nome){
+        EntityManager emCliente = ModelCliente.openDB();
+        try{
+            return (Cliente) emCliente.createQuery("SELECT c FROM Cliente c WHERE c.nome = '"+nome+"'").getSingleResult();
+        }catch(Exception e){
+            emCliente.getTransaction().rollback();
+            erro = e;
+            return null;
+        }finally{
+            emCliente.close();
+        }
+    }
+    
     public Cliente buscar(Long id){
         EntityManager emCliente = ModelCliente.openDB();
         try{

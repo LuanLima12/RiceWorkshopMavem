@@ -80,6 +80,19 @@ public class ModelProduto {
         }
     }
     
+    public Produto buscarNome(String nome){
+        EntityManager emProduto = ModelProduto.openDB();
+        try{
+            return (Produto) emProduto.createQuery("SELECT p FROM Produto p WHERE p.nome = '"+nome+"'").getSingleResult();
+        }catch(Exception e){
+            emProduto.getTransaction().rollback();
+            erro = e;
+            return null;
+        }finally{
+            emProduto.close();
+        }
+    }
+    
     public List<Produto> listaProdutos(){
         EntityManager em = ModelCliente.openDB();
         try{

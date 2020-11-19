@@ -6,6 +6,7 @@
 package Frames;
 
 import Entidades.Cliente;
+import Modal.AdcCliente2;
 import Models.ModelCliente;
 import java.awt.Dimension;
 import javax.swing.JOptionPane;
@@ -68,6 +69,8 @@ public class FrameClientes extends javax.swing.JInternalFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         TabelaCliente = new javax.swing.JTable();
         Editar = new javax.swing.JButton();
+        Apagar = new javax.swing.JButton();
+        Cadastrar = new javax.swing.JButton();
 
         setClosable(true);
         setIconifiable(true);
@@ -75,6 +78,7 @@ public class FrameClientes extends javax.swing.JInternalFrame {
         setTitle("Clientes");
         addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
             public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
+                formInternalFrameActivated(evt);
             }
             public void internalFrameClosed(javax.swing.event.InternalFrameEvent evt) {
             }
@@ -307,38 +311,61 @@ public class FrameClientes extends javax.swing.JInternalFrame {
             }
         });
 
+        Apagar.setText("Apagar");
+        Apagar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ApagarActionPerformed(evt);
+            }
+        });
+
+        Cadastrar.setText("Cadastrar");
+        Cadastrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CadastrarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(211, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(201, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 770, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(Editar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(Editar)
+                    .addComponent(Apagar)
+                    .addComponent(Cadastrar))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
+
+        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {Apagar, Cadastrar, Editar});
+
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 286, Short.MAX_VALUE)
-                        .addGap(6, 6, 6))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(19, 19, 19)
-                        .addComponent(Editar)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addComponent(Cadastrar, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 89, Short.MAX_VALUE)
+                        .addComponent(Editar, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 89, Short.MAX_VALUE)
+                        .addComponent(Apagar, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                .addGap(6, 6, 6))
         );
 
-        setBounds(0, 0, 900, 500);
+        layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {Apagar, Cadastrar, Editar});
+
+        setBounds(0, 0, 893, 500);
     }// </editor-fold>//GEN-END:initComponents
 
     // INICIO DE MÉTODOS PARA A TABELA
@@ -571,21 +598,6 @@ public class FrameClientes extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_Data1ActionPerformed
 
-    private void semFiltroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_semFiltroActionPerformed
-        // TODO add your handling code here:
-
-        /*quantidade = 0;
-        FrameExibirCliente fec = new FrameExibirCliente();
-        fec.setValores(this.selecionado1, this.selecionado2, this.conteudo1, this.conteudo2, this.quantidade);
-        fec.setVisible(true);*/
-        if (i==1){
-          limparTabela();  
-        }
-        montarTabela();
-        i=1;
-
-    }//GEN-LAST:event_semFiltroActionPerformed
-
     private void formInternalFrameOpened(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameOpened
         // TODO add your handling code here:
         centralizar();
@@ -610,8 +622,45 @@ public class FrameClientes extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_EditarActionPerformed
 
+    private void ApagarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ApagarActionPerformed
+        // TODO add your handling code here:
+        int botao;
+        botao = JOptionPane.showConfirmDialog (null, "Tem certeza que deseja apagar?", "Aviso", JOptionPane.YES_OPTION);
+        if(botao == JOptionPane.YES_OPTION){
+           // deleteLinha();
+        }
+    }//GEN-LAST:event_ApagarActionPerformed
+
+    private void CadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CadastrarActionPerformed
+        // TODO add your handling code here:
+         AdcCliente2 ac = new AdcCliente2();
+         ac.setModal(true);
+         ac.setVisible(true);
+    }//GEN-LAST:event_CadastrarActionPerformed
+
+    private void formInternalFrameActivated(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameActivated
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_formInternalFrameActivated
+
+    private void semFiltroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_semFiltroActionPerformed
+        // TODO add your handling code here:
+
+        /*quantidade = 0;
+        FrameExibirCliente fec = new FrameExibirCliente();
+        fec.setValores(this.selecionado1, this.selecionado2, this.conteudo1, this.conteudo2, this.quantidade);
+        fec.setVisible(true);*/
+        if (i==1){
+            limparTabela();
+        }
+        montarTabela();
+        i=1;
+    }//GEN-LAST:event_semFiltroActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton Apagar;
+    private javax.swing.JButton Cadastrar;
     private javax.swing.JButton Confirmar;
     private javax.swing.JFormattedTextField Data;
     private javax.swing.JRadioButton Data1;

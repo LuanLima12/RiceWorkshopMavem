@@ -3,31 +3,32 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Frames;
+package Modal;
 
 import Entidades.Cliente;
 import Models.ModelCliente;
 import Outros.SuporteSistema;
 import java.awt.Dimension;
-import javax.persistence.EntityManager;
 import javax.swing.JOptionPane;
 
 /**
  *
  * @author Luan
  */
-public class FrameAdcCliente extends javax.swing.JInternalFrame {
+public class AdcCliente2 extends javax.swing.JDialog {
 
-        Cliente c = new Cliente();
+      public Cliente c = new Cliente();
         ModelCliente mc = new ModelCliente();
         SuporteSistema ss = new SuporteSistema();
     
     /**
-     * Creates new form FrameAdcCliente
+     * Creates new form AdcCliente2
      */
-    public FrameAdcCliente() {
+    public AdcCliente2() {
         initComponents();
     }
+    
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -48,26 +49,13 @@ public class FrameAdcCliente extends javax.swing.JInternalFrame {
         jLabel2 = new javax.swing.JLabel();
         Nome = new javax.swing.JTextField();
 
-        setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        setClosable(true);
-        setIconifiable(true);
-        setTitle("Adicionar Cliente");
-        setToolTipText("Adicionar um cliente com seu nome, email e telefone.");
-        addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
-            public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
-            }
-            public void internalFrameClosed(javax.swing.event.InternalFrameEvent evt) {
-            }
-            public void internalFrameClosing(javax.swing.event.InternalFrameEvent evt) {
-            }
-            public void internalFrameDeactivated(javax.swing.event.InternalFrameEvent evt) {
-            }
-            public void internalFrameDeiconified(javax.swing.event.InternalFrameEvent evt) {
-            }
-            public void internalFrameIconified(javax.swing.event.InternalFrameEvent evt) {
-            }
-            public void internalFrameOpened(javax.swing.event.InternalFrameEvent evt) {
-                formInternalFrameOpened(evt);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
+        setTitle("Cadastrar cliente");
+        setModal(true);
+        setResizable(false);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
             }
         });
 
@@ -152,7 +140,7 @@ public class FrameAdcCliente extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -162,30 +150,22 @@ public class FrameAdcCliente extends javax.swing.JInternalFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        setBounds(550, 250, 300, 220);
+        pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    
-    public void centralizar(){
-        Dimension d = this.getDesktopPane().getSize();
-        this.setLocation((d.width - this.getSize().width) / 2, (d.height - this.getSize().height) / 2);
-    }
-    
     private void CadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CadastrarActionPerformed
         // TODO add your handling code here:
-        
-        
+
         if(ss.checarNumeros(Nome.getText()) ==false){ //checar se não há numeros
             if (ss.checarLetras(Fone.getText()) ==false){ //checar se não há letras
-                
-                
+
                 c.setNome(Nome.getText());
                 c.setEmail(Email.getText());
                 c.setFone(Fone.getText());
-                
+
                 if(mc.inserir(c) == true){
-                    
-                    
+
                     JOptionPane.showMessageDialog(this, "Cliente cadastrado com sucesso!");
 
                     Nome.setText(null);
@@ -194,8 +174,7 @@ public class FrameAdcCliente extends javax.swing.JInternalFrame {
                 }else{
                     JOptionPane.showMessageDialog(this, mc.exibirErro());
                 }
-                
-                
+
             }else{
                 JOptionPane.showMessageDialog(this, "Não devem haver letras em campos numéricos");
             }
@@ -203,7 +182,7 @@ public class FrameAdcCliente extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(this, "Não devem haver números em campos de texto.");
         }
         
-        
+     
     }//GEN-LAST:event_CadastrarActionPerformed
 
     private void CancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CancelarActionPerformed
@@ -211,13 +190,46 @@ public class FrameAdcCliente extends javax.swing.JInternalFrame {
         this.dispose();
     }//GEN-LAST:event_CancelarActionPerformed
 
-    private void formInternalFrameOpened(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameOpened
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         // TODO add your handling code here:
+        Nome.setText(c.getNome());
         
-        centralizar();
-        
-    }//GEN-LAST:event_formInternalFrameOpened
+    }//GEN-LAST:event_formWindowOpened
 
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String args[]) {
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(AdcCliente2.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(AdcCliente2.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(AdcCliente2.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(AdcCliente2.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
+
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new AdcCliente2().setVisible(true);
+            }
+        });
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Cadastrar;

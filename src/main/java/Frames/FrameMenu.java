@@ -5,7 +5,9 @@
  */
 package Frames;
 
+import Modal.AdcProduto;
 import javax.swing.JInternalFrame;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -17,7 +19,7 @@ public class FrameMenu extends javax.swing.JFrame {
      * Creates new form FrameMenu
      */
     public FrameMenu() {
-        initComponents();
+        initComponents(); 
     }
 
     /**
@@ -30,6 +32,12 @@ public class FrameMenu extends javax.swing.JFrame {
     private void initComponents() {
 
         Desktop = new javax.swing.JDesktopPane();
+        RH2 = new javax.swing.JButton();
+        Cliente2 = new javax.swing.JButton();
+        Vendas2 = new javax.swing.JButton();
+        Produtos2 = new javax.swing.JButton();
+        Fornecedores2 = new javax.swing.JButton();
+        Fornecedores3 = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         MenuGFuncionario = new javax.swing.JMenuItem();
@@ -50,17 +58,67 @@ public class FrameMenu extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Menu do Gerente");
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
+
+        Desktop.setMaximumSize(new java.awt.Dimension(571, 478));
+        Desktop.setMinimumSize(new java.awt.Dimension(571, 478));
 
         javax.swing.GroupLayout DesktopLayout = new javax.swing.GroupLayout(Desktop);
         Desktop.setLayout(DesktopLayout);
         DesktopLayout.setHorizontalGroup(
             DesktopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 540, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
         DesktopLayout.setVerticalGroup(
             DesktopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 258, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
+
+        RH2.setText("RH");
+        RH2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                RH2ActionPerformed(evt);
+            }
+        });
+
+        Cliente2.setText("Cliente");
+        Cliente2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Cliente2ActionPerformed(evt);
+            }
+        });
+
+        Vendas2.setText("Vendas");
+        Vendas2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Vendas2ActionPerformed(evt);
+            }
+        });
+
+        Produtos2.setText("Produtos");
+        Produtos2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Produtos2ActionPerformed(evt);
+            }
+        });
+
+        Fornecedores2.setText("Fornecedores");
+        Fornecedores2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Fornecedores2ActionPerformed(evt);
+            }
+        });
+
+        Fornecedores3.setText(". . .");
+        Fornecedores3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Fornecedores3ActionPerformed(evt);
+            }
+        });
 
         jMenu1.setText("RH");
 
@@ -108,6 +166,11 @@ public class FrameMenu extends javax.swing.JFrame {
         jMenu4.add(MenuGVendas);
 
         MenuGVender.setText("Realizar Venda");
+        MenuGVender.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MenuGVenderActionPerformed(evt);
+            }
+        });
         jMenu4.add(MenuGVender);
 
         jMenuBar1.add(jMenu4);
@@ -161,17 +224,49 @@ public class FrameMenu extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(Desktop)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(RH2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Cliente2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Vendas2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Produtos2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Fornecedores2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Fornecedores3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(10, 10, 10)
+                .addComponent(Desktop, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(Desktop)
+            .addComponent(Desktop, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(RH2, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(Cliente2, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(Vendas2, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(Produtos2, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(Fornecedores2, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(Fornecedores3, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(105, Short.MAX_VALUE))
         );
+
+        layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {Cliente2, Fornecedores2, Produtos2, RH2, Vendas2});
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    /*public void painel(){
+        jPanel1.setLayout(null);
+        jPanel1.setSize(142, 352);
+        Desktop.setSize(571, 478);
+    }*/
+    
     private void MenuGFuncionarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuGFuncionarioActionPerformed
         // TODO add your handling code here:
         openForm(new FrameFuncionario());
@@ -230,6 +325,47 @@ public class FrameMenu extends javax.swing.JFrame {
         openForm(new FrameFornecedor());
     }//GEN-LAST:event_MenuGFornecedorActionPerformed
 
+    private void MenuGVenderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuGVenderActionPerformed
+        // TODO add your handling code here:
+        openForm(new FrameVender());
+    }//GEN-LAST:event_MenuGVenderActionPerformed
+
+    private void RH2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RH2ActionPerformed
+        // TODO add your handling code here:
+        openForm(new FrameFuncionario());
+    }//GEN-LAST:event_RH2ActionPerformed
+
+    private void Cliente2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Cliente2ActionPerformed
+        // TODO add your handling code here:
+        openForm(new FrameClientes());
+    }//GEN-LAST:event_Cliente2ActionPerformed
+
+    private void Vendas2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Vendas2ActionPerformed
+        // TODO add your handling code here:
+        openForm(new FrameVender());
+    }//GEN-LAST:event_Vendas2ActionPerformed
+
+    private void Produtos2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Produtos2ActionPerformed
+        // TODO add your handling code here:
+        openForm(new FrameProduto());
+    }//GEN-LAST:event_Produtos2ActionPerformed
+
+    private void Fornecedores2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Fornecedores2ActionPerformed
+        // TODO add your handling code here:
+        openForm(new FrameFornecedor());
+    }//GEN-LAST:event_Fornecedores2ActionPerformed
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        // TODO add your handling code here:
+        //painel();
+    }//GEN-LAST:event_formWindowOpened
+
+    private void Fornecedores3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Fornecedores3ActionPerformed
+        // TODO add your handling code here:
+        
+        
+    }//GEN-LAST:event_Fornecedores3ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -266,7 +402,10 @@ public class FrameMenu extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton Cliente2;
     private javax.swing.JDesktopPane Desktop;
+    private javax.swing.JButton Fornecedores2;
+    private javax.swing.JButton Fornecedores3;
     private javax.swing.JMenuItem ManuGCliente;
     private javax.swing.JMenuItem MenuGAdcCliente;
     private javax.swing.JMenuItem MenuGAdcFornecedor;
@@ -278,6 +417,9 @@ public class FrameMenu extends javax.swing.JFrame {
     private javax.swing.JMenuItem MenuGSair;
     private javax.swing.JMenuItem MenuGVendas;
     private javax.swing.JMenuItem MenuGVender;
+    private javax.swing.JButton Produtos2;
+    private javax.swing.JButton RH2;
+    private javax.swing.JButton Vendas2;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
