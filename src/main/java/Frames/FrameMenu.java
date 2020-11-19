@@ -5,6 +5,8 @@
  */
 package Frames;
 
+import Entidades.Venda;
+import Modal.Vender;
 import Modal.AdcProduto;
 import javax.swing.JInternalFrame;
 import javax.swing.JOptionPane;
@@ -327,7 +329,7 @@ public class FrameMenu extends javax.swing.JFrame {
 
     private void MenuGVenderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuGVenderActionPerformed
         // TODO add your handling code here:
-        openForm(new FrameVender());
+        openForm(new Vender());
     }//GEN-LAST:event_MenuGVenderActionPerformed
 
     private void RH2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RH2ActionPerformed
@@ -342,7 +344,7 @@ public class FrameMenu extends javax.swing.JFrame {
 
     private void Vendas2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Vendas2ActionPerformed
         // TODO add your handling code here:
-        openForm(new FrameVender());
+        openForm(new FrameVenda());
     }//GEN-LAST:event_Vendas2ActionPerformed
 
     private void Produtos2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Produtos2ActionPerformed

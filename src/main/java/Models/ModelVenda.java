@@ -81,7 +81,7 @@ public class ModelVenda {
         }
     }
     
-    public List<Venda> listaClientes(){
+    public List<Venda> listaVendas(){
         EntityManager emVenda = ModelVenda.openDB();
         try{
             return emVenda.createQuery("SELECT v FROM Venda v").getResultList();
@@ -90,7 +90,7 @@ public class ModelVenda {
         }
     }
     
-    public List<Venda> listaClientes1(String selecionado1, String conteudo1){
+    public List<Venda> listaVendas1(String selecionado1, String conteudo1){
         EntityManager emVenda = ModelVenda.openDB();
         try{
             /*if (selecionado1.equals("id")){
@@ -107,7 +107,7 @@ public class ModelVenda {
         }
     }
     
-    public List<Venda> listaClientes2(String selecionado1,String selecionado2, String conteudo1, String conteudo2){
+    public List<Venda> listaVendas2(String selecionado1,String selecionado2, String conteudo1, String conteudo2){
         EntityManager emVenda = ModelVenda.openDB();
         try{
             /*if (selecionado1.equals("id")){

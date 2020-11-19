@@ -21,8 +21,8 @@ public class Venda implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String vendedor, cliente, produto;
-    private double valoruni, valortotal;
+    private String vendedor, cliente;
+    private double valortotal;
     private int quantidade;
     private String data;
 
@@ -54,21 +54,6 @@ public class Venda implements Serializable {
         this.cliente = cliente;
     }
 
-    public String getProduto() {
-        return produto;
-    }
-
-    public void setProduto(String produto) {
-        this.produto = produto;
-    }
-
-    public double getValoruni() {
-        return valoruni;
-    }
-
-    public void setValoruni(double valoruni) {
-        this.valoruni = valoruni;
-    }
 
     public double getValortotal() {
         return valortotal;
