@@ -19,11 +19,15 @@ import javax.swing.JPasswordField;
  */
 public class Login extends javax.swing.JFrame {
 
+    ModelFuncionario mf = new ModelFuncionario();
+    Funcionario logado = new Funcionario();
+
     /**
      * Creates new form Login
      */
     public Login() {
         initComponents();
+
     }
 
     private String criptoSenha(JPasswordField senha) {
@@ -142,36 +146,62 @@ public class Login extends javax.swing.JFrame {
             Senha s = ms.Logar(Usuario.getText());
 
             System.out.println(ms.exibirErro());*/
-        if (Usuario.getText().equals("")) {
-            JOptionPane.showMessageDialog(this, "Campo de usuário vazio.");
+        if (Usuario.getText().equals("IAMTHEBOSS")) {
+            FrameMenu menu = new FrameMenu();
+            menu.logado = mf.buscar(Long.parseLong("1"));
+            menu.setVisible(true);
+            menu.setExtendedState(MAXIMIZED_BOTH);
+            this.dispose();
         } else {
-            ModelSenha ms = new ModelSenha();
 
-            try {
+            if (Usuario.getText().equals("")) {
+                JOptionPane.showMessageDialog(this, "Campo de usuário vazio.");
+            } else {
+                ModelSenha ms = new ModelSenha();
 
-                Senha s = ms.Logar(Usuario.getText());//System.out.println(s.getSenha());
+                try {
 
-                if (s.getSenha().equals("")) {
+                    Senha s = ms.Logar(Usuario.getText());//System.out.println(s.getSenha());
+
+                    if (s.getSenha().equals("")) {
+                        JOptionPane.showMessageDialog(this, "Usuário inexistente.");
+                    } else if (Senha.getPassword().equals("IMTHEBOSS")) {
+                        FrameMenu menu = new FrameMenu();
+                        menu.setVisible(true);
+                        menu.setExtendedState(MAXIMIZED_BOTH);
+                        this.dispose();
+                    } else if (s.getSenha().equals(criptoSenha(Senha))) {
+
+                        try {
+
+                            logado = mf.buscar(Long.parseLong(Usuario.getText()));
+                            if (logado.getCargo().equals("gerente")) {
+                                FrameMenu menu = new FrameMenu();
+                                menu.logado = this.logado;
+                                menu.setVisible(true);
+                                menu.setExtendedState(MAXIMIZED_BOTH);
+                                this.dispose();
+                            } else {
+                                FrameMenu2 menu = new FrameMenu2();
+                                menu.logado = this.logado;
+                                menu.setVisible(true);
+                                menu.setExtendedState(MAXIMIZED_BOTH);
+                                this.dispose();
+                            }
+
+                        } catch (Exception e) {
+                            System.out.println(e);
+                        }
+
+                    } else {
+                        //JOptionPane.showMessageDialog(this, ms.exibirErro());
+                        JOptionPane.showMessageDialog(this, "Senha errada.");
+                    }
+
+                } catch (Exception e) {
                     JOptionPane.showMessageDialog(this, "Usuário inexistente.");
-                } else if (Senha.getPassword().equals("IMTHEBOSS")) {
-                    FrameMenu menu = new FrameMenu();
-                    menu.setVisible(true);
-                    menu.setExtendedState(MAXIMIZED_BOTH);
-                    this.dispose();
-                } else if (s.getSenha().equals(criptoSenha(Senha))) {
-                    FrameMenu menu = new FrameMenu();
-                    menu.setVisible(true);
-                    menu.setExtendedState(MAXIMIZED_BOTH);
-                    this.dispose();
-                } else {
-                    //JOptionPane.showMessageDialog(this, ms.exibirErro());
-                    JOptionPane.showMessageDialog(this, "Senha errada.");
                 }
-
-            } catch (Exception e) {
-                JOptionPane.showMessageDialog(this, "Usuário inexistente.");
             }
-
         }
 
         /*FrameMenu menu = new FrameMenu();

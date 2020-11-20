@@ -6,9 +6,11 @@
 package Frames;
 
 import Entidades.Cliente;
+import Entidades.Funcionario;
 import Entidades.Venda;
 import Modal.AdcVenda;
 import Modal.AdcVenda2;
+import Models.ModelFuncionario;
 import Models.ModelVenda;
 import java.awt.Dimension;
 import javax.swing.JOptionPane;
@@ -25,6 +27,8 @@ public class FrameVenda extends javax.swing.JInternalFrame {
     private String selecionado1, selecionado2; //Saber quais itens serão usados no SELECT
     private String conteudo1, conteudo2; //Conteudo dos campos selecionados para o SELECT
     ModelVenda mv = new ModelVenda();
+    ModelFuncionario mf = new ModelFuncionario();
+    Funcionario logado = new Funcionario();
     Venda p = new Venda();
     /**
      * Creates new form FrameVenda
@@ -705,6 +709,7 @@ public class FrameVenda extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         try{
             AdcVenda2 av = new AdcVenda2();
+            av.logado = this.logado;
             av.setModal(true);
             av.setVisible(true);
         }catch(Exception e){

@@ -6,6 +6,7 @@
 package Modal;
 
 import Entidades.Cliente;
+import Entidades.Funcionario;
 import Entidades.Historicop;
 import Entidades.Produto;
 import Entidades.Venda;
@@ -32,16 +33,16 @@ public class AdcVenda2 extends javax.swing.JDialog {
     ModelVenda mv = new ModelVenda();
     Cliente c = new Cliente();
     Produto p = new Produto();
+    public Funcionario logado = new Funcionario();
     Calendar date = Calendar.getInstance();
     SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
     SuporteSistema ss = new SuporteSistema();
     private double valor, valorT;
-    private int Q, l = 0, r = 0; //Q da quantidade total de itens totais, l para a contagem de ids de itens e r para representar cada id
+    private int Q, l = 0; //Q da quantidade total de itens totais, l para a contagem de ids de itens e r para representar cada id
     int produtoQ[];
     Long[] pID = new Long[100];
     int[] pQ = new int[100];
     String[] pNome = new String[100];
-    
     
     /**
      * Creates new form AdcVenda2
@@ -78,6 +79,10 @@ public class AdcVenda2 extends javax.swing.JDialog {
 
     private String data() {
         return (sdf.format(date.getTime()));
+    }
+    
+    private void limparTabela(){
+        tabela.setNumRows(0);
     }
 
     /**
@@ -130,6 +135,9 @@ public class AdcVenda2 extends javax.swing.JDialog {
         setModal(true);
         setResizable(false);
         addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowActivated(java.awt.event.WindowEvent evt) {
+                formWindowActivated(evt);
+            }
             public void windowOpened(java.awt.event.WindowEvent evt) {
                 formWindowOpened(evt);
             }
@@ -137,6 +145,7 @@ public class AdcVenda2 extends javax.swing.JDialog {
 
         jLabel2.setText("Cliente");
 
+        Vendedor.setEnabled(false);
         Vendedor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 VendedorActionPerformed(evt);
@@ -672,7 +681,7 @@ public class AdcVenda2 extends javax.swing.JDialog {
 
                                 try {
                                     p = new Produto();
-                                    p = mp.buscar(Long.valueOf(i));
+                                    p = mp.buscar(pID[i]);
                                     p.setEstoque(   p.getEstoque()-pQ[i]   );
                                     mp.editar(p);
 
@@ -683,11 +692,18 @@ public class AdcVenda2 extends javax.swing.JDialog {
                                     mh.inserir(h);
 
                                 } catch (Exception e) {
-                                    mp.exibirErro();
+                                    JOptionPane.showMessageDialog(this, mp.exibirErro());
                                 }
                             }
                         }
-
+                        
+                        limparTabela();
+                        l =0;
+                        for (int i = 0; i < 100; i++){
+                            pNome[i]=null;
+                            pQ[i]=0;
+                            pID[i]= null;
+                        }
                         JOptionPane.showMessageDialog(this, "Venda realizada com sucesso.");
                         Q = 0;
                         valor = 0;
@@ -717,6 +733,11 @@ public class AdcVenda2 extends javax.swing.JDialog {
         areaTexto();
         montarTabela();
     }//GEN-LAST:event_formWindowOpened
+
+    private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
+        // TODO add your handling code here:
+        Vendedor.setText(logado.getNome());
+    }//GEN-LAST:event_formWindowActivated
 
     /**
      * @param args the command line arguments

@@ -5,9 +5,13 @@
  */
 package Modal;
 
+import Entidades.Historicop;
 import Entidades.Produto;
+import Models.ModelHistoricop;
 import Models.ModelProduto;
 import Outros.SuporteSistema;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import javax.swing.JOptionPane;
 
 /**
@@ -16,14 +20,22 @@ import javax.swing.JOptionPane;
  */
 public class AdcProduto extends javax.swing.JDialog {
 
+    ModelHistoricop mh = new ModelHistoricop();
+    Calendar date = Calendar.getInstance();
+    SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
+
     /**
      * Creates new form AdcProduto
      */
     public AdcProduto() {
         initComponents();
     }
-    
-    public void areaTexto(){
+
+    private String data() {
+        return (sdf.format(date.getTime()));
+    }
+
+    public void areaTexto() {
         Descricao.setLineWrap(true);
         Descricao.setWrapStyleWord(true);
     }
@@ -253,15 +265,16 @@ public class AdcProduto extends javax.swing.JDialog {
         Produto p = new Produto();
         SuporteSistema ss = new SuporteSistema();
 
-        if(tipo.getSelectedIndex()==0){ //CHECAR SE O CAMPO FOI SELECIONADO
+        if (tipo.getSelectedIndex() == 0) { //CHECAR SE O CAMPO FOI SELECIONADO
             JOptionPane.showMessageDialog(this, "Por favor, não deixe campos em branco.");
-        }else{
+        } else {
 
-            if(ss.checarLetras(Quantidade.getText()) ==false && //conferir se há letras em campos numéricos
-                ss.checarLetras(Compra.getText()) ==false &&
-                ss.checarLetras(Venda.getText()) ==false &&
-                ss.checarLetras(min.getText()) ==false &&
-                ss.checarLetras(cnpj.getText()) ==false){
+            if (ss.checarLetras(Quantidade.getText()) == false
+                    && //conferir se há letras em campos numéricos
+                    ss.checarLetras(Compra.getText()) == false
+                    && ss.checarLetras(Venda.getText()) == false
+                    && ss.checarLetras(min.getText()) == false
+                    && ss.checarLetras(cnpj.getText()) == false) {
 
                 //INICIO DAS OPERAÇÕES DE CRUD
                 p.setNome(Nome.getText());
@@ -275,41 +288,69 @@ public class AdcProduto extends javax.swing.JDialog {
 
                 switch (tipo.getSelectedIndex()) {
                     case 1:
-                    p.setTipo("caixa");
-                    break;
+                        p.setTipo("caixa");
+                        break;
                     case 2:
-                    p.setTipo("unidade");
-                    break;
+                        p.setTipo("unidade");
+                        break;
                     case 3:
-                    p.setTipo("litro");
-                    break;
+                        p.setTipo("litro");
+                        break;
                     case 4:
-                    p.setTipo("metro");
-                    break;
+                        p.setTipo("metro");
+                        break;
                     case 5:
-                    p.setTipo("unidade");
-                    break;
+                        p.setTipo("unidade");
+                        break;
                     case 6:
-                    p.setTipo("outro");
-                    break;
+                        p.setTipo("outro");
+                        break;
                 }
 
-                if (mp.inserir(p) == true) {
-                    JOptionPane.showMessageDialog(this, "Produto cadastrado com sucesso!");
+                try {
+                    Produto p2 = new Produto();
+                    p2 = mp.buscarNome(p.getNome());
 
-                    Nome.setText(null);
-                    Descricao.setText(null);
-                    Quantidade.setText(null);
-                    Compra.setText(null);
-                    Venda.setText(null);
-                    min.setText(null);
-                    Tamanho.setText(null);
-                    tipo.setSelectedIndex(0);
-                    cnpj.setText(null);
-                } else {
-                    JOptionPane.showMessageDialog(this, mp.exibirErro());
+                    int botao = JOptionPane.showConfirmDialog(null, "Você está atualizando o estoque de um produto. Tem certeza disso?", "Aviso", JOptionPane.YES_OPTION);
+                    if (botao == JOptionPane.YES_OPTION) {
+
+                        int estoque = p2.getEstoque();
+                        p2.setEstoque(estoque + p.getEstoque());
+                        
+                        if (mp.editar(p2) == true) {
+                        JOptionPane.showMessageDialog(this, "Produto atualizado com sucesso!");
+                        } else {
+                        JOptionPane.showMessageDialog(this, mp.exibirErro());
+                        }
+                    }
+                } catch (Exception e) {
+
+                    if (mp.inserir(p) == true) {
+                        JOptionPane.showMessageDialog(this, "Produto cadastrado com sucesso!");
+                    } else {
+                        JOptionPane.showMessageDialog(this, mp.exibirErro());
+                    }
+                } finally {
+                    Historicop h = new Historicop();
+                    h.setProduto(p.getNome());
+                    h.setMovimento(p.getEstoque());
+                    h.setData(data());
+                    if (mh.inserir(h) == true) {
+
+                        Nome.setText(null);
+                        Descricao.setText(null);
+                        Quantidade.setText(null);
+                        Compra.setText(null);
+                        Venda.setText(null);
+                        min.setText(null);
+                        Tamanho.setText(null);
+                        tipo.setSelectedIndex(0);
+                        cnpj.setText(null);
+
+                    }
                 }
-            }else{
+
+            } else {
                 JOptionPane.showMessageDialog(this, "Por favor, não coloque números em campos de texto.");
             }
         }

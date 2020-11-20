@@ -5,9 +5,11 @@
  */
 package Frames;
 
-import Entidades.Venda;
+import Entidades.Funcionario;
+import Entidades.Produto;
 import Modal.Vender;
-import Modal.AdcProduto;
+import Models.ModelFuncionario;
+import Models.ModelProduto;
 import javax.swing.JInternalFrame;
 import javax.swing.JOptionPane;
 
@@ -17,11 +19,61 @@ import javax.swing.JOptionPane;
  */
 public class FrameMenu extends javax.swing.JFrame {
 
+    ModelFuncionario mf = new ModelFuncionario();
+    ModelProduto mp = new ModelProduto();
+    Funcionario logado = new Funcionario();
+    int R = 0; //cuidar do array
+    
+
     /**
      * Creates new form FrameMenu
      */
     public FrameMenu() {
-        initComponents(); 
+        initComponents();
+        //System.out.println(logado.getId()+","+logado.getNome());
+    }
+
+    public boolean todosProdutos() {
+        try {
+            for (Produto p : mp.listaProdutos()) {
+                if (p.getEstoque() <= p.getEstoqueMin()) {
+                    return true;
+                }
+            }
+            return false;
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, e);
+            return false;
+        }
+
+    }
+    
+    /*public void todosProdutos() {
+        try {
+            for (Produto p : mp.listaProdutos()) {
+                if (p.getEstoque() <= p.getEstoqueMin()) {
+                    R++;
+                    nomeP[R] = p.getNome();
+                    System.out.println(p.getNome()+"==="+R);
+
+                }
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, e);
+        }
+
+    }*/
+
+    public void aviso() {
+        if (todosProdutos()==true) {
+
+            FrameAviso fa = new FrameAviso();
+            Desktop.add(fa);
+            fa.montarTabela();
+            //fa.R = this.R;
+            fa.show();
+
+        }
     }
 
     /**
@@ -268,62 +320,62 @@ public class FrameMenu extends javax.swing.JFrame {
         jPanel1.setSize(142, 352);
         Desktop.setSize(571, 478);
     }*/
-    
+
     private void MenuGFuncionarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuGFuncionarioActionPerformed
         // TODO add your handling code here:
         openForm(new FrameFuncionario());
-        
+
     }//GEN-LAST:event_MenuGFuncionarioActionPerformed
 
-    private void openForm(JInternalFrame f){
+    private void openForm(JInternalFrame f) {
         Desktop.add(f);
         //f.centralizar();
         f.show();
     }
-    
+
     private void MenuGAdcFuncionarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuGAdcFuncionarioActionPerformed
         // TODO add your handling code here:
         /*FrameAdcFuncionario adcFunc = new FrameAdcFuncionario();
         Desktop.add(adcFunc);
         adcFunc.show();*/
         openForm(new FrameAdcFuncionario());
-        
+
     }//GEN-LAST:event_MenuGAdcFuncionarioActionPerformed
 
     private void MenuGAdcFornecedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuGAdcFornecedorActionPerformed
         // TODO add your handling code here:
         //FrameAdcFornecedor adcForn = new FrameAdcFornecedor();
         openForm(new FrameAdcFornecedor());
-        
+
     }//GEN-LAST:event_MenuGAdcFornecedorActionPerformed
 
     private void MenuGAdcClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuGAdcClienteActionPerformed
         // TODO add your handling code here:
         openForm(new FrameAdcCliente());
-        
+
     }//GEN-LAST:event_MenuGAdcClienteActionPerformed
 
     private void MenuGAdcProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuGAdcProdutoActionPerformed
         // TODO add your handling code here:
-        
+
         openForm(new FrameAdcProduto());
     }//GEN-LAST:event_MenuGAdcProdutoActionPerformed
 
     private void ManuGClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ManuGClienteActionPerformed
         // TODO add your handling code here:
-        
+
         openForm(new FrameClientes());
     }//GEN-LAST:event_ManuGClienteActionPerformed
 
     private void MenuGProdutosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuGProdutosActionPerformed
         // TODO add your handling code here:
-        
+
         openForm(new FrameProduto());
     }//GEN-LAST:event_MenuGProdutosActionPerformed
 
     private void MenuGFornecedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuGFornecedorActionPerformed
         // TODO add your handling code here:
-        
+
         openForm(new FrameFornecedor());
     }//GEN-LAST:event_MenuGFornecedorActionPerformed
 
@@ -344,7 +396,11 @@ public class FrameMenu extends javax.swing.JFrame {
 
     private void Vendas2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Vendas2ActionPerformed
         // TODO add your handling code here:
-        openForm(new FrameVenda());
+        //openForm(new FrameVenda());
+        FrameVenda fv = new FrameVenda();
+        fv.logado = this.logado;
+        Desktop.add(fv);
+        fv.show();
     }//GEN-LAST:event_Vendas2ActionPerformed
 
     private void Produtos2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Produtos2ActionPerformed
@@ -360,12 +416,13 @@ public class FrameMenu extends javax.swing.JFrame {
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         // TODO add your handling code here:
         //painel();
+        aviso();
     }//GEN-LAST:event_formWindowOpened
 
     private void Fornecedores3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Fornecedores3ActionPerformed
         // TODO add your handling code here:
-        
-        
+
+
     }//GEN-LAST:event_Fornecedores3ActionPerformed
 
     /**

@@ -93,6 +93,15 @@ public class ModelProduto {
         }
     }
     
+    public List<Produto> listaProdutosNome(String nome){
+        EntityManager em = ModelCliente.openDB();
+        try{
+            return em.createQuery("SELECT p FROM Produto p WHERE p.nome = '"+nome+"'").getResultList();
+        }finally{
+            em.close();
+        }
+    }
+    
     public List<Produto> listaProdutos(){
         EntityManager em = ModelCliente.openDB();
         try{
