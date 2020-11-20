@@ -92,7 +92,7 @@ public class FrameFuncionario extends javax.swing.JInternalFrame {
         tabela = (DefaultTableModel) Tabela.getModel();
         ModelFuncionario mf = new ModelFuncionario();
         for (Funcionario f : mf.listaFuncionarios()){
-            tabela.addRow(new Object[]{f.getId(), f.getNome(), f.getEmail(), f.getCargo(), f.getFone(), f.getCpf_funcionario(), f.getRg()});
+            tabela.addRow(new Object[]{f.getId(), f.getNome(), f.getEmail(), f.getCargo(), f.getFone(), f.getCpf_funcionario(), f.getRg(), f.getData()});
         }
     }
     
@@ -100,7 +100,7 @@ public class FrameFuncionario extends javax.swing.JInternalFrame {
         tabela = (DefaultTableModel) Tabela.getModel();
         ModelFuncionario mf = new ModelFuncionario();
         for (Funcionario f : mf.listaFuncionarios1(s1, c1)){
-            tabela.addRow(new Object[]{f.getId(), f.getNome(), f.getEmail(), f.getCargo(), f.getFone(), f.getCpf_funcionario(), f.getRg()});
+            tabela.addRow(new Object[]{f.getId(), f.getNome(), f.getEmail(), f.getCargo(), f.getFone(), f.getCpf_funcionario(), f.getRg(), f.getData()});
         }
     }
     
@@ -108,7 +108,7 @@ public class FrameFuncionario extends javax.swing.JInternalFrame {
         tabela = (DefaultTableModel) Tabela.getModel();
         ModelFuncionario mf = new ModelFuncionario();
         for (Funcionario f : mf.listaFuncionarios2(s1, c1, s2, c2)){
-            tabela.addRow(new Object[]{f.getId(), f.getNome(), f.getEmail(), f.getCargo(),f.getFone(), f.getCpf_funcionario(), f.getRg()});
+            tabela.addRow(new Object[]{f.getId(), f.getNome(), f.getEmail(), f.getCargo(),f.getFone(), f.getCpf_funcionario(), f.getRg(), f.getData()});
         }
     }
     
@@ -314,6 +314,11 @@ public class FrameFuncionario extends javax.swing.JInternalFrame {
 
         Email.setEnabled(false);
 
+        try {
+            Data.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("####-##-##")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
         Data.setEnabled(false);
         Data.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -474,7 +479,7 @@ public class FrameFuncionario extends javax.swing.JInternalFrame {
 
             },
             new String [] {
-                "ID", "Nome", "E-Mail", "Cargo", "Fone", "CPF", "RG", "Comandos"
+                "ID", "Nome", "E-Mail", "Cargo", "Fone", "CPF", "RG", "Data"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -513,18 +518,18 @@ public class FrameFuncionario extends javax.swing.JInternalFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(225, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(189, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 770, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 770, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(Editar)
                     .addComponent(Editar1)
                     .addComponent(Editar2))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(16, 16, 16))
         );
 
         layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {Editar, Editar1, Editar2});
@@ -918,6 +923,7 @@ public class FrameFuncionario extends javax.swing.JInternalFrame {
             CPF.setText(f.getCpf_funcionario()); CPF.setEnabled(true);
             RG.setText(f.getRg()); RG.setEnabled(true);
             Fone.setText(f.getFone()); Fone.setEnabled(true);
+            Data.setText(f.getData()); Data.setEnabled(false);
             
             if(f.getCargo().equals("gerente")){
                 Cargo.setSelectedIndex(1);

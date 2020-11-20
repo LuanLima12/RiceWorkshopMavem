@@ -176,6 +176,11 @@ public class FrameClientes extends javax.swing.JInternalFrame {
 
         Email.setEnabled(false);
 
+        try {
+            Data.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("####-##-##")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
         Data.setEnabled(false);
         Data.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -288,7 +293,7 @@ public class FrameClientes extends javax.swing.JInternalFrame {
 
             },
             new String [] {
-                "ID", "Nome", "E-Mail", "Fone", "Comandos"
+                "ID", "Nome", "E-Mail", "Fone", "Data"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -299,6 +304,7 @@ public class FrameClientes extends javax.swing.JInternalFrame {
                 return canEdit [columnIndex];
             }
         });
+        TabelaCliente.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS);
         jScrollPane1.setViewportView(TabelaCliente);
         if (TabelaCliente.getColumnModel().getColumnCount() > 0) {
             TabelaCliente.getColumnModel().getColumn(0).setPreferredWidth(1);
@@ -330,18 +336,20 @@ public class FrameClientes extends javax.swing.JInternalFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 770, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(Editar)
-                    .addComponent(Apagar)
-                    .addComponent(Cadastrar))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 770, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(Editar)
+                            .addComponent(Apagar)
+                            .addComponent(Cadastrar))))
+                .addContainerGap())
         );
 
         layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {Apagar, Cadastrar, Editar});
@@ -375,7 +383,7 @@ public class FrameClientes extends javax.swing.JInternalFrame {
         tabela = (DefaultTableModel) TabelaCliente.getModel();
         //ModelCliente mc = new ModelCliente();
         for (Cliente c : mc.listaClientes()){
-            tabela.addRow(new Object[]{c.getId(), c.getNome(), c.getEmail(), c.getFone()});
+            tabela.addRow(new Object[]{c.getId(), c.getNome(), c.getEmail(), c.getFone(), c.getData()});
         }
     }
     
@@ -386,7 +394,7 @@ public class FrameClientes extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(this, mc.exibirErro()); 
         }else{
             for (Cliente c : mc.listaClientes1(selecionado1, conteudo1)){
-            tabela.addRow(new Object[]{c.getId(), c.getNome(), c.getEmail(), c.getFone()});
+            tabela.addRow(new Object[]{c.getId(), c.getNome(), c.getEmail(), c.getFone(), c.getData()});
         }
         }
     }
@@ -395,7 +403,7 @@ public class FrameClientes extends javax.swing.JInternalFrame {
         tabela = (DefaultTableModel) TabelaCliente.getModel();
         //ModelCliente mc = new ModelCliente();
         for (Cliente c : mc.listaClientes2(selecionado1, conteudo1, selecionado2, conteudo2)){
-            tabela.addRow(new Object[]{c.getId(), c.getNome(), c.getEmail(), c.getFone()});
+            tabela.addRow(new Object[]{c.getId(), c.getNome(), c.getEmail(), c.getFone(), c.getData()});
         }
         
     }
@@ -616,6 +624,7 @@ public class FrameClientes extends javax.swing.JInternalFrame {
             ID.setText(Long.toString(p.getId())); ID.setEnabled(false);
             Nome.setText(p.getNome()); Nome.setEnabled(true);
             Email.setText(p.getEmail()); Email.setEnabled(true);
+            Data.setText(p.getData()); Data.setEnabled(false);
             Confirmar.setText("Salvar"); Confirmar.setEnabled(true);
             semFiltro.setEnabled(false);
             

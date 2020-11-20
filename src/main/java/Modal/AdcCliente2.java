@@ -9,6 +9,8 @@ import Entidades.Cliente;
 import Models.ModelCliente;
 import Outros.SuporteSistema;
 import java.awt.Dimension;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import javax.swing.JOptionPane;
 
 /**
@@ -20,6 +22,8 @@ public class AdcCliente2 extends javax.swing.JDialog {
       public Cliente c = new Cliente();
         ModelCliente mc = new ModelCliente();
         SuporteSistema ss = new SuporteSistema();
+        Calendar date = Calendar.getInstance();
+    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
     
     /**
      * Creates new form AdcCliente2
@@ -28,7 +32,9 @@ public class AdcCliente2 extends javax.swing.JDialog {
         initComponents();
     }
     
-    
+    private String data() {
+        return (sdf.format(date.getTime()));
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -163,6 +169,7 @@ public class AdcCliente2 extends javax.swing.JDialog {
                 c.setNome(Nome.getText());
                 c.setEmail(Email.getText());
                 c.setFone(Fone.getText());
+                c.setData((data()));
 
                 if(mc.inserir(c) == true){
 

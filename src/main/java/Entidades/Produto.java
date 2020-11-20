@@ -21,7 +21,7 @@ public class Produto implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    private String nome, descricao, cnpj_fornecedor, tamanho, tipo;
+    private String nome, descricao, cnpj_fornecedor, tamanho, tipo, data;
     private int estoque, estoqueMin;
     private double valorVenda, valorCompra;
     
@@ -109,7 +109,13 @@ public class Produto implements Serializable {
         this.valorCompra = valorCompra;
     }
     
-    
+    public String getData() {
+        return data;
+    }
+
+    public void setData(String data) {
+        this.data = data;
+    }
     
     
     

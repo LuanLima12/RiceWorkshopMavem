@@ -141,11 +141,12 @@ public class Login extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
 
-        //System.out.println(Senha.getPassword());
-        /*ModelSenha ms = new ModelSenha();
-            Senha s = ms.Logar(Usuario.getText());
-
-            System.out.println(ms.exibirErro());*/
+        FrameMenu menu = new FrameMenu();
+        menu.setVisible(true);
+        menu.setExtendedState(MAXIMIZED_BOTH);
+        this.dispose();
+        
+        /*
         if (Usuario.getText().equals("IAMTHEBOSS")) {
             FrameMenu menu = new FrameMenu();
             menu.logado = mf.buscar(Long.parseLong("1"));
@@ -202,12 +203,9 @@ public class Login extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(this, "Usuário inexistente.");
                 }
             }
-        }
+        }*/
 
-        /*FrameMenu menu = new FrameMenu();
-            menu.setVisible(true);
-            this.dispose(); */
-        //String senha = new String(Senha.getPassword());
+        
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jButton1KeyTyped

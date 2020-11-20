@@ -21,7 +21,7 @@ public class Funcionario implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    private String nome, email, cpf_funcionario, rg, fone, cargo;
+    private String nome, email, cpf_funcionario, rg, fone, cargo, data;
     
     public void Funcionario(){
 
@@ -83,6 +83,12 @@ public class Funcionario implements Serializable {
         this.cargo = cargo;
     }
     
-    
+    public String getData() {
+        return data;
+    }
+
+    public void setData(String data) {
+        this.data = data;
+    }
     
 }

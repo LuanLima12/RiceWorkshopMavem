@@ -35,7 +35,7 @@ public class AdcVenda2 extends javax.swing.JDialog {
     Produto p = new Produto();
     public Funcionario logado = new Funcionario();
     Calendar date = Calendar.getInstance();
-    SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
+    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
     SuporteSistema ss = new SuporteSistema();
     private double valor, valorT;
     private int Q, l = 0; //Q da quantidade total de itens totais, l para a contagem de ids de itens e r para representar cada id

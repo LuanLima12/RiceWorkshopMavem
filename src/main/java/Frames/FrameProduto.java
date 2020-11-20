@@ -56,7 +56,7 @@ public class FrameProduto extends javax.swing.JInternalFrame {
         ModelProduto mp = new ModelProduto();
         for (Produto p : mp.listaProdutos()){
             tabela.addRow(new Object[]{p.getId(), p.getNome(), p.getDescricao(), p.getTipo(), p.getEstoque(),
-                p.getValorVenda(), p.getValorCompra(), p.getCnpj_fornecedor(), p.getTamanho(), p.getEstoqueMin()});
+                p.getValorVenda(), p.getValorCompra(), p.getCnpj_fornecedor(), p.getTamanho(), p.getEstoqueMin(), p.getData()});
         }
     }
     
@@ -65,7 +65,7 @@ public class FrameProduto extends javax.swing.JInternalFrame {
         ModelProduto mp = new ModelProduto();
         for (Produto p : mp.listaProdutos1(selecionado1, conteudo1)){
             tabela.addRow(new Object[]{p.getId(), p.getNome(), p.getDescricao(), p.getTipo(), p.getEstoque(),
-                p.getValorVenda(), p.getValorCompra(), p.getCnpj_fornecedor(), p.getTamanho(), p.getEstoqueMin()});
+                p.getValorVenda(), p.getValorCompra(), p.getCnpj_fornecedor(), p.getTamanho(), p.getEstoqueMin(), p.getData()});
         }
     }
     
@@ -74,7 +74,7 @@ public class FrameProduto extends javax.swing.JInternalFrame {
         ModelProduto mp = new ModelProduto();
         for (Produto p : mp.listaProdutos2(selecionado1, conteudo1, selecionado2, conteudo2)){
             tabela.addRow(new Object[]{p.getId(), p.getNome(), p.getDescricao(), p.getTipo(), p.getEstoque(),
-                p.getValorVenda(), p.getValorCompra(), p.getCnpj_fornecedor(), p.getTamanho(), p.getEstoqueMin()});
+                p.getValorVenda(), p.getValorCompra(), p.getCnpj_fornecedor(), p.getTamanho(), p.getEstoqueMin(), p.getData()});
         }
     }
     
@@ -275,6 +275,11 @@ public class FrameProduto extends javax.swing.JInternalFrame {
 
         ValorC.setEnabled(false);
 
+        try {
+            Data.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("####-##-##")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
         Data.setEnabled(false);
         Data.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -397,7 +402,7 @@ public class FrameProduto extends javax.swing.JInternalFrame {
                                 .addGap(8, 8, 8)
                                 .addComponent(Estoque)))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 149, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -436,11 +441,11 @@ public class FrameProduto extends javax.swing.JInternalFrame {
                             .addComponent(Tamanho, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(limite, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 13, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(semFiltro)
                             .addComponent(Confirmar)))
-                    .addComponent(jScrollPane2))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
@@ -452,8 +457,7 @@ public class FrameProduto extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -471,11 +475,11 @@ public class FrameProduto extends javax.swing.JInternalFrame {
 
             },
             new String [] {
-                "ID", "Nome", "Descrição", "Tipo", "Estoque", "Valor de venda", "Valor de aquisição", "CNPJ do Fornecedor", "Tamanho", "Limite de estoque"
+                "ID", "Nome", "Descrição", "Tipo", "Estoque", "Valor de venda", "Valor de aquisição", "CNPJ do Fornecedor", "Tamanho", "Limite de estoque", "Data"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false, false, false
+                false, false, false, false, false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -511,17 +515,17 @@ public class FrameProduto extends javax.swing.JInternalFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 600, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 604, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(Editar)
-                            .addComponent(Editar1)
-                            .addComponent(Editar2))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                    .addComponent(Editar)
+                    .addComponent(Editar1)
+                    .addComponent(Editar2))
                 .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {Editar, Editar1, Editar2});
@@ -918,6 +922,7 @@ public class FrameProduto extends javax.swing.JInternalFrame {
             CNPJ.setText(p.getCnpj_fornecedor()); CNPJ.setEnabled(true);
             Tamanho.setText(p.getTamanho()); Tamanho.setEnabled(true);
             limite.setText(Integer.toString(p.getEstoqueMin())); limite.setEnabled(true);
+            Data.setText(p.getData()); Data.setEnabled(false);
             
             if(p.getTipo().equals("Caixa")){
                 tipo.setSelectedIndex(1);

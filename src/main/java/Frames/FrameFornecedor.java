@@ -55,7 +55,7 @@ public class FrameFornecedor extends javax.swing.JInternalFrame {
         tabela = (DefaultTableModel) Tabela.getModel();
         ModelFornecedor mf = new ModelFornecedor();
         for (Fornecedor f : mf.listaFornecedores()){
-            tabela.addRow(new Object[]{f.getId(), f.getRazao_social(), f.getCnpj_fornecedor(), f.getEndereco(), f.getCidade()});
+            tabela.addRow(new Object[]{f.getId(), f.getRazao_social(), f.getCnpj_fornecedor(), f.getEndereco(), f.getCidade(), f.getData()});
         }
     }
     
@@ -63,7 +63,7 @@ public class FrameFornecedor extends javax.swing.JInternalFrame {
         tabela = (DefaultTableModel) Tabela.getModel();
         ModelFornecedor mf = new ModelFornecedor();
         for (Fornecedor f : mf.listaFornecedores1(selecionado1, conteudo1)){
-            tabela.addRow(new Object[]{f.getId(), f.getRazao_social(), f.getCnpj_fornecedor(), f.getEndereco(), f.getCidade()});
+            tabela.addRow(new Object[]{f.getId(), f.getRazao_social(), f.getCnpj_fornecedor(), f.getEndereco(), f.getCidade(), f.getData()});
         }
     }
     
@@ -71,7 +71,7 @@ public class FrameFornecedor extends javax.swing.JInternalFrame {
         tabela = (DefaultTableModel) Tabela.getModel();
         ModelFornecedor mf = new ModelFornecedor();
         for (Fornecedor f : mf.listaFornecedores2(selecionado1, conteudo1, selecionado2, conteudo2)){
-            tabela.addRow(new Object[]{f.getId(), f.getRazao_social(), f.getCnpj_fornecedor(), f.getEndereco(), f.getCidade()});
+            tabela.addRow(new Object[]{f.getId(), f.getRazao_social(), f.getCnpj_fornecedor(), f.getEndereco(), f.getCidade(), f.getData()});
         }
     }
     
@@ -110,7 +110,6 @@ public class FrameFornecedor extends javax.swing.JInternalFrame {
         semFiltro = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         Tabela = new javax.swing.JTable();
-        Editar = new javax.swing.JButton();
         Editar1 = new javax.swing.JButton();
         Apagar = new javax.swing.JButton();
         Cadastrar = new javax.swing.JButton();
@@ -247,6 +246,11 @@ public class FrameFornecedor extends javax.swing.JInternalFrame {
 
         endereco.setEnabled(false);
 
+        try {
+            Data.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("####-##-##")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
         Data.setEnabled(false);
         Data.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -384,11 +388,11 @@ public class FrameFornecedor extends javax.swing.JInternalFrame {
 
             },
             new String [] {
-                "ID", "Razão Social", "CNPJ", "Endereço", "Cidade"
+                "ID", "Razão Social", "CNPJ", "Endereço", "Cidade", "Data"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
+                false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -396,8 +400,6 @@ public class FrameFornecedor extends javax.swing.JInternalFrame {
             }
         });
         jScrollPane1.setViewportView(Tabela);
-
-        Editar.setText("Editar");
 
         Editar1.setText("Editar");
         Editar1.addActionListener(new java.awt.event.ActionListener() {
@@ -430,18 +432,13 @@ public class FrameFornecedor extends javax.swing.JInternalFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 664, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 664, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(Editar1)
                     .addComponent(Apagar)
                     .addComponent(Cadastrar))
-                .addContainerGap(11, Short.MAX_VALUE))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(Editar)
-                    .addGap(0, 0, Short.MAX_VALUE)))
+                .addGap(11, 11, 11))
         );
 
         layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {Apagar, Cadastrar, Editar1});
@@ -461,11 +458,6 @@ public class FrameFornecedor extends javax.swing.JInternalFrame {
                         .addGap(60, 60, 60)
                         .addComponent(Apagar, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(Editar)
-                    .addGap(0, 0, Short.MAX_VALUE)))
         );
 
         setBounds(0, 0, 788, 469);
@@ -759,6 +751,7 @@ public class FrameFornecedor extends javax.swing.JInternalFrame {
             endereco.setText(f.getEndereco()); endereco.setEnabled(true);
             Cidade.setText(f.getCidade()); Cidade.setEnabled(true);
             CNPJ.setText(f.getCnpj_fornecedor()); CNPJ.setEnabled(true);
+            Data.setText(f.getData()); Data.setEnabled(false);
             Confirmar.setText("Salvar"); Confirmar.setEnabled(true);
             semFiltro.setEnabled(false);
             
@@ -787,7 +780,6 @@ public class FrameFornecedor extends javax.swing.JInternalFrame {
     private javax.swing.JButton Confirmar;
     private javax.swing.JFormattedTextField Data;
     private javax.swing.JRadioButton Data1;
-    private javax.swing.JButton Editar;
     private javax.swing.JButton Editar1;
     private javax.swing.JTextField ID;
     private javax.swing.JRadioButton ID1;

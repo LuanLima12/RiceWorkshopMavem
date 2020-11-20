@@ -285,6 +285,7 @@ public class AdcProduto extends javax.swing.JDialog {
                 p.setEstoqueMin(Integer.parseInt(min.getText()));
                 p.setTamanho(Tamanho.getText());
                 p.setCnpj_fornecedor(cnpj.getText());
+                p.setData(data());
 
                 switch (tipo.getSelectedIndex()) {
                     case 1:
@@ -319,6 +320,16 @@ public class AdcProduto extends javax.swing.JDialog {
                         
                         if (mp.editar(p2) == true) {
                         JOptionPane.showMessageDialog(this, "Produto atualizado com sucesso!");
+                            ModelHistoricop mh = new ModelHistoricop();
+                            Historicop h = new Historicop();
+                            h.setProduto(p.getNome());
+                            h.setMovimento(estoque);
+                            h.setData(data());
+                            try{
+                                mh.inserir(h);
+                            }catch(Exception er){
+                                JOptionPane.showMessageDialog(this, er);
+                            }
                         } else {
                         JOptionPane.showMessageDialog(this, mp.exibirErro());
                         }
@@ -327,6 +338,16 @@ public class AdcProduto extends javax.swing.JDialog {
 
                     if (mp.inserir(p) == true) {
                         JOptionPane.showMessageDialog(this, "Produto cadastrado com sucesso!");
+                        ModelHistoricop mh = new ModelHistoricop();
+                            Historicop h = new Historicop();
+                            h.setProduto(p.getNome());
+                            h.setMovimento(p.getEstoque());
+                            h.setData(data());
+                            try{
+                                mh.inserir(h);
+                            }catch(Exception er){
+                                JOptionPane.showMessageDialog(this, er);
+                            }
                     } else {
                         JOptionPane.showMessageDialog(this, mp.exibirErro());
                     }

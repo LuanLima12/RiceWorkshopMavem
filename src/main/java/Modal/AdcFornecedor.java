@@ -7,6 +7,8 @@ package Modal;
 
 import Entidades.Fornecedor;
 import Models.ModelFornecedor;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import javax.swing.JOptionPane;
 
 /**
@@ -15,6 +17,13 @@ import javax.swing.JOptionPane;
  */
 public class AdcFornecedor extends javax.swing.JDialog {
 
+    Calendar date = Calendar.getInstance();
+    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+    
+    private String data() {
+        return (sdf.format(date.getTime()));
+    }
+    
     /**
      * Creates new form AdcFornecedor
      */
@@ -167,6 +176,7 @@ public class AdcFornecedor extends javax.swing.JDialog {
         f.setRazao_social(Razao.getText());
         f.setCidade(Cidade.getText());
         f.setEndereco(Endereco.getText());
+        f.setData(data());
 
         if(mf.inserir(f)==true){
             JOptionPane.showMessageDialog(this, "Fornecedor cadastrado com sucesso!");

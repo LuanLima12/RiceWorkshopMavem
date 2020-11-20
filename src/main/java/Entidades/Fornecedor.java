@@ -21,7 +21,7 @@ public class Fornecedor implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    private String cnpj_fornecedor, razao_social, endereco, cidade;
+    private String cnpj_fornecedor, razao_social, endereco, cidade, data;
     
     public void Fonecedor(){
         
@@ -65,6 +65,14 @@ public class Fornecedor implements Serializable{
 
     public void setCidade(String cidade) {
         this.cidade = cidade;
+    }
+    
+    public String getData() {
+        return data;
+    }
+
+    public void setData(String data) {
+        this.data = data;
     }
     
     
