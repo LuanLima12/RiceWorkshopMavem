@@ -22,11 +22,11 @@ public class AdcFuncionario extends javax.swing.JDialog {
 
     Calendar date = Calendar.getInstance();
     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-    
+
     private String data() {
         return (sdf.format(date.getTime()));
     }
-    
+
     /**
      * Creates new form AdcFuncionario
      */
@@ -231,64 +231,69 @@ public class AdcFuncionario extends javax.swing.JDialog {
         ModelFuncionario mf = new ModelFuncionario();
         SuporteSistema ss = new SuporteSistema();
 
-        if (cargo.getSelectedIndex()==0){
-            JOptionPane.showMessageDialog(this, "Por favor, selecione um cargo.");
+        if (Nome.getText().equals("") || Fone.getText().equals("") || Email.getText().equals("") || CPF.getText().equals("")
+                || RG.getText().equals("")) {
+                JOptionPane.showMessageDialog(this, "Não devem haver campos em branco");
         }else{
+            if (cargo.getSelectedIndex() == 0) {
+                JOptionPane.showMessageDialog(this, "Por favor, selecione um cargo.");
+            } else {
 
-            if(ss.checarNumeros(Nome.getText())==false){
+                if (ss.checarNumeros(Nome.getText()) == false) {
 
-                if(ss.checarLetras(Fone.getText())==false){
+                    if (ss.checarLetras(Fone.getText()) == false) {
 
-                    if(Senha1.equals(null)){ // CONFERIR SE CAMPO DE SENHA ESTÁ EM BRANCO
-                        JOptionPane.showMessageDialog(this, "Senha não pode ser vazia.");
-                    }else{
+                        if (Senha1.equals(null)) { // CONFERIR SE CAMPO DE SENHA ESTÁ EM BRANCO
+                            JOptionPane.showMessageDialog(this, "Senha não pode ser vazia.");
+                        } else {
 
-                        if(Arrays.equals(Senha1.getPassword(), Senha2.getPassword())){
-                            String ps = new String(Senha1.getPassword());
+                            if (Arrays.equals(Senha1.getPassword(), Senha2.getPassword())) {
+                                String ps = new String(Senha1.getPassword());
 
-                            s.setSenha(ps);
-                            f.setNome(Nome.getText());
-                            f.setEmail(Email.getText());
-                            f.setFone(Fone.getText());
-                            f.setCpf_funcionario(CPF.getText());
-                            f.setRg(RG.getText());
-                            f.setData(data());
+                                s.setSenha(ps);
+                                f.setNome(Nome.getText());
+                                f.setEmail(Email.getText());
+                                f.setFone(Fone.getText());
+                                f.setCpf_funcionario(CPF.getText());
+                                f.setRg(RG.getText());
+                                f.setData(data());
 
-                            if (cargo.getSelectedIndex() == 1) {
-                                f.setCargo("gerente");
+                                if (cargo.getSelectedIndex() == 1) {
+                                    f.setCargo("gerente");
+                                } else {
+                                    f.setCargo("funcionario");
+                                }
+
+                                if (mf.inserir(f, s) == true) {
+                                    JOptionPane.showMessageDialog(this, "Funcionario cadastrado com sucesso!");
+
+                                    ps = null;
+                                    Senha1.setText(null);
+                                    Senha2.setText(null);
+                                    Nome.setText(null);
+                                    Email.setText(null);
+                                    Fone.setText(null);
+                                    CPF.setText(null);
+                                    RG.setText(null);
+                                    cargo.setSelectedIndex(0);
+
+                                } else {
+                                    JOptionPane.showMessageDialog(this, mf.exibirErro());
+                                }
+
                             } else {
-                                f.setCargo("funcionario");
+                                JOptionPane.showMessageDialog(this, "Os campos de senhas não devem ser diferentes.");
                             }
 
-                            if (mf.inserir(f, s) == true) {
-                                JOptionPane.showMessageDialog(this, "Funcionario cadastrado com sucesso!");
-
-                                ps = null;
-                                Senha1.setText(null);
-                                Senha2.setText(null);
-                                Nome.setText(null);
-                                Email.setText(null);
-                                Fone.setText(null);
-                                CPF.setText(null);
-                                RG.setText(null);
-                                cargo.setSelectedIndex(0);
-
-                            } else {
-                                JOptionPane.showMessageDialog(this, mf.exibirErro());
-                            }
-
-                        }else{
-                            JOptionPane.showMessageDialog(this, "Os campos de senhas não devem ser diferentes.");
                         }
 
+                    } else {
+                        JOptionPane.showMessageDialog(this, "Campos numéricos não devem conter letras.");
                     }
 
-                }else{
-                    JOptionPane.showMessageDialog(this, "Campos numéricos não devem conter letras.");
+                } else {
+                    JOptionPane.showMessageDialog(this, "Campos de texto não devem conter números.");
                 }
-
-            }else{
-                JOptionPane.showMessageDialog(this, "Campos de texto não devem conter números.");
             }
         }
     }//GEN-LAST:event_CadastrarActionPerformed

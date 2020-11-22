@@ -393,6 +393,7 @@ public class FrameClientes extends javax.swing.JInternalFrame {
         if(mc.listaClientes1(selecionado1, conteudo1)==null){
             JOptionPane.showMessageDialog(this, mc.exibirErro()); 
         }else{
+            //JOptionPane.showMessageDialog(this, conteudo1);
             for (Cliente c : mc.listaClientes1(selecionado1, conteudo1)){
             tabela.addRow(new Object[]{c.getId(), c.getNome(), c.getEmail(), c.getFone(), c.getData()});
         }
@@ -480,12 +481,17 @@ public class FrameClientes extends javax.swing.JInternalFrame {
             }
             switch (getQuantidade()) {
                 case 0:
-                    montarTabela();
+                    try{montarTabela();
+                    }catch(Exception e){ JOptionPane.showMessageDialog(this, e);
                     i=1;
+                    }
+                    
                     break;
                 case 1:
-                    montarTabela1();
+                    try{montarTabela1();
+                    }catch(Exception e){ JOptionPane.showMessageDialog(this, e);
                     i=1;
+                    }
                     break;
                 case 2:
                     montarTabela2();
@@ -507,6 +513,9 @@ public class FrameClientes extends javax.swing.JInternalFrame {
                 Email.setText(null); Email.setEnabled(false);
                 Confirmar.setText("Pesquisar"); Confirmar.setEnabled(false);
                 semFiltro.setEnabled(true);
+                limparTabela(); montarTabela();
+            }else{
+                JOptionPane.showMessageDialog(this, mc.exibirErro());
             }
             
         }
@@ -592,7 +601,7 @@ public class FrameClientes extends javax.swing.JInternalFrame {
             Confirmar.setEnabled(true);
 
             quantidade = 1;
-            selecionado1 = "email";
+            selecionado1 = "data";
 
         }else{
             JOptionPane.showMessageDialog(this, "É preciso selecionar ao menos um tema de pesquisa.");
@@ -627,17 +636,28 @@ public class FrameClientes extends javax.swing.JInternalFrame {
             Data.setText(p.getData()); Data.setEnabled(false);
             Confirmar.setText("Salvar"); Confirmar.setEnabled(true);
             semFiltro.setEnabled(false);
+            JOptionPane.showMessageDialog(this, p.getData());
             
         }
     }//GEN-LAST:event_EditarActionPerformed
 
     private void ApagarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ApagarActionPerformed
         // TODO add your handling code here:
-        int botao;
+        if(TabelaCliente.getSelectedRowCount()>1){
+            JOptionPane.showMessageDialog(this, "Selecione apenas um cliente por vez para deleta-lo.");
+        }else if(TabelaCliente.getSelectedRowCount()<1){
+            JOptionPane.showMessageDialog(this, "Nenhum cliente selecionado.");
+        }else{
+            Long n = (Long)TabelaCliente.getValueAt(TabelaCliente.getSelectedRow(), 0);
+            System.out.println(n);
+            int botao;
         botao = JOptionPane.showConfirmDialog (null, "Tem certeza que deseja apagar?", "Aviso", JOptionPane.YES_OPTION);
         if(botao == JOptionPane.YES_OPTION){
-           // deleteLinha();
+           mc.delete(n);
+           limparTabela(); montarTabela();
         }
+        }
+        
     }//GEN-LAST:event_ApagarActionPerformed
 
     private void CadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CadastrarActionPerformed

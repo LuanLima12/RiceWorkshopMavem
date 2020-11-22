@@ -551,7 +551,7 @@ public class AdcVenda extends javax.swing.JDialog {
     private void AdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AdicionarActionPerformed
         // TODO add your handling code here:
         if (p.getNome().equals("")) {
-            JOptionPane.showMessageDialog(this, "Nenhum produto adicionado.");
+            JOptionPane.showMessageDialog(this, "Nenhum produto selecionado.");
         } else {
             l++;
             adcLinha();
@@ -614,6 +614,10 @@ public class AdcVenda extends javax.swing.JDialog {
         botao = JOptionPane.showConfirmDialog(null, "Tem certeza que deseja apagar?", "Aviso", JOptionPane.YES_OPTION);
         if (botao == JOptionPane.YES_OPTION) {
             pQ[(int) Tabela.getValueAt(Tabela.getSelectedRow(), 0)] = 0;
+            double a = (Double)Tabela.getValueAt(Tabela.getSelectedRow(), 2);
+            double b = (Double)Tabela.getValueAt(Tabela.getSelectedRow(), 3);
+            valorT = valorT - ( a * b );
+            ValorTotal.setText(Double.toString(valorT));
             deleteLinha();
         }
     }//GEN-LAST:event_ExcluirActionPerformed
@@ -645,8 +649,10 @@ public class AdcVenda extends javax.swing.JDialog {
         // TODO add your handling code here:
         if (ss.checarNumeros(Cliente.getText()) == false) {
             if (Cliente.getText().equals("")) {
-                JOptionPane.showMessageDialog(this, "Não há cliente.");
-            } else {
+                JOptionPane.showMessageDialog(this, "É preciso haver um cliente, cadastrado ou não.");
+            }else if(Tabela.getRowCount()<1){
+                 JOptionPane.showMessageDialog(this, "Nenhum produto foi adicionado.");
+            }else {
                 if (Tabela.getRowCount() > 0) {
 
                     Venda v = new Venda();

@@ -6,6 +6,7 @@
 package Frames;
 
 import Entidades.Produto;
+import Modal.AdcEstoque2;
 import Modal.AdcProduto;
 import Models.ModelProduto;
 import java.awt.Dimension;
@@ -134,6 +135,7 @@ public class FrameProduto extends javax.swing.JInternalFrame {
         Editar = new javax.swing.JButton();
         Editar1 = new javax.swing.JButton();
         Editar2 = new javax.swing.JButton();
+        Editar3 = new javax.swing.JButton();
 
         setClosable(true);
         setIconifiable(true);
@@ -359,9 +361,9 @@ public class FrameProduto extends javax.swing.JInternalFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(Data, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel9)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(tipo, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(tipo, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel8))
                     .addGroup(jPanel2Layout.createSequentialGroup()
@@ -509,26 +511,36 @@ public class FrameProduto extends javax.swing.JInternalFrame {
             }
         });
 
+        Editar3.setText("Repor estoque");
+        Editar3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Editar3ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 600, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(Editar)
-                    .addComponent(Editar1)
-                    .addComponent(Editar2))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 578, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(Editar1, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(Editar, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(Editar3, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(Editar2, javax.swing.GroupLayout.Alignment.TRAILING)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {Editar, Editar1, Editar2});
+        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {Editar, Editar1, Editar2, Editar3});
 
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -539,9 +551,11 @@ public class FrameProduto extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(Editar2, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 48, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
+                        .addComponent(Editar3, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
                         .addComponent(Editar, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 49, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
                         .addComponent(Editar1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                 .addContainerGap())
@@ -877,6 +891,7 @@ public class FrameProduto extends javax.swing.JInternalFrame {
                 tipo.setSelectedIndex(0); tipo.setEnabled(false);
                 Confirmar.setText("Pesquisar"); Confirmar.setEnabled(false);
                 semFiltro.setEnabled(true);
+                limparTabela(); montarTabela();
             }
 
         }
@@ -916,14 +931,14 @@ public class FrameProduto extends javax.swing.JInternalFrame {
             ID.setText(Long.toString(p.getId())); ID.setEnabled(false);
             Nome.setText(p.getNome()); Nome.setEnabled(true);
             Descricao.setText(p.getDescricao()); Descricao.setEnabled(true);
-            Estoque.setText(Integer.toString(p.getEstoque())); Estoque.setEnabled(true);
+            Estoque.setText(Integer.toString(p.getEstoque())); Estoque.setEnabled(false);
             ValorC.setText(Double.toString(p.getValorCompra())); ValorC.setEnabled(true);
             ValorV.setText(Double.toString(p.getValorVenda())); ValorV.setEnabled(true);
             CNPJ.setText(p.getCnpj_fornecedor()); CNPJ.setEnabled(true);
             Tamanho.setText(p.getTamanho()); Tamanho.setEnabled(true);
             limite.setText(Integer.toString(p.getEstoqueMin())); limite.setEnabled(true);
             Data.setText(p.getData()); Data.setEnabled(false);
-            
+            tipo.setEnabled(true);
             if(p.getTipo().equals("Caixa")){
                 tipo.setSelectedIndex(1);
             }else if(p.getTipo().equals("Litro")){
@@ -935,7 +950,7 @@ public class FrameProduto extends javax.swing.JInternalFrame {
             }else{
                 tipo.setSelectedIndex(5);
             }
-            
+            limparTabela(); montarTabela();
             Confirmar.setText("Salvar"); Confirmar.setEnabled(true);
             semFiltro.setEnabled(false);
 
@@ -944,6 +959,22 @@ public class FrameProduto extends javax.swing.JInternalFrame {
 
     private void Editar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Editar1ActionPerformed
         // TODO add your handling code here:
+        
+        if(Tabela.getSelectedRowCount()>1){
+            JOptionPane.showMessageDialog(this, "Selecione apenas um cliente por vez para deleta-lo.");
+        }else if(Tabela.getSelectedRowCount()<1){
+            JOptionPane.showMessageDialog(this, "Nenhum cliente selecionado.");
+        }else{
+            Long n = (Long)Tabela.getValueAt(Tabela.getSelectedRow(), 0);
+            System.out.println(n);
+            int botao;
+        botao = JOptionPane.showConfirmDialog (null, "Tem certeza que deseja apagar?", "Aviso", JOptionPane.YES_OPTION);
+        if(botao == JOptionPane.YES_OPTION){
+           mp.delete(n);
+           limparTabela(); montarTabela();
+        }
+        }
+        
     }//GEN-LAST:event_Editar1ActionPerformed
 
     private void Editar2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Editar2ActionPerformed
@@ -952,6 +983,13 @@ public class FrameProduto extends javax.swing.JInternalFrame {
         ap.setModal(true);
         ap.setVisible(true);
     }//GEN-LAST:event_Editar2ActionPerformed
+
+    private void Editar3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Editar3ActionPerformed
+        // TODO add your handling code here:
+        AdcEstoque2 ae = new AdcEstoque2();
+        ae.setModal(true);
+        ae.setVisible(true);
+    }//GEN-LAST:event_Editar3ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -964,6 +1002,7 @@ public class FrameProduto extends javax.swing.JInternalFrame {
     private javax.swing.JButton Editar;
     private javax.swing.JButton Editar1;
     private javax.swing.JButton Editar2;
+    private javax.swing.JButton Editar3;
     private javax.swing.JTextField Estoque;
     private javax.swing.JRadioButton Estoque1;
     private javax.swing.JTextField ID;

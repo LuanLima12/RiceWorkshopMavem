@@ -19,19 +19,19 @@ import javax.swing.JOptionPane;
  */
 public class AdcCliente2 extends javax.swing.JDialog {
 
-      public Cliente c = new Cliente();
-        ModelCliente mc = new ModelCliente();
-        SuporteSistema ss = new SuporteSistema();
-        Calendar date = Calendar.getInstance();
+    public Cliente c = new Cliente();
+    ModelCliente mc = new ModelCliente();
+    SuporteSistema ss = new SuporteSistema();
+    Calendar date = Calendar.getInstance();
     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-    
+
     /**
      * Creates new form AdcCliente2
      */
     public AdcCliente2() {
         initComponents();
     }
-    
+
     private String data() {
         return (sdf.format(date.getTime()));
     }
@@ -162,34 +162,36 @@ public class AdcCliente2 extends javax.swing.JDialog {
 
     private void CadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CadastrarActionPerformed
         // TODO add your handling code here:
+        if (Nome.getText().equals("") || Email.getText().equals("") || Fone.getText().equals("")) {
+            JOptionPane.showMessageDialog(this, "Não devem haver campos vazios.");
+        } else {
+            if (ss.checarNumeros(Nome.getText()) == false) { //checar se não há numeros
+                if (ss.checarLetras(Fone.getText()) == false) { //checar se não há letras
 
-        if(ss.checarNumeros(Nome.getText()) ==false){ //checar se não há numeros
-            if (ss.checarLetras(Fone.getText()) ==false){ //checar se não há letras
+                    c.setNome(Nome.getText());
+                    c.setEmail(Email.getText());
+                    c.setFone(Fone.getText());
+                    c.setData((data()));
 
-                c.setNome(Nome.getText());
-                c.setEmail(Email.getText());
-                c.setFone(Fone.getText());
-                c.setData((data()));
+                    if (mc.inserir(c) == true) {
 
-                if(mc.inserir(c) == true){
+                        JOptionPane.showMessageDialog(this, "Cliente cadastrado com sucesso!");
 
-                    JOptionPane.showMessageDialog(this, "Cliente cadastrado com sucesso!");
+                        Nome.setText(null);
+                        Email.setText(null);
+                        Fone.setText(null);
+                    } else {
+                        JOptionPane.showMessageDialog(this, mc.exibirErro());
+                    }
 
-                    Nome.setText(null);
-                    Email.setText(null);
-                    Fone.setText(null);
-                }else{
-                    JOptionPane.showMessageDialog(this, mc.exibirErro());
+                } else {
+                    JOptionPane.showMessageDialog(this, "Não devem haver letras em campos numéricos");
                 }
-
-            }else{
-                JOptionPane.showMessageDialog(this, "Não devem haver letras em campos numéricos");
+            } else {
+                JOptionPane.showMessageDialog(this, "Não devem haver números em campos de texto.");
             }
-        }else{
-            JOptionPane.showMessageDialog(this, "Não devem haver números em campos de texto.");
         }
-        
-     
+
     }//GEN-LAST:event_CadastrarActionPerformed
 
     private void CancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CancelarActionPerformed
@@ -200,7 +202,7 @@ public class AdcCliente2 extends javax.swing.JDialog {
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         // TODO add your handling code here:
         Nome.setText(c.getNome());
-        
+
     }//GEN-LAST:event_formWindowOpened
 
     /**

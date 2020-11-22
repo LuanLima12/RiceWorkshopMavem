@@ -5,8 +5,10 @@
  */
 package Modal;
 
+import Entidades.Fornecedor;
 import Entidades.Historicop;
 import Entidades.Produto;
+import Models.ModelFornecedor;
 import Models.ModelHistoricop;
 import Models.ModelProduto;
 import Outros.SuporteSistema;
@@ -70,6 +72,7 @@ public class AdcProduto extends javax.swing.JDialog {
         jLabel4 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         Descricao = new javax.swing.JTextArea();
+        jButton2 = new javax.swing.JButton();
 
         setTitle("Adicionar produto");
         setModal(true);
@@ -91,7 +94,7 @@ public class AdcProduto extends javax.swing.JDialog {
 
         Compra.setToolTipText("Valor pelo qual o produto foi comprado do fornecedor.");
 
-        jLabel1.setText("Nome:");
+        jLabel1.setText("Produto:");
         jLabel1.setToolTipText("Nome do produto.");
 
         tipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "[ Selecione uma das opções ]", "Caixa", "Litro", "Metro", "Unidade", "Outro" }));
@@ -141,6 +144,13 @@ public class AdcProduto extends javax.swing.JDialog {
         Descricao.setToolTipText("");
         jScrollPane1.setViewportView(Descricao);
 
+        jButton2.setText("+");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -163,14 +173,17 @@ public class AdcProduto extends javax.swing.JDialog {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(cnpj, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(jPanel1Layout.createSequentialGroup()
-                                    .addComponent(min, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(jLabel7)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(Tamanho, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(cnpj, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(min, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(jLabel7)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(Tamanho, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jButton2))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(97, 97, 97)
                         .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -182,8 +195,8 @@ public class AdcProduto extends javax.swing.JDialog {
                             .addGap(179, 179, 179)
                             .addComponent(Cancelar))
                         .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(jLabel1)
+                            .addGap(2, 2, 2)
                             .addComponent(Nome, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGap(18, 18, 18)
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -214,7 +227,8 @@ public class AdcProduto extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cnpj, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cnpj, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -265,116 +279,87 @@ public class AdcProduto extends javax.swing.JDialog {
         Produto p = new Produto();
         SuporteSistema ss = new SuporteSistema();
 
-        if (tipo.getSelectedIndex() == 0) { //CHECAR SE O CAMPO FOI SELECIONADO
-            JOptionPane.showMessageDialog(this, "Por favor, não deixe campos em branco.");
-        } else {
-
-            if (ss.checarLetras(Quantidade.getText()) == false
-                    && //conferir se há letras em campos numéricos
-                    ss.checarLetras(Compra.getText()) == false
-                    && ss.checarLetras(Venda.getText()) == false
-                    && ss.checarLetras(min.getText()) == false
-                    && ss.checarLetras(cnpj.getText()) == false) {
-
-                //INICIO DAS OPERAÇÕES DE CRUD
-                p.setNome(Nome.getText());
-                p.setDescricao(Descricao.getText());
-                p.setEstoque(Integer.parseInt(Quantidade.getText()));
-                p.setValorCompra(Double.parseDouble(Compra.getText()));
-                p.setValorVenda(Double.parseDouble(Venda.getText()));
-                p.setEstoqueMin(Integer.parseInt(min.getText()));
-                p.setTamanho(Tamanho.getText());
-                p.setCnpj_fornecedor(cnpj.getText());
-                p.setData(data());
-
-                switch (tipo.getSelectedIndex()) {
-                    case 1:
-                        p.setTipo("caixa");
-                        break;
-                    case 2:
-                        p.setTipo("unidade");
-                        break;
-                    case 3:
-                        p.setTipo("litro");
-                        break;
-                    case 4:
-                        p.setTipo("metro");
-                        break;
-                    case 5:
-                        p.setTipo("unidade");
-                        break;
-                    case 6:
-                        p.setTipo("outro");
-                        break;
-                }
-
-                try {
-                    Produto p2 = new Produto();
-                    p2 = mp.buscarNome(p.getNome());
-
-                    int botao = JOptionPane.showConfirmDialog(null, "Você está atualizando o estoque de um produto. Tem certeza disso?", "Aviso", JOptionPane.YES_OPTION);
-                    if (botao == JOptionPane.YES_OPTION) {
-
-                        int estoque = p2.getEstoque();
-                        p2.setEstoque(estoque + p.getEstoque());
-                        
-                        if (mp.editar(p2) == true) {
-                        JOptionPane.showMessageDialog(this, "Produto atualizado com sucesso!");
-                            ModelHistoricop mh = new ModelHistoricop();
-                            Historicop h = new Historicop();
-                            h.setProduto(p.getNome());
-                            h.setMovimento(estoque);
-                            h.setData(data());
-                            try{
-                                mh.inserir(h);
-                            }catch(Exception er){
-                                JOptionPane.showMessageDialog(this, er);
-                            }
-                        } else {
-                        JOptionPane.showMessageDialog(this, mp.exibirErro());
-                        }
-                    }
-                } catch (Exception e) {
-
-                    if (mp.inserir(p) == true) {
-                        JOptionPane.showMessageDialog(this, "Produto cadastrado com sucesso!");
-                        ModelHistoricop mh = new ModelHistoricop();
-                            Historicop h = new Historicop();
-                            h.setProduto(p.getNome());
-                            h.setMovimento(p.getEstoque());
-                            h.setData(data());
-                            try{
-                                mh.inserir(h);
-                            }catch(Exception er){
-                                JOptionPane.showMessageDialog(this, er);
-                            }
-                    } else {
-                        JOptionPane.showMessageDialog(this, mp.exibirErro());
-                    }
-                } finally {
-                    Historicop h = new Historicop();
-                    h.setProduto(p.getNome());
-                    h.setMovimento(p.getEstoque());
-                    h.setData(data());
-                    if (mh.inserir(h) == true) {
-
-                        Nome.setText(null);
-                        Descricao.setText(null);
-                        Quantidade.setText(null);
-                        Compra.setText(null);
-                        Venda.setText(null);
-                        min.setText(null);
-                        Tamanho.setText(null);
-                        tipo.setSelectedIndex(0);
-                        cnpj.setText(null);
-
-                    }
-                }
-
-            } else {
-                JOptionPane.showMessageDialog(this, "Por favor, não coloque números em campos de texto.");
+        try{
+            
+            p = mp.buscarNome(Nome.getText());
+            int botao = JOptionPane.showConfirmDialog(null, "O produto já é cadastrado. Deja adicionar ao estoque deste produto?", "Aviso", JOptionPane.YES_OPTION);
+            if (botao == JOptionPane.YES_OPTION) {
+                AdcEstoque2 ae = new AdcEstoque2();
+                ae.p.setNome(this.Nome.getText());
+                this.dispose();
+                ae.setModal(true);
+                ae.setVisible(true);
+                
+                
             }
-        }
+        }catch(Exception e2){
+            System.out.println(e2);
+            if (tipo.getSelectedIndex() == 0 || Nome.getText().equals("") || Compra.getText().equals("") || 
+                   Venda.getText().equals("") || Quantidade.getText().equals("") || cnpj.getText().equals("") ||
+                    min.getText().equals("") || Tamanho.getText().equals("") || Descricao.getText().equals("") ) { //CHECAR SE O CAMPO FOI SELECIONADO
+                JOptionPane.showMessageDialog(this, "Não devem haver campos em branco.");
+            } else {
+                if (ss.checarLetras(Quantidade.getText()) == false
+                        && //conferir se há letras em campos numéricos
+                        ss.checarLetras(Compra.getText()) == false
+                        && ss.checarLetras(Venda.getText()) == false
+                        && ss.checarLetras(min.getText()) == false
+                        && ss.checarLetras(cnpj.getText()) == false) {
+
+                    //INICIO DAS OPERAÇÕES DE CRUD
+                    p.setNome(Nome.getText());
+                    p.setDescricao(Descricao.getText());
+                    p.setEstoque(Integer.parseInt(Quantidade.getText()));
+                    p.setValorCompra(Double.parseDouble(Compra.getText()));
+                    p.setValorVenda(Double.parseDouble(Venda.getText()));
+                    p.setEstoqueMin(Integer.parseInt(min.getText()));
+                    p.setTamanho(Tamanho.getText());
+                    p.setCnpj_fornecedor(cnpj.getText());
+                    p.setData(data());
+
+                    switch (tipo.getSelectedIndex()) {
+                        case 1:
+                            p.setTipo("caixa");
+                            break;
+                        case 2:
+                            p.setTipo("unidade");
+                            break;
+                        case 3:
+                            p.setTipo("litro");
+                            break;
+                        case 4:
+                            p.setTipo("metro");
+                            break;
+                        case 5:
+                            p.setTipo("unidade");
+                            break;
+                        case 6:
+                            p.setTipo("outro");
+                            break;
+                    }//SWITCH
+                    
+                    try{//NOVO TRY PARA OPERAÇÕES DE BANCO
+                        
+                        mp.inserir(p);
+                        
+                        ModelHistoricop mh = new ModelHistoricop();
+                        Historicop h = new Historicop();
+                        h.setProduto(p.getNome());
+                        h.setMovimento(p.getEstoque());
+                        h.setData(data());
+                        mh.inserir(h);
+                        
+                        JOptionPane.showMessageDialog(this, "Produto cadastrado com sucesso.");
+                        
+                    }catch(Exception e){
+                        JOptionPane.showMessageDialog(this, e);
+                    }
+                    
+                }//IF LETRAS
+            }//IF DOS VAZIOS
+            
+        }//CATCH
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void cnpjActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cnpjActionPerformed
@@ -385,6 +370,33 @@ public class AdcProduto extends javax.swing.JDialog {
         // TODO add your handling code here:
         areaTexto();
     }//GEN-LAST:event_formWindowOpened
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        SuporteSistema ss = new SuporteSistema();
+        ModelFornecedor mf = new ModelFornecedor();
+
+        if (cnpj.getText().equals("")) {
+            JOptionPane.showMessageDialog(this, "Campo não pode ser vazio.");
+        } else {
+
+                try {
+                    Fornecedor f2 = mf.buscarCNPJ(cnpj.getText());
+
+                    JOptionPane.showMessageDialog(this, "Fornecedor já cadastrado.");
+
+                } catch (Exception e) {
+                    AdcFornecedor af = new AdcFornecedor();
+                    af.setModal(true);
+                    af.f.setCnpj_fornecedor(cnpj.getText());
+                    af.setVisible(true);
+                }
+
+            
+
+        }
+
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -431,6 +443,7 @@ public class AdcProduto extends javax.swing.JDialog {
     private javax.swing.JFormattedTextField Venda;
     private javax.swing.JFormattedTextField cnpj;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

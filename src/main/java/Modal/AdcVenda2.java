@@ -42,6 +42,7 @@ public class AdcVenda2 extends javax.swing.JDialog {
     int produtoQ[];
     Long[] pID = new Long[100];
     int[] pQ = new int[100];
+    double[] vu = new double[100];
     String[] pNome = new String[100];
     
     /**
@@ -108,7 +109,7 @@ public class AdcVenda2 extends javax.swing.JDialog {
         jLabel6 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         ValorU = new javax.swing.JTextField();
-        ValorT = new javax.swing.JTextField();
+        ValorTotal1 = new javax.swing.JTextField();
         jPanel5 = new javax.swing.JPanel();
         Selecionar = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
@@ -199,10 +200,10 @@ public class AdcVenda2 extends javax.swing.JDialog {
             }
         });
 
-        ValorT.setEnabled(false);
-        ValorT.addActionListener(new java.awt.event.ActionListener() {
+        ValorTotal1.setEnabled(false);
+        ValorTotal1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ValorTActionPerformed(evt);
+                ValorTotal1ActionPerformed(evt);
             }
         });
 
@@ -217,7 +218,7 @@ public class AdcVenda2 extends javax.swing.JDialog {
                 .addGap(18, 18, Short.MAX_VALUE)
                 .addComponent(jLabel6)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(ValorT, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(ValorTotal1, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(49, 49, 49))
         );
         jPanel4Layout.setVerticalGroup(
@@ -228,7 +229,7 @@ public class AdcVenda2 extends javax.swing.JDialog {
                     .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(ValorU, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(ValorT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(ValorTotal1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
@@ -571,7 +572,6 @@ public class AdcVenda2 extends javax.swing.JDialog {
         if (p.getNome().equals("")) {
             JOptionPane.showMessageDialog(this, "Nenhum produto adicionado.");
         } else {
-            l++;
             adcLinha();
             pID[l] = p.getId();
             pQ[l] = Integer.parseInt(Quantidade.getText());
@@ -579,7 +579,8 @@ public class AdcVenda2 extends javax.swing.JDialog {
             valorT = valorT + valor;
             ValorTotal.setText(Double.toString(valorT));
             Q = Q + (Integer.parseInt(Quantidade.getText()));
-
+            vu[l] = (Double.parseDouble(ValorU.getText()));
+            l++;
         }
     }//GEN-LAST:event_AdicionarActionPerformed
 
@@ -587,9 +588,9 @@ public class AdcVenda2 extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_ValorUActionPerformed
 
-    private void ValorTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ValorTActionPerformed
+    private void ValorTotal1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ValorTotal1ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_ValorTActionPerformed
+    }//GEN-LAST:event_ValorTotal1ActionPerformed
 
     private void SelecionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SelecionarActionPerformed
         // TODO add your handling code here:
@@ -611,7 +612,7 @@ public class AdcVenda2 extends javax.swing.JDialog {
                 }else{
                     ValorU.setText(Double.toString(p.getValorVenda()));
                     valor = (p.getValorVenda()) * (Integer.parseInt(Quantidade.getText()));
-                    ValorT.setText(Double.toString(valor));
+                    ValorTotal1.setText(Double.toString(valor));
                     Descricao.setText(p.getDescricao());
                 }
 
@@ -631,8 +632,21 @@ public class AdcVenda2 extends javax.swing.JDialog {
         int botao;
         botao = JOptionPane.showConfirmDialog(null, "Tem certeza que deseja apagar?", "Aviso", JOptionPane.YES_OPTION);
         if (botao == JOptionPane.YES_OPTION) {
+            
+            /*String a = (String) Tabela.getValueAt(Tabela.getSelectedRow(), 2);
+            String b = (String) Tabela.getValueAt(Tabela.getSelectedRow(), 3);
+            a.replaceAll(",",".");
+            b.replaceAll(",",".");*/
+            int idLocal = (int)Tabela.getValueAt(Tabela.getSelectedRow(), 0);
+            valorT = valorT - (vu[idLocal] * pQ[idLocal]);
+            //JOptionPane.showMessageDialog(this, valorT+","+idLocal+","+vu[idLocal]+","+pQ[idLocal]);
+            //ValorTotal.setText(Double.toString(valorT));
+            ValorTotal.setText(Double.toString(valorT));
+            Q = Q - pQ[idLocal];
             pQ[(int) Tabela.getValueAt(Tabela.getSelectedRow(), 0)] = 0;
             deleteLinha();
+            Tabela.removeRowSelectionInterval(Tabela.getSelectedRow(), Tabela.getSelectedRow());
+            //limparTabela(); montarTabela();
         }
     }//GEN-LAST:event_ExcluirActionPerformed
 
@@ -664,7 +678,9 @@ public class AdcVenda2 extends javax.swing.JDialog {
         if (ss.checarNumeros(Cliente.getText()) == false) {
             if (Cliente.getText().equals("")) {
                 JOptionPane.showMessageDialog(this, "Não há cliente.");
-            } else {
+            }else if(Tabela.getRowCount()<1){
+                JOptionPane.showMessageDialog(this, "Não há produto.");
+            }else {
                 if (Tabela.getRowCount() > 0) {
 
                     Venda v = new Venda();
@@ -699,7 +715,7 @@ public class AdcVenda2 extends javax.swing.JDialog {
                         
                         limparTabela();
                         l =0;
-                        for (int i = 0; i < 100; i++){
+                        for (int i = 0; i < Q; i++){
                             pNome[i]=null;
                             pQ[i]=0;
                             pID[i]= null;
@@ -795,8 +811,8 @@ public class AdcVenda2 extends javax.swing.JDialog {
     private javax.swing.JTable Tabela;
     private javax.swing.JTextField Troco;
     private javax.swing.JTextField ValorRecebido;
-    private javax.swing.JTextField ValorT;
     private javax.swing.JTextField ValorTotal;
+    private javax.swing.JTextField ValorTotal1;
     private javax.swing.JTextField ValorU;
     private javax.swing.JTextField Vendedor;
     private javax.swing.JButton jButton1;

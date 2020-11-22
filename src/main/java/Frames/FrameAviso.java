@@ -47,6 +47,7 @@ public class FrameAviso extends javax.swing.JInternalFrame {
             p = mp.buscarNome((String) tabela.getValueAt(i, 0));
             if (p.getEstoque() > p.getEstoqueMin()) {
                 L++;
+                Tabela.removeRowSelectionInterval(i, i);
             }
             }
         }catch(Exception e){

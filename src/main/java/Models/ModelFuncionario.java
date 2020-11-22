@@ -127,30 +127,37 @@ public class ModelFuncionario {
         }
     }
     
-    /*public boolean inserir(Funcionario f) {
-        ModelSenha ms = new ModelSenha();
-        EntityManager em = ModelFuncionario.openDB(); //CHAMAR O MODELO
-        try {
-            em.getTransaction().begin(); //INICIAR TRANSAÇÃO DE INFORMAÇÕES
-
-            em.persist(f); //MONTA O INSERT
-
-            if (ms.inserir() == true) { //CONFERIR SE A SENHA FOI CRIADA
-                em.getTransaction().commit(); //EXECUTA O QUE FOI MONTADO ACIMA
-                return true;
-
-            } else {
-                erro = ms.exibirErro();
-                return false;
-            }
-        } catch (Exception e) {
+    public boolean delete(Long id){
+        
+        EntityManager em = ModelCliente.openDB(); //CHAMAR O MODELO
+        
+        try{
+        ModelSenha ms = new ModelSenha();    
+            
+        Funcionario f = em.find(Funcionario.class, id);    
+            
+        em.getTransaction().begin(); //INICIAR TRANSAÇÃO DE INFORMAÇÕES
+        
+        if(ms.delete(id)==true){
+           
+            em.remove(f); //MONTA O INSERT
+        
+            em.getTransaction().commit(); //EXECUTA O QUE FOI MONTADO ACIMA
+        
+            return true;
+            
+        }
+        
+            return false;
+        
+        }catch(Exception e){
             em.getTransaction().rollback();
             erro = e;
             return false;
-        } finally {
+        }finally{
             em.close(); //FECHA A TRANSAÇÃO
         }
-    }*/
+    }
     
     public Exception exibirErro(){
         return erro;

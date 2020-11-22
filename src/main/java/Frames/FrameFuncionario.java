@@ -754,7 +754,7 @@ public class FrameFuncionario extends javax.swing.JInternalFrame {
             Confirmar.setEnabled(true);
             
             q = 1;
-            s1 = "email";
+            s1 = "data";
             
         }else{
             JOptionPane.showMessageDialog(this, "É preciso selecionar ao menos um tema de pesquisa.");
@@ -883,6 +883,7 @@ public class FrameFuncionario extends javax.swing.JInternalFrame {
                 Cargo.setSelectedIndex(0); Cargo.setEnabled(false);
                 Confirmar.setText("Pesquisar"); Confirmar.setEnabled(false);
                 semFiltro.setEnabled(true);
+                limparTabela(); montarTabela();
             }
             
         }
@@ -930,7 +931,7 @@ public class FrameFuncionario extends javax.swing.JInternalFrame {
             }else{
                 Cargo.setSelectedIndex(2);
             }
-            
+            limparTabela(); montarTabela();
             Confirmar.setText("Salvar"); Confirmar.setEnabled(true);
             semFiltro.setEnabled(false);
             
@@ -940,6 +941,22 @@ public class FrameFuncionario extends javax.swing.JInternalFrame {
 
     private void Editar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Editar1ActionPerformed
         // TODO add your handling code here:
+        
+        if(Tabela.getSelectedRowCount()>1){
+            JOptionPane.showMessageDialog(this, "Selecione apenas um cliente por vez para deleta-lo.");
+        }else if(Tabela.getSelectedRowCount()<1){
+            JOptionPane.showMessageDialog(this, "Nenhum cliente selecionado.");
+        }else{
+            Long n = (Long)Tabela.getValueAt(Tabela.getSelectedRow(), 0);
+            System.out.println(n);
+            int botao;
+        botao = JOptionPane.showConfirmDialog (null, "Tem certeza que deseja apagar?", "Aviso", JOptionPane.YES_OPTION);
+        if(botao == JOptionPane.YES_OPTION){
+           mf.delete(n);
+           limparTabela(); montarTabela();
+        }
+        }
+        
     }//GEN-LAST:event_Editar1ActionPerformed
 
     private void Editar2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Editar2ActionPerformed

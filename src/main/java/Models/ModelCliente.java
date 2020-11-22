@@ -134,6 +134,30 @@ public class ModelCliente {
         }
     }
     
+    public boolean delete(Long id){
+        
+        EntityManager emCliente = ModelCliente.openDB(); //CHAMAR O MODELO
+        
+        try{
+        Cliente c = emCliente.find(Cliente.class, id);    
+            
+        emCliente.getTransaction().begin(); //INICIAR TRANSAÇÃO DE INFORMAÇÕES
+        
+        emCliente.remove(c); //MONTA O INSERT
+        
+        emCliente.getTransaction().commit(); //EXECUTA O QUE FOI MONTADO ACIMA
+        
+        return true;
+        
+        }catch(Exception e){
+            emCliente.getTransaction().rollback();
+            erro = e;
+            return false;
+        }finally{
+            emCliente.close(); //FECHA A TRANSAÇÃO
+        }
+    }
+    
     public Exception exibirErro(){
         return erro;
     }

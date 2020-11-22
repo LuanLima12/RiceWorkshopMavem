@@ -79,6 +79,19 @@ public class ModelFornecedor {
         }
     }
     
+    public Fornecedor buscarCNPJ(String cnpj){
+        EntityManager emFornecedor = ModelFornecedor.openDB();
+        try{
+            return (Fornecedor) emFornecedor.createQuery("SELECT f FROM Fornecedor f WHERE f.cnpj_fornecedor = '"+cnpj+"'").getSingleResult();
+        }catch(Exception e){
+            emFornecedor.getTransaction().rollback();
+            erro = e;
+            return null;
+        }finally{
+            emFornecedor.close();
+        }
+    }
+    
     public List<Fornecedor> listaFornecedores(){
         EntityManager em = ModelCliente.openDB();
         try{
@@ -103,6 +116,30 @@ public class ModelFornecedor {
             return em.createQuery("SELECT f FROM Fornecedor f WHERE f."+selecionado1+" = '"+conteudo1+"' AND f."+selecionado2+" = '"+conteudo2+"'").getResultList();
         }finally{
             em.close();
+        }
+    }
+    
+    public boolean delete(Long id){
+        
+        EntityManager em = ModelCliente.openDB(); //CHAMAR O MODELO
+        
+        try{
+        Fornecedor f = em.find(Fornecedor.class, id);    
+            
+        em.getTransaction().begin(); //INICIAR TRANSAÇÃO DE INFORMAÇÕES
+        
+        em.remove(f); //MONTA O INSERT
+        
+        em.getTransaction().commit(); //EXECUTA O QUE FOI MONTADO ACIMA
+        
+        return true;
+        
+        }catch(Exception e){
+            em.getTransaction().rollback();
+            erro = e;
+            return false;
+        }finally{
+            em.close(); //FECHA A TRANSAÇÃO
         }
     }
     

@@ -141,12 +141,12 @@ public class Login extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
 
-        FrameMenu menu = new FrameMenu();
+        /*FrameMenu menu = new FrameMenu();
         menu.setVisible(true);
         menu.setExtendedState(MAXIMIZED_BOTH);
-        this.dispose();
+        this.dispose();*/
         
-        /*
+        
         if (Usuario.getText().equals("IAMTHEBOSS")) {
             FrameMenu menu = new FrameMenu();
             menu.logado = mf.buscar(Long.parseLong("1"));
@@ -203,7 +203,7 @@ public class Login extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(this, "Usuário inexistente.");
                 }
             }
-        }*/
+        }
 
         
     }//GEN-LAST:event_jButton1ActionPerformed

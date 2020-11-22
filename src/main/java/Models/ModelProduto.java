@@ -129,6 +129,30 @@ public class ModelProduto {
         }
     }
     
+    public boolean delete(Long id){
+        
+        EntityManager em = ModelCliente.openDB(); //CHAMAR O MODELO
+        
+        try{
+        Produto p = em.find(Produto.class, id);    
+            
+        em.getTransaction().begin(); //INICIAR TRANSAÇÃO DE INFORMAÇÕES
+        
+        em.remove(p); //MONTA O INSERT
+        
+        em.getTransaction().commit(); //EXECUTA O QUE FOI MONTADO ACIMA
+        
+        return true;
+        
+        }catch(Exception e){
+            em.getTransaction().rollback();
+            erro = e;
+            return false;
+        }finally{
+            em.close(); //FECHA A TRANSAÇÃO
+        }
+    }
+    
     public Exception exibirErro(){
         return erro;
     }

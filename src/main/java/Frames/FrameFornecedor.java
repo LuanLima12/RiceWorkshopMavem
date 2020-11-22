@@ -703,6 +703,7 @@ public class FrameFornecedor extends javax.swing.JInternalFrame {
                 CNPJ.setText(null); CNPJ.setEnabled(false);
                 Confirmar.setText("Pesquisar"); Confirmar.setEnabled(false);
                 semFiltro.setEnabled(true);
+                limparTabela(); montarTabela();
             }
 
         }
@@ -754,13 +755,29 @@ public class FrameFornecedor extends javax.swing.JInternalFrame {
             Data.setText(f.getData()); Data.setEnabled(false);
             Confirmar.setText("Salvar"); Confirmar.setEnabled(true);
             semFiltro.setEnabled(false);
-            
+            limparTabela(); montarTabela();
         }
         
     }//GEN-LAST:event_Editar1ActionPerformed
 
     private void ApagarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ApagarActionPerformed
         // TODO add your handling code here:
+        
+        if(Tabela.getSelectedRowCount()>1){
+            JOptionPane.showMessageDialog(this, "Selecione apenas um cliente por vez para deleta-lo.");
+        }else if(Tabela.getSelectedRowCount()<1){
+            JOptionPane.showMessageDialog(this, "Nenhum cliente selecionado.");
+        }else{
+            Long n = (Long)Tabela.getValueAt(Tabela.getSelectedRow(), 0);
+            System.out.println(n);
+            int botao;
+        botao = JOptionPane.showConfirmDialog (null, "Tem certeza que deseja apagar?", "Aviso", JOptionPane.YES_OPTION);
+        if(botao == JOptionPane.YES_OPTION){
+           mf.delete(n);
+           limparTabela(); montarTabela();
+        }
+        }
+        
     }//GEN-LAST:event_ApagarActionPerformed
 
     private void CadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CadastrarActionPerformed

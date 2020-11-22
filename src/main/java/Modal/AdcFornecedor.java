@@ -19,11 +19,12 @@ public class AdcFornecedor extends javax.swing.JDialog {
 
     Calendar date = Calendar.getInstance();
     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-    
+    Fornecedor f = new Fornecedor();
+
     private String data() {
         return (sdf.format(date.getTime()));
     }
-    
+
     /**
      * Creates new form AdcFornecedor
      */
@@ -55,6 +56,11 @@ public class AdcFornecedor extends javax.swing.JDialog {
         setTitle("Cadastrar fornecedor");
         setModal(true);
         setResizable(false);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
         jLabel5.setText("Cidade:");
 
@@ -171,24 +177,37 @@ public class AdcFornecedor extends javax.swing.JDialog {
         // TODO add your handling code here:
         Fornecedor f = new Fornecedor();
         ModelFornecedor mf = new ModelFornecedor();
-
-        f.setCnpj_fornecedor(CNPJ.getText());
-        f.setRazao_social(Razao.getText());
-        f.setCidade(Cidade.getText());
-        f.setEndereco(Endereco.getText());
-        f.setData(data());
-
-        if(mf.inserir(f)==true){
-            JOptionPane.showMessageDialog(this, "Fornecedor cadastrado com sucesso!");
-
-            Razao.setText(null);
-            Endereco.setText(null);
-            Cidade.setText(null);
-            CNPJ.setText(null);
+        if (CNPJ.getText().equals("") || Razao.getText().equals("") || Cidade.getText().equals("") || 
+                Endereco.getText().equals("")) {
+            JOptionPane.showMessageDialog(this, "Não devem haver campos em branco");
         }else{
-            JOptionPane.showMessageDialog(this, mf.exibirErro());
+            f.setCnpj_fornecedor(CNPJ.getText());
+            f.setRazao_social(Razao.getText());
+            f.setCidade(Cidade.getText());
+            f.setEndereco(Endereco.getText());
+            f.setData(data());
+
+            if (mf.inserir(f) == true) {
+                JOptionPane.showMessageDialog(this, "Fornecedor cadastrado com sucesso!");
+
+                Razao.setText(null);
+                Endereco.setText(null);
+                Cidade.setText(null);
+                CNPJ.setText(null);
+            } else {
+                JOptionPane.showMessageDialog(this, mf.exibirErro());
+            }
         }
     }//GEN-LAST:event_CadastrarActionPerformed
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        // TODO add your handling code here:
+        if (f.getCnpj_fornecedor().equals("")) {
+
+        } else {
+            CNPJ.setText(f.getCnpj_fornecedor());
+        }
+    }//GEN-LAST:event_formWindowOpened
 
     /**
      * @param args the command line arguments

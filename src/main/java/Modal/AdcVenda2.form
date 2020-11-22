@@ -239,7 +239,7 @@
                           <EmptySpace type="separate" max="32767" attributes="0"/>
                           <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="ValorT" min="-2" pref="69" max="-2" attributes="0"/>
+                          <Component id="ValorTotal1" min="-2" pref="69" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="49" max="-2" attributes="0"/>
                       </Group>
                   </Group>
@@ -252,7 +252,7 @@
                               <Component id="jLabel4" alignment="3" min="-2" pref="22" max="-2" attributes="0"/>
                               <Component id="ValorU" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="jLabel6" alignment="3" min="-2" pref="22" max="-2" attributes="0"/>
-                              <Component id="ValorT" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="ValorTotal1" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                       </Group>
@@ -278,12 +278,12 @@
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ValorUActionPerformed"/>
                   </Events>
                 </Component>
-                <Component class="javax.swing.JTextField" name="ValorT">
+                <Component class="javax.swing.JTextField" name="ValorTotal1">
                   <Properties>
                     <Property name="enabled" type="boolean" value="false"/>
                   </Properties>
                   <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ValorTActionPerformed"/>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ValorTotal1ActionPerformed"/>
                   </Events>
                 </Component>
               </SubComponents>
