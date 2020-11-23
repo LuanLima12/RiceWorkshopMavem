@@ -187,7 +187,11 @@ public class Login extends javax.swing.JFrame {
         
         if (Usuario.getText().equals("IAMTHEBOSS")) {
             FrameMenu menu = new FrameMenu();
-            menu.logado = mf.buscar(Long.parseLong("1"));
+            try{
+                menu.logado = mf.buscar(Long.parseLong("1"));
+            }catch(Exception e){
+                JOptionPane.showMessageDialog(this, "Logado como administrador!");
+            }
             menu.setVisible(true);
             menu.setExtendedState(MAXIMIZED_BOTH);
             this.dispose();
