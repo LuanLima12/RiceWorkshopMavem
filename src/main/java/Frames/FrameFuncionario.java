@@ -31,6 +31,7 @@ public class FrameFuncionario extends javax.swing.JInternalFrame {
 
     /**
      * Creates new form FrameFuncionario
+     * @return 
      */
     
     public int getQ() {

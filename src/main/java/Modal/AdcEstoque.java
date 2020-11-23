@@ -28,6 +28,7 @@ public class AdcEstoque extends javax.swing.JDialog {
     
     /**
      * Creates new form AdcEstoque
+     * @param parent
      * @param modal
      */
     public AdcEstoque(java.awt.Frame parent, boolean modal) {

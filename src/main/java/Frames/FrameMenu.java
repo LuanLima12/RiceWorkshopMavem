@@ -243,8 +243,16 @@ public class FrameMenu extends javax.swing.JFrame {
     private void RH2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RH2ActionPerformed
         // TODO add your handling code here:
         try {
-            ff.isVisible();
-            ff.toFront();
+            if (ff.isVisible() == true) {
+                ff.toFront();
+            } else {
+                
+                ff = new FrameFuncionario();
+                //ff.logado = this.logado;
+                Desktop.add(ff);
+                ff.show();
+            }
+
         } catch (Exception e) {
             ff = new FrameFuncionario();
             //ff.logado = this.logado;
@@ -258,8 +266,15 @@ public class FrameMenu extends javax.swing.JFrame {
         // TODO add your handling code here:
 
         try {
-            fc.isVisible();
-            fc.toFront();
+
+            if (fc.isVisible() == true) {
+                fc.toFront();
+            } else {
+                fc = new FrameClientes();
+                //fv.logado = this.logado;
+                Desktop.add(fc);
+                fc.show();
+            }
         } catch (Exception e) {
             fc = new FrameClientes();
             //fv.logado = this.logado;
@@ -273,8 +288,14 @@ public class FrameMenu extends javax.swing.JFrame {
         //openForm(new FrameVenda());
 
         try {
-            fv.isVisible();
-            fv.toFront();
+            if (fv.isVisible() == true) {
+                fv.toFront();
+            } else {
+                fv = new FrameVenda();
+                //fv.logado = this.logado;
+                Desktop.add(fv);
+                fv.show();
+            }
         } catch (Exception e) {
             fv = new FrameVenda();
             fv.logado = this.logado;
@@ -287,8 +308,14 @@ public class FrameMenu extends javax.swing.JFrame {
         // TODO add your handling code here:
 
         try {
-            fp.isVisible();
-            fp.toFront();
+            if (fp.isVisible() == true) {
+                fp.toFront();
+            } else {
+                fp = new FrameProduto();
+                //fp.logado = this.logado;
+                Desktop.add(fp);
+                fp.show();
+            }
         } catch (Exception e) {
             fp = new FrameProduto();
             //fp.logado = this.logado;
@@ -301,8 +328,14 @@ public class FrameMenu extends javax.swing.JFrame {
         // TODO add your handling code here:
 
         try {
-            ffo.isVisible();
-            ffo.toFront();
+            if (ffo.isVisible() == true) {
+                ffo.toFront();
+            } else {
+                ffo = new FrameFornecedor();
+                //fv.logado = this.logado;
+                Desktop.add(ffo);
+                ffo.show();
+            }
         } catch (Exception e) {
             ffo = new FrameFornecedor();
             //fv.logado = this.logado;
