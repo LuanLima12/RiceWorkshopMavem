@@ -24,7 +24,11 @@ public class FrameMenu extends javax.swing.JFrame {
     ModelProduto mp = new ModelProduto();
     Funcionario logado = new Funcionario();
     int R = 0; //cuidar do array
-    
+    private FrameFuncionario ff;
+    private FrameClientes fc;
+    private FrameFornecedor ffo;
+    private FrameVenda fv;
+    private FrameProduto fp;
 
     /**
      * Creates new form FrameMenu
@@ -48,7 +52,7 @@ public class FrameMenu extends javax.swing.JFrame {
         }
 
     }
-    
+
     /*public void todosProdutos() {
         try {
             for (Produto p : mp.listaProdutos()) {
@@ -64,9 +68,8 @@ public class FrameMenu extends javax.swing.JFrame {
         }
 
     }*/
-
     public void aviso() {
-        if (todosProdutos()==true) {
+        if (todosProdutos() == true) {
 
             FrameAviso fa = new FrameAviso();
             Desktop.add(fa);
@@ -239,31 +242,73 @@ public class FrameMenu extends javax.swing.JFrame {
 
     private void RH2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RH2ActionPerformed
         // TODO add your handling code here:
-        openForm(new FrameFuncionario());
+        try {
+            ff.isVisible();
+            ff.toFront();
+        } catch (Exception e) {
+            ff = new FrameFuncionario();
+            //ff.logado = this.logado;
+            Desktop.add(ff);
+            ff.show();
+        }
+
     }//GEN-LAST:event_RH2ActionPerformed
 
     private void Cliente2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Cliente2ActionPerformed
         // TODO add your handling code here:
-        openForm(new FrameClientes());
+
+        try {
+            fc.isVisible();
+            fc.toFront();
+        } catch (Exception e) {
+            fc = new FrameClientes();
+            //fv.logado = this.logado;
+            Desktop.add(fc);
+            fc.show();
+        }
     }//GEN-LAST:event_Cliente2ActionPerformed
 
     private void Vendas2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Vendas2ActionPerformed
         // TODO add your handling code here:
         //openForm(new FrameVenda());
-        FrameVenda fv = new FrameVenda();
-        fv.logado = this.logado;
-        Desktop.add(fv);
-        fv.show();
+
+        try {
+            fv.isVisible();
+            fv.toFront();
+        } catch (Exception e) {
+            fv = new FrameVenda();
+            fv.logado = this.logado;
+            Desktop.add(fv);
+            fv.show();
+        }
     }//GEN-LAST:event_Vendas2ActionPerformed
 
     private void Produtos2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Produtos2ActionPerformed
         // TODO add your handling code here:
-        openForm(new FrameProduto());
+
+        try {
+            fp.isVisible();
+            fp.toFront();
+        } catch (Exception e) {
+            fp = new FrameProduto();
+            //fp.logado = this.logado;
+            Desktop.add(fp);
+            fp.show();
+        }
     }//GEN-LAST:event_Produtos2ActionPerformed
 
     private void Fornecedores2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Fornecedores2ActionPerformed
         // TODO add your handling code here:
-        openForm(new FrameFornecedor());
+
+        try {
+            ffo.isVisible();
+            ffo.toFront();
+        } catch (Exception e) {
+            ffo = new FrameFornecedor();
+            //fv.logado = this.logado;
+            Desktop.add(ffo);
+            ffo.show();
+        }
     }//GEN-LAST:event_Fornecedores2ActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
