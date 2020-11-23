@@ -144,6 +144,8 @@ public class AdcVenda2 extends javax.swing.JDialog {
             }
         });
 
+        jPanel1.setBackground(new java.awt.Color(114, 172, 254));
+
         jLabel2.setText("Cliente");
 
         Vendedor.setEnabled(false);
@@ -161,8 +163,10 @@ public class AdcVenda2 extends javax.swing.JDialog {
             }
         });
 
+        jButton1.setBackground(new java.awt.Color(204, 204, 204));
         jButton1.setText("Cadastrar");
-        jButton1.setToolTipText("Cadastrar cliente.");
+        jButton1.setToolTipText("Cadastrar novo cliente");
+        jButton1.setBorderPainted(false);
         jButton1.setPreferredSize(new java.awt.Dimension(113, 23));
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -170,6 +174,7 @@ public class AdcVenda2 extends javax.swing.JDialog {
             }
         });
 
+        jPanel2.setBackground(new java.awt.Color(21, 116, 253));
         jPanel2.setToolTipText("Adicione o produto e a quantidade e receba valor unitário, total e a descrição.");
 
         Descricao.setEditable(false);
@@ -178,8 +183,10 @@ public class AdcVenda2 extends javax.swing.JDialog {
         Descricao.setEnabled(false);
         jScrollPane1.setViewportView(Descricao);
 
+        Adicionar.setBackground(new java.awt.Color(153, 153, 153));
         Adicionar.setText(" Adicionar à lista");
-        Adicionar.setToolTipText("Adicionar produto à lista.");
+        Adicionar.setToolTipText("Adicionar produto à lista");
+        Adicionar.setBorderPainted(false);
         Adicionar.setPreferredSize(new java.awt.Dimension(113, 23));
         Adicionar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -187,6 +194,7 @@ public class AdcVenda2 extends javax.swing.JDialog {
             }
         });
 
+        jPanel4.setBackground(new java.awt.Color(21, 116, 253));
         jPanel4.setToolTipText("Adicione o produto e a quantidade e receba valor unitário, total e a descrição.");
 
         jLabel6.setText("Valor total do produto");
@@ -233,10 +241,13 @@ public class AdcVenda2 extends javax.swing.JDialog {
                 .addContainerGap())
         );
 
+        jPanel5.setBackground(new java.awt.Color(21, 116, 253));
         jPanel5.setToolTipText("Adicione o produto e a quantidade e receba valor unitário, total e a descrição.");
 
+        Selecionar.setBackground(new java.awt.Color(153, 153, 153));
         Selecionar.setText("OK");
-        Selecionar.setToolTipText("Selecionar produto.");
+        Selecionar.setToolTipText("Selecionar produto");
+        Selecionar.setBorderPainted(false);
         Selecionar.setPreferredSize(new java.awt.Dimension(113, 23));
         Selecionar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -322,8 +333,12 @@ public class AdcVenda2 extends javax.swing.JDialog {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        jPanel3.setBackground(new java.awt.Color(114, 172, 254));
+
+        Excluir.setBackground(new java.awt.Color(255, 102, 102));
         Excluir.setText("Excluir da lista");
-        Excluir.setToolTipText("Exluir produto da lista.");
+        Excluir.setToolTipText("Exluir produto da lista");
+        Excluir.setBorderPainted(false);
         Excluir.setPreferredSize(new java.awt.Dimension(113, 23));
         Excluir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -375,8 +390,10 @@ public class AdcVenda2 extends javax.swing.JDialog {
             }
         });
 
+        Calcular.setBackground(new java.awt.Color(204, 204, 204));
         Calcular.setText("Calcular");
-        Calcular.setToolTipText("Exluir produto da lista.");
+        Calcular.setToolTipText("Calcular troco");
+        Calcular.setBorderPainted(false);
         Calcular.setPreferredSize(new java.awt.Dimension(113, 23));
         Calcular.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -435,16 +452,20 @@ public class AdcVenda2 extends javax.swing.JDialog {
                 .addContainerGap())
         );
 
+        Confirmar.setBackground(new java.awt.Color(153, 153, 153));
         Confirmar.setText("Confirmar venda");
-        Confirmar.setToolTipText("Confirmar venda.");
+        Confirmar.setToolTipText("Confirmar venda");
+        Confirmar.setBorderPainted(false);
         Confirmar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ConfirmarActionPerformed(evt);
             }
         });
 
+        Confirmar1.setBackground(new java.awt.Color(204, 204, 204));
         Confirmar1.setText("Cancelar");
-        Confirmar1.setToolTipText("Confirmar venda.");
+        Confirmar1.setToolTipText("Cancelar venda");
+        Confirmar1.setBorderPainted(false);
         Confirmar1.setPreferredSize(new java.awt.Dimension(113, 23));
         Confirmar1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -457,9 +478,6 @@ public class AdcVenda2 extends javax.swing.JDialog {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -474,10 +492,16 @@ public class AdcVenda2 extends javax.swing.JDialog {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(Confirmar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(Confirmar)))
+                        .addComponent(Confirmar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(0, 20, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addComponent(Confirmar))
+                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -504,17 +528,11 @@ public class AdcVenda2 extends javax.swing.JDialog {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -741,7 +759,11 @@ public class AdcVenda2 extends javax.swing.JDialog {
 
     private void Confirmar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Confirmar1ActionPerformed
         // TODO add your handling code here:
-        this.dispose();
+        int botao;
+        botao = JOptionPane.showConfirmDialog(null, "Tem certeza que deseja sair?", "Aviso", JOptionPane.YES_OPTION);
+        if (botao == JOptionPane.YES_OPTION) {
+            this.dispose();
+        }
     }//GEN-LAST:event_Confirmar1ActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened

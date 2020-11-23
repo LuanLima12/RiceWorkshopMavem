@@ -83,6 +83,8 @@ public class AdcProduto extends javax.swing.JDialog {
             }
         });
 
+        jPanel1.setBackground(new java.awt.Color(114, 172, 254));
+
         Nome.setToolTipText("Nome do produto.");
 
         jLabel8.setText("CNPJ fonecedor:");
@@ -100,7 +102,9 @@ public class AdcProduto extends javax.swing.JDialog {
         tipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "[ Selecione uma das opções ]", "Caixa", "Litro", "Metro", "Unidade", "Outro" }));
         tipo.setToolTipText("Este campo define se o produto será vendido em unidade, caixa, entre outros.");
 
+        Cancelar.setBackground(new java.awt.Color(204, 204, 204));
         Cancelar.setText("Cancelar");
+        Cancelar.setBorderPainted(false);
         Cancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 CancelarActionPerformed(evt);
@@ -116,7 +120,9 @@ public class AdcProduto extends javax.swing.JDialog {
         jLabel6.setText("Valor Venda:");
         jLabel6.setToolTipText("Preço pelo qual irá vender o produto.");
 
+        jButton1.setBackground(new java.awt.Color(153, 153, 153));
         jButton1.setText("Cadastrar");
+        jButton1.setBorderPainted(false);
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -144,7 +150,9 @@ public class AdcProduto extends javax.swing.JDialog {
         Descricao.setToolTipText("");
         jScrollPane1.setViewportView(Descricao);
 
+        jButton2.setBackground(new java.awt.Color(153, 153, 153));
         jButton2.setText("+");
+        jButton2.setToolTipText("Adicionar fornecedor");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
@@ -250,17 +258,11 @@ public class AdcProduto extends javax.swing.JDialog {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();

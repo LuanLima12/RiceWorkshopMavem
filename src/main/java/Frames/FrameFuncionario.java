@@ -153,10 +153,11 @@ public class FrameFuncionario extends javax.swing.JInternalFrame {
         semFiltro = new javax.swing.JButton();
         jLabel8 = new javax.swing.JLabel();
         Fone = new javax.swing.JFormattedTextField();
+        jPanel4 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         Tabela = new javax.swing.JTable();
-        Editar = new javax.swing.JButton();
         Editar1 = new javax.swing.JButton();
+        Editar = new javax.swing.JButton();
         Editar2 = new javax.swing.JButton();
 
         jToggleButton1.setText("jToggleButton1");
@@ -184,14 +185,16 @@ public class FrameFuncionario extends javax.swing.JInternalFrame {
             }
         });
 
-        jPanel1.setBackground(new java.awt.Color(153, 153, 255));
+        jPanel3.setBackground(new java.awt.Color(114, 172, 254));
+
+        jPanel1.setBackground(new java.awt.Color(21, 116, 253));
         jPanel1.setToolTipText("Escolha temas para pesquisar.\n\"Data\" pode ser combinado com qualquer outro.");
 
-        Nome1.setBackground(new java.awt.Color(153, 153, 255));
+        Nome1.setBackground(new java.awt.Color(21, 116, 253));
         buttonGroup1.add(Nome1);
         Nome1.setText("Nome");
 
-        Cargo1.setBackground(new java.awt.Color(153, 153, 255));
+        Cargo1.setBackground(new java.awt.Color(21, 116, 253));
         buttonGroup1.add(Cargo1);
         Cargo1.setText("Cargo");
         Cargo1.addActionListener(new java.awt.event.ActionListener() {
@@ -200,7 +203,7 @@ public class FrameFuncionario extends javax.swing.JInternalFrame {
             }
         });
 
-        Email1.setBackground(new java.awt.Color(153, 153, 255));
+        Email1.setBackground(new java.awt.Color(21, 116, 253));
         buttonGroup1.add(Email1);
         Email1.setText("E-Mail");
         Email1.addActionListener(new java.awt.event.ActionListener() {
@@ -209,7 +212,7 @@ public class FrameFuncionario extends javax.swing.JInternalFrame {
             }
         });
 
-        CPF1.setBackground(new java.awt.Color(153, 153, 255));
+        CPF1.setBackground(new java.awt.Color(21, 116, 253));
         buttonGroup1.add(CPF1);
         CPF1.setText("CPF");
         CPF1.addActionListener(new java.awt.event.ActionListener() {
@@ -218,18 +221,20 @@ public class FrameFuncionario extends javax.swing.JInternalFrame {
             }
         });
 
-        ID1.setBackground(new java.awt.Color(153, 153, 255));
+        ID1.setBackground(new java.awt.Color(21, 116, 253));
         buttonGroup1.add(ID1);
         ID1.setText("ID");
 
+        jButton1.setBackground(new java.awt.Color(153, 153, 153));
         jButton1.setText("OK");
+        jButton1.setBorderPainted(false);
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
 
-        RG1.setBackground(new java.awt.Color(153, 153, 255));
+        RG1.setBackground(new java.awt.Color(21, 116, 253));
         buttonGroup1.add(RG1);
         RG1.setText("RG");
         RG1.addActionListener(new java.awt.event.ActionListener() {
@@ -238,7 +243,7 @@ public class FrameFuncionario extends javax.swing.JInternalFrame {
             }
         });
 
-        Data1.setBackground(new java.awt.Color(153, 153, 255));
+        Data1.setBackground(new java.awt.Color(21, 116, 253));
         Data1.setText("Data");
         Data1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -294,6 +299,8 @@ public class FrameFuncionario extends javax.swing.JInternalFrame {
                 .addContainerGap())
         );
 
+        jPanel2.setBackground(new java.awt.Color(114, 172, 254));
+
         jLabel2.setText("Nome");
 
         ID.setEnabled(false);
@@ -337,8 +344,10 @@ public class FrameFuncionario extends javax.swing.JInternalFrame {
         }
         CPF.setEnabled(false);
 
+        Confirmar.setBackground(new java.awt.Color(204, 204, 204));
         Confirmar.setText("Pesquisar");
         Confirmar.setAutoscrolls(true);
+        Confirmar.setBorderPainted(false);
         Confirmar.setEnabled(false);
         Confirmar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -353,8 +362,10 @@ public class FrameFuncionario extends javax.swing.JInternalFrame {
         }
         RG.setEnabled(false);
 
+        semFiltro.setBackground(new java.awt.Color(153, 153, 153));
         semFiltro.setText("Sem Filtro");
         semFiltro.setToolTipText("Não usar filtros de pesquisa.");
+        semFiltro.setBorderPainted(false);
         semFiltro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 semFiltroActionPerformed(evt);
@@ -458,11 +469,11 @@ public class FrameFuncionario extends javax.swing.JInternalFrame {
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap()
+                .addContainerGap(217, Short.MAX_VALUE)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addContainerGap(217, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -473,6 +484,8 @@ public class FrameFuncionario extends javax.swing.JInternalFrame {
                     .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
+
+        jPanel4.setBackground(new java.awt.Color(114, 172, 254));
 
         Tabela.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -492,63 +505,78 @@ public class FrameFuncionario extends javax.swing.JInternalFrame {
         });
         jScrollPane1.setViewportView(Tabela);
 
-        Editar.setText("Editar");
-        Editar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                EditarActionPerformed(evt);
-            }
-        });
-
+        Editar1.setBackground(new java.awt.Color(255, 102, 102));
         Editar1.setText("Apagar");
+        Editar1.setBorderPainted(false);
         Editar1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 Editar1ActionPerformed(evt);
             }
         });
 
+        Editar.setBackground(new java.awt.Color(204, 204, 204));
+        Editar.setText("Editar");
+        Editar.setBorderPainted(false);
+        Editar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                EditarActionPerformed(evt);
+            }
+        });
+
+        Editar2.setBackground(new java.awt.Color(153, 153, 153));
         Editar2.setText("Cadastrar");
+        Editar2.setBorderPainted(false);
         Editar2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 Editar2ActionPerformed(evt);
             }
         });
 
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(Editar)
+                    .addComponent(Editar1)
+                    .addComponent(Editar2))
+                .addContainerGap())
+        );
+
+        jPanel4Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {Editar, Editar1, Editar2});
+
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addComponent(Editar2, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 63, Short.MAX_VALUE)
+                        .addComponent(Editar, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 61, Short.MAX_VALUE)
+                        .addComponent(Editar1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 770, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(Editar)
-                    .addComponent(Editar1)
-                    .addComponent(Editar2))
-                .addGap(16, 16, 16))
+            .addComponent(jPanel4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
-
-        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {Editar, Editar1, Editar2});
-
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(Editar2, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(62, 62, 62)
-                        .addComponent(Editar, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(62, 62, 62)
-                        .addComponent(Editar1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap())
+                .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         setBounds(0, 0, 899, 495);
@@ -1002,6 +1030,7 @@ public class FrameFuncionario extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JToggleButton jToggleButton1;
     private javax.swing.JButton semFiltro;

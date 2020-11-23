@@ -108,11 +108,12 @@ public class FrameFornecedor extends javax.swing.JInternalFrame {
         jLabel6 = new javax.swing.JLabel();
         Cidade = new javax.swing.JFormattedTextField();
         semFiltro = new javax.swing.JButton();
+        jPanel4 = new javax.swing.JPanel();
+        Cadastrar = new javax.swing.JButton();
+        Apagar = new javax.swing.JButton();
+        Editar1 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         Tabela = new javax.swing.JTable();
-        Editar1 = new javax.swing.JButton();
-        Apagar = new javax.swing.JButton();
-        Cadastrar = new javax.swing.JButton();
 
         setClosable(true);
         setIconifiable(true);
@@ -137,15 +138,16 @@ public class FrameFornecedor extends javax.swing.JInternalFrame {
             }
         });
 
+        jPanel3.setBackground(new java.awt.Color(114, 172, 254));
         jPanel3.setPreferredSize(new java.awt.Dimension(508, 181));
 
-        jPanel1.setBackground(new java.awt.Color(153, 153, 255));
+        jPanel1.setBackground(new java.awt.Color(21, 116, 253));
         jPanel1.setToolTipText("Escolha temas para pesquisar.\n\"Data\" pode ser combinado com qualquer outro.");
 
-        razao_social1.setBackground(new java.awt.Color(153, 153, 255));
+        razao_social1.setBackground(new java.awt.Color(21, 116, 253));
         razao_social1.setText("Razao");
 
-        cidade1.setBackground(new java.awt.Color(153, 153, 255));
+        cidade1.setBackground(new java.awt.Color(21, 116, 253));
         cidade1.setText("Cidade");
         cidade1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -153,7 +155,7 @@ public class FrameFornecedor extends javax.swing.JInternalFrame {
             }
         });
 
-        CNPJ1.setBackground(new java.awt.Color(153, 153, 255));
+        CNPJ1.setBackground(new java.awt.Color(21, 116, 253));
         CNPJ1.setText("CNPJ");
         CNPJ1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -161,17 +163,20 @@ public class FrameFornecedor extends javax.swing.JInternalFrame {
             }
         });
 
-        ID1.setBackground(new java.awt.Color(153, 153, 255));
+        ID1.setBackground(new java.awt.Color(21, 116, 253));
         ID1.setText("ID");
 
+        jButton1.setBackground(new java.awt.Color(153, 153, 153));
         jButton1.setText("OK");
+        jButton1.setAutoscrolls(true);
+        jButton1.setBorderPainted(false);
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
 
-        Data1.setBackground(new java.awt.Color(153, 153, 255));
+        Data1.setBackground(new java.awt.Color(21, 116, 253));
         Data1.setText("Data");
         Data1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -179,7 +184,7 @@ public class FrameFornecedor extends javax.swing.JInternalFrame {
             }
         });
 
-        endereco1.setBackground(new java.awt.Color(153, 153, 255));
+        endereco1.setBackground(new java.awt.Color(21, 116, 253));
         endereco1.setText("Endereço");
         endereco1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -234,6 +239,8 @@ public class FrameFornecedor extends javax.swing.JInternalFrame {
                 .addContainerGap(14, Short.MAX_VALUE))
         );
 
+        jPanel2.setBackground(new java.awt.Color(114, 172, 254));
+
         jLabel2.setText("Razão Social");
 
         ID.setEnabled(false);
@@ -262,8 +269,10 @@ public class FrameFornecedor extends javax.swing.JInternalFrame {
 
         jLabel4.setText("Endereço");
 
+        Confirmar.setBackground(new java.awt.Color(204, 204, 204));
         Confirmar.setText("Pesquisar");
         Confirmar.setAutoscrolls(true);
+        Confirmar.setBorderPainted(false);
         Confirmar.setEnabled(false);
         Confirmar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -282,8 +291,11 @@ public class FrameFornecedor extends javax.swing.JInternalFrame {
 
         Cidade.setEnabled(false);
 
+        semFiltro.setBackground(new java.awt.Color(153, 153, 153));
         semFiltro.setText("Sem Filtro");
         semFiltro.setToolTipText("Não usar filtros de pesquisa.");
+        semFiltro.setAutoscrolls(true);
+        semFiltro.setBorderPainted(false);
         semFiltro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 semFiltroActionPerformed(evt);
@@ -367,11 +379,11 @@ public class FrameFornecedor extends javax.swing.JInternalFrame {
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap()
+                .addContainerGap(149, Short.MAX_VALUE)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addContainerGap(136, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -380,8 +392,40 @@ public class FrameFornecedor extends javax.swing.JInternalFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
+
+        jPanel4.setBackground(new java.awt.Color(114, 172, 254));
+
+        Cadastrar.setBackground(new java.awt.Color(153, 153, 153));
+        Cadastrar.setText("Cadastrar");
+        Cadastrar.setAutoscrolls(true);
+        Cadastrar.setBorderPainted(false);
+        Cadastrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CadastrarActionPerformed(evt);
+            }
+        });
+
+        Apagar.setBackground(new java.awt.Color(255, 102, 102));
+        Apagar.setText("Apagar");
+        Apagar.setAutoscrolls(true);
+        Apagar.setBorderPainted(false);
+        Apagar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ApagarActionPerformed(evt);
+            }
+        });
+
+        Editar1.setBackground(new java.awt.Color(204, 204, 204));
+        Editar1.setText("Editar");
+        Editar1.setAutoscrolls(true);
+        Editar1.setBorderPainted(false);
+        Editar1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Editar1ActionPerformed(evt);
+            }
+        });
 
         Tabela.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -401,63 +445,51 @@ public class FrameFornecedor extends javax.swing.JInternalFrame {
         });
         jScrollPane1.setViewportView(Tabela);
 
-        Editar1.setText("Editar");
-        Editar1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Editar1ActionPerformed(evt);
-            }
-        });
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(Editar1)
+                    .addComponent(Apagar)
+                    .addComponent(Cadastrar))
+                .addContainerGap())
+        );
 
-        Apagar.setText("Apagar");
-        Apagar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ApagarActionPerformed(evt);
-            }
-        });
+        jPanel4Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {Apagar, Cadastrar, Editar1});
 
-        Cadastrar.setText("Cadastrar");
-        Cadastrar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                CadastrarActionPerformed(evt);
-            }
-        });
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addComponent(Cadastrar, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 72, Short.MAX_VALUE)
+                        .addComponent(Editar1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 65, Short.MAX_VALUE)
+                        .addComponent(Apagar, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 664, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(Editar1)
-                    .addComponent(Apagar)
-                    .addComponent(Cadastrar))
-                .addGap(11, 11, 11))
+            .addComponent(jPanel4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 772, Short.MAX_VALUE)
         );
-
-        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {Apagar, Cadastrar, Editar1});
-
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(11, 11, 11)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(Cadastrar, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(60, 60, 60)
-                        .addComponent(Editar1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(60, 60, 60)
-                        .addComponent(Apagar, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap())
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         setBounds(0, 0, 788, 469);
@@ -814,6 +846,7 @@ public class FrameFornecedor extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField razao_social;
     private javax.swing.JRadioButton razao_social1;

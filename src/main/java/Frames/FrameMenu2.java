@@ -73,12 +73,13 @@ public class FrameMenu2 extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        Cliente2 = new javax.swing.JButton();
-        Vendas2 = new javax.swing.JButton();
-        Produtos2 = new javax.swing.JButton();
-        Fornecedores2 = new javax.swing.JButton();
-        Fornecedores3 = new javax.swing.JButton();
         Desktop = new javax.swing.JDesktopPane();
+        jPanel1 = new javax.swing.JPanel();
+        Vendas2 = new javax.swing.JButton();
+        Fornecedores3 = new javax.swing.JButton();
+        Cliente2 = new javax.swing.JButton();
+        Fornecedores2 = new javax.swing.JButton();
+        Produtos2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Menu");
@@ -88,41 +89,7 @@ public class FrameMenu2 extends javax.swing.JFrame {
             }
         });
 
-        Cliente2.setText("Cliente");
-        Cliente2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Cliente2ActionPerformed(evt);
-            }
-        });
-
-        Vendas2.setText("Vendas");
-        Vendas2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Vendas2ActionPerformed(evt);
-            }
-        });
-
-        Produtos2.setText("Produtos");
-        Produtos2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Produtos2ActionPerformed(evt);
-            }
-        });
-
-        Fornecedores2.setText("Fornecedores");
-        Fornecedores2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Fornecedores2ActionPerformed(evt);
-            }
-        });
-
-        Fornecedores3.setText(". . .");
-        Fornecedores3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Fornecedores3ActionPerformed(evt);
-            }
-        });
-
+        Desktop.setBackground(new java.awt.Color(255, 255, 255));
         Desktop.setMaximumSize(new java.awt.Dimension(571, 478));
         Desktop.setMinimumSize(new java.awt.Dimension(571, 478));
 
@@ -134,32 +101,76 @@ public class FrameMenu2 extends javax.swing.JFrame {
         );
         DesktopLayout.setVerticalGroup(
             DesktopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGap(0, 500, Short.MAX_VALUE)
         );
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+        jPanel1.setBackground(new java.awt.Color(21, 116, 253));
+
+        Vendas2.setBackground(new java.awt.Color(114, 172, 254));
+        Vendas2.setText("VENDAS");
+        Vendas2.setBorderPainted(false);
+        Vendas2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Vendas2ActionPerformed(evt);
+            }
+        });
+
+        Fornecedores3.setBackground(new java.awt.Color(114, 172, 254));
+        Fornecedores3.setText("LOGOUT");
+        Fornecedores3.setBorderPainted(false);
+        Fornecedores3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Fornecedores3ActionPerformed(evt);
+            }
+        });
+
+        Cliente2.setBackground(new java.awt.Color(114, 172, 254));
+        Cliente2.setText("CLIENTE");
+        Cliente2.setBorderPainted(false);
+        Cliente2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Cliente2ActionPerformed(evt);
+            }
+        });
+
+        Fornecedores2.setBackground(new java.awt.Color(114, 172, 254));
+        Fornecedores2.setText("FONECEDORES");
+        Fornecedores2.setBorderPainted(false);
+        Fornecedores2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Fornecedores2ActionPerformed(evt);
+            }
+        });
+
+        Produtos2.setBackground(new java.awt.Color(114, 172, 254));
+        Produtos2.setText("PRODUTOS");
+        Produtos2.setBorderPainted(false);
+        Produtos2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Produtos2ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(Cliente2, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(Cliente2, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(Vendas2, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(Produtos2, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(Fornecedores2, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(Fornecedores3, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(Desktop, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(6, 6, 6))
+                .addGap(10, 10, 10))
         );
 
-        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {Cliente2, Fornecedores2, Fornecedores3, Produtos2, Vendas2});
+        jPanel1Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {Cliente2, Fornecedores2, Fornecedores3, Produtos2, Vendas2});
 
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(Desktop, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(layout.createSequentialGroup()
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(Cliente2, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -170,10 +181,26 @@ public class FrameMenu2 extends javax.swing.JFrame {
                 .addComponent(Fornecedores2, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(Fornecedores3, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(195, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {Cliente2, Fornecedores2, Fornecedores3, Produtos2, Vendas2});
+        jPanel1Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {Cliente2, Fornecedores2, Fornecedores3, Produtos2, Vendas2});
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(10, 10, 10)
+                .addComponent(Desktop, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(Desktop, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
 
         pack();
         setLocationRelativeTo(null);
@@ -205,6 +232,9 @@ public class FrameMenu2 extends javax.swing.JFrame {
 
     private void Fornecedores3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Fornecedores3ActionPerformed
         // TODO add your handling code here:
+        Login l = new Login();
+        l.setVisible(true);
+        this.dispose();
 
     }//GEN-LAST:event_Fornecedores3ActionPerformed
 
@@ -257,5 +287,6 @@ public class FrameMenu2 extends javax.swing.JFrame {
     private javax.swing.JButton Fornecedores3;
     private javax.swing.JButton Produtos2;
     private javax.swing.JButton Vendas2;
+    private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 }

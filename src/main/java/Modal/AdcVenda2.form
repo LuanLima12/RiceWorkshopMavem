@@ -30,34 +30,27 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="0" attributes="0">
-              <EmptySpace max="-2" attributes="0"/>
-              <Component id="jPanel1" max="32767" attributes="0"/>
-              <EmptySpace max="32767" attributes="0"/>
-          </Group>
+          <Component id="jPanel1" alignment="0" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="0" attributes="0">
-              <EmptySpace max="-2" attributes="0"/>
-              <Component id="jPanel1" max="32767" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
-          </Group>
+          <Component id="jPanel1" alignment="0" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
   </Layout>
   <SubComponents>
     <Container class="javax.swing.JPanel" name="jPanel1">
+      <Properties>
+        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="fe" green="ac" red="72" type="rgb"/>
+        </Property>
+      </Properties>
 
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
               <Component id="jPanel2" alignment="1" max="32767" attributes="0"/>
-              <Group type="102" alignment="1" attributes="0">
-                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                  <Component id="jPanel3" min="-2" max="-2" attributes="0"/>
-              </Group>
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
@@ -73,12 +66,21 @@
                           <Component id="jButton1" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="1" attributes="0">
-                          <Component id="Confirmar1" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="32767" attributes="0"/>
-                          <Component id="Confirmar" min="-2" max="-2" attributes="0"/>
+                          <Component id="Confirmar1" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
+              </Group>
+              <Group type="102" alignment="1" attributes="0">
+                  <EmptySpace min="0" pref="20" max="32767" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" attributes="0">
+                          <EmptySpace min="10" pref="10" max="-2" attributes="0"/>
+                          <Component id="Confirmar" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <Component id="jPanel3" min="-2" max="-2" attributes="0"/>
+                  </Group>
               </Group>
           </Group>
         </DimensionLayout>
@@ -133,8 +135,12 @@
         </Component>
         <Component class="javax.swing.JButton" name="jButton1">
           <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="cc" green="cc" red="cc" type="rgb"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Cadastrar"/>
-            <Property name="toolTipText" type="java.lang.String" value="Cadastrar cliente."/>
+            <Property name="toolTipText" type="java.lang.String" value="Cadastrar novo cliente"/>
+            <Property name="borderPainted" type="boolean" value="false"/>
             <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
               <Dimension value="[113, 23]"/>
             </Property>
@@ -145,6 +151,9 @@
         </Component>
         <Container class="javax.swing.JPanel" name="jPanel2">
           <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="fd" green="74" red="15" type="rgb"/>
+            </Property>
             <Property name="toolTipText" type="java.lang.String" value="Adicione o produto e a quantidade e receba valor unit&#xe1;rio, total e a descri&#xe7;&#xe3;o."/>
           </Properties>
 
@@ -214,8 +223,12 @@
             </Container>
             <Component class="javax.swing.JButton" name="Adicionar">
               <Properties>
+                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="99" green="99" red="99" type="rgb"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value=" Adicionar &#xe0; lista"/>
-                <Property name="toolTipText" type="java.lang.String" value="Adicionar produto &#xe0; lista."/>
+                <Property name="toolTipText" type="java.lang.String" value="Adicionar produto &#xe0; lista"/>
+                <Property name="borderPainted" type="boolean" value="false"/>
                 <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
                   <Dimension value="[113, 23]"/>
                 </Property>
@@ -226,6 +239,9 @@
             </Component>
             <Container class="javax.swing.JPanel" name="jPanel4">
               <Properties>
+                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="fd" green="74" red="15" type="rgb"/>
+                </Property>
                 <Property name="toolTipText" type="java.lang.String" value="Adicione o produto e a quantidade e receba valor unit&#xe1;rio, total e a descri&#xe7;&#xe3;o."/>
               </Properties>
 
@@ -290,6 +306,9 @@
             </Container>
             <Container class="javax.swing.JPanel" name="jPanel5">
               <Properties>
+                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="fd" green="74" red="15" type="rgb"/>
+                </Property>
                 <Property name="toolTipText" type="java.lang.String" value="Adicione o produto e a quantidade e receba valor unit&#xe1;rio, total e a descri&#xe7;&#xe3;o."/>
               </Properties>
 
@@ -328,8 +347,12 @@
               <SubComponents>
                 <Component class="javax.swing.JButton" name="Selecionar">
                   <Properties>
+                    <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="99" green="99" red="99" type="rgb"/>
+                    </Property>
                     <Property name="text" type="java.lang.String" value="OK"/>
-                    <Property name="toolTipText" type="java.lang.String" value="Selecionar produto."/>
+                    <Property name="toolTipText" type="java.lang.String" value="Selecionar produto"/>
+                    <Property name="borderPainted" type="boolean" value="false"/>
                     <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
                       <Dimension value="[113, 23]"/>
                     </Property>
@@ -370,6 +393,11 @@
           </SubComponents>
         </Container>
         <Container class="javax.swing.JPanel" name="jPanel3">
+          <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="fe" green="ac" red="72" type="rgb"/>
+            </Property>
+          </Properties>
 
           <Layout>
             <DimensionLayout dim="0">
@@ -438,8 +466,12 @@
           <SubComponents>
             <Component class="javax.swing.JButton" name="Excluir">
               <Properties>
+                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="66" green="66" red="ff" type="rgb"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Excluir da lista"/>
-                <Property name="toolTipText" type="java.lang.String" value="Exluir produto da lista."/>
+                <Property name="toolTipText" type="java.lang.String" value="Exluir produto da lista"/>
+                <Property name="borderPainted" type="boolean" value="false"/>
                 <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
                   <Dimension value="[113, 23]"/>
                 </Property>
@@ -510,8 +542,12 @@
             </Component>
             <Component class="javax.swing.JButton" name="Calcular">
               <Properties>
+                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="cc" green="cc" red="cc" type="rgb"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Calcular"/>
-                <Property name="toolTipText" type="java.lang.String" value="Exluir produto da lista."/>
+                <Property name="toolTipText" type="java.lang.String" value="Calcular troco"/>
+                <Property name="borderPainted" type="boolean" value="false"/>
                 <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
                   <Dimension value="[113, 23]"/>
                 </Property>
@@ -524,8 +560,12 @@
         </Container>
         <Component class="javax.swing.JButton" name="Confirmar">
           <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="99" green="99" red="99" type="rgb"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Confirmar venda"/>
-            <Property name="toolTipText" type="java.lang.String" value="Confirmar venda."/>
+            <Property name="toolTipText" type="java.lang.String" value="Confirmar venda"/>
+            <Property name="borderPainted" type="boolean" value="false"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ConfirmarActionPerformed"/>
@@ -533,8 +573,12 @@
         </Component>
         <Component class="javax.swing.JButton" name="Confirmar1">
           <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="cc" green="cc" red="cc" type="rgb"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Cancelar"/>
-            <Property name="toolTipText" type="java.lang.String" value="Confirmar venda."/>
+            <Property name="toolTipText" type="java.lang.String" value="Cancelar venda"/>
+            <Property name="borderPainted" type="boolean" value="false"/>
             <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
               <Dimension value="[113, 23]"/>
             </Property>
