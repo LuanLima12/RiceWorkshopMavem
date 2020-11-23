@@ -625,7 +625,7 @@ public class AdcVenda2 extends javax.swing.JDialog {
 
                 if(   p.getEstoque()<Integer.parseInt(Quantidade.getText())   ){//CONFERIR SE HÁ ESTOQUE
 
-                    JOptionPane.showMessageDialog(this, "Há apenas "+p.getEstoque()+" "+p.getNome()+"s no estoque.");
+                    JOptionPane.showMessageDialog(this, "Há apenas "+p.getEstoque()+" do produto "+p.getNome()+" no estoque.");
 
                 }else{
                     ValorU.setText(Double.toString(p.getValorVenda()));
